@@ -1,25 +1,38 @@
-UTHOR mmateo-t
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    Makefile                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: mmateo-t <mmateo-t@student.42madrid>       +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2021/12/03 10:00:24 by mmateo-t          #+#    #+#              #
+#    Updated: 2021/12/03 10:45:41 by mmateo-t         ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
+
+#AUTHOR mmateo-t
 #USAGE
 
 #make          #compile all binary
 #make clean		#remove all binaries
 #make fclean		#remove all binaries and executable
 
-SRCS_DIR:= srcs/
+SRCS_DIR:= files/srcs/
 SRCS := $(wildcard $(SRCS_DIR)*.c)
 OBJS := $(SRCS:%.c=%.o)
 NAME:= minishell
 CC:= gcc
-CFLAGS:= -Wall -Werror -Wextra
-LIBFT_PATH:= lib/libft
+#CFLAGS:= -Wall -Werror -Wextra
+SYS_LIB:= -lreadline
+LIBFT_PATH:= files/lib/libft
 LIBFT_LIB:= -L$(LIBFT_PATH) $(LIBFT_PATH)/libft.a
-RM :=	rm -rvf
+RM := rm -rvf
 DEBUG_FLAG:= -g
 
-all:	libft $(NAME) msg
+all:	libft $(NAME)
 
 $(NAME): $(OBJS)
-		$(CC) $(CFLAGS) $(GNL) $(OBJS) -o $(NAME) $(MINILIBX) $(LM) $(LIBFT_LIB)
+		$(CC) $(CFLAGS) $(OBJS) -o $(NAME) $(LIBFT_LIB) $(SYS_LIB)
 			
 $(%.o): $(%.c)
 			$(CC) -c $^ -o $@
@@ -30,15 +43,16 @@ libft:
 
 clean:
 			@echo "Removing objects"
-					$(RM) $(OBJS) $(OBJS_BONUS)
+					$(RM) $(OBJS)
 fclean:
 			make clean
 			cd $(LIBFT_PATH) && $(MAKE) fclean
 			$(RM) $(NAME)
-msg:
+
+#msg
 
 re:
 		make fclean all
 			@echo "All files has been deleted and recompiled"
 
-.PHONY: clean fclean all re objects debug bonus libft msg
+.PHONY: clean fclean all re objects debug libft msg
