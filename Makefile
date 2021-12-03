@@ -6,11 +6,10 @@
 #    By: mmateo-t <mmateo-t@student.42madrid>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/12/03 10:00:24 by mmateo-t          #+#    #+#              #
-#    Updated: 2021/12/03 10:45:41 by mmateo-t         ###   ########.fr        #
+#    Updated: 2021/12/03 10:47:32 by mmateo-t         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-#AUTHOR mmateo-t
 #USAGE
 
 #make          #compile all binary
