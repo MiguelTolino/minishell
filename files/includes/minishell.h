@@ -6,7 +6,7 @@
 /*   By: mmateo-t <mmateo-t@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/03 13:27:13 by mmateo-t          #+#    #+#             */
-/*   Updated: 2021/12/05 18:50:04 by mmateo-t         ###   ########.fr       */
+/*   Updated: 2021/12/05 21:01:06 by mmateo-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,14 +20,24 @@
 
 # define SIMBOL "> $ "
 
-typedef struct s_prompt
+typedef struct g_env
 {
+	char *home;
 	char *user;
 	char *hostname;
-	char *simbol;
-	char *dir;
-} t_prompt;
+	char *pwd;
+	char *old_pwd;
+}	g_env;
 
-t_prompt build_prompt(char **envp);
+g_env vars;
+
+char* build_prompt();
+void action(char *cmdline, char **envp);
+int	save_env(char **envp);
+
+//Commands
+void	env(char **envp);
+void change_directory(char *str);
+
 
 #endif

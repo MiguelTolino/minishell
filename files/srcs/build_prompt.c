@@ -6,64 +6,46 @@
 /*   By: mmateo-t <mmateo-t@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/05 17:46:43 by mmateo-t          #+#    #+#             */
-/*   Updated: 2021/12/05 18:57:23 by mmateo-t         ###   ########.fr       */
+/*   Updated: 2021/12/05 20:41:54 by mmateo-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
+
+// COLOR + USER + @ + HOSTNAME + < + DIR + > $ 
 
 char *set_directory(char *dir)
 {
 	int size = 1024;
 	char *ptr;
 	
-	free(dir);
 	if ((dir = (char *)malloc((size_t)size)) != NULL)
     	ptr = getcwd(dir, (size_t)size);
 	return(ptr);
 }
 
-void join_elements(t_prompt prompt)
+void join_elements(char *prompt)
 {
-	ft_strlcat(prompt.simbol, COLOR(1, 34), ft_strlen(COLOR(1, 34)) + 1);
-	ft_strlcat(prompt.simbol, prompt.user, ft_strlen(prompt.simbol) + ft_strlen(prompt.user) + 1);
-	ft_strlcat(prompt.simbol, NC, ft_strlen(prompt.simbol) + ft_strlen(NC) + 1);
-	ft_strlcat(prompt.simbol, "@", ft_strlen(prompt.simbol) + 2);
-	ft_strlcat(prompt.simbol, COLOR(1, 33), ft_strlen(prompt.simbol) + ft_strlen(COLOR(1, 33)) + 1);
-	ft_strlcat(prompt.simbol, prompt.hostname, ft_strlen(prompt.simbol) + ft_strlen(prompt.hostname) + 1);
-	ft_strlcat(prompt.simbol, " < ", ft_strlen(prompt.simbol) + 3);
-	ft_strlcat(prompt.simbol, COLOR(1, 31), ft_strlen(prompt.simbol) + ft_strlen(COLOR(1, 31)) + 1);
-	ft_strlcat(prompt.simbol, prompt.dir, ft_strlen(prompt.simbol) + ft_strlen(prompt.dir) + 1);
-	ft_strlcat(prompt.simbol, NC, ft_strlen(prompt.simbol) + ft_strlen(NC) + 1);
-	ft_strlcat(prompt.simbol, SIMBOL, ft_strlen(prompt.simbol) + ft_strlen(SIMBOL) + 1);
+	ft_strlcat(prompt, COLOR(1, 34), ft_strlen(COLOR(1, 34)) + 1);
+	ft_strlcat(prompt, vars.user, ft_strlen(prompt) + ft_strlen(vars.user) + 1);
+	ft_strlcat(prompt, NC, ft_strlen(prompt) + ft_strlen(NC) + 1);
+	ft_strlcat(prompt, "@", ft_strlen(prompt) + 2);
+	ft_strlcat(prompt, COLOR(1, 33), ft_strlen(prompt) + ft_strlen(COLOR(1, 33)) + 1);
+	ft_strlcat(prompt, vars.hostname, ft_strlen(prompt) + ft_strlen(vars.hostname) + 1);
+	ft_strlcat(prompt, " < ", ft_strlen(prompt) + 3);
+	ft_strlcat(prompt, COLOR(1, 31), ft_strlen(prompt) + ft_strlen(COLOR(1, 31)) + 1);
+	ft_strlcat(prompt, vars.pwd, ft_strlen(prompt) + ft_strlen(vars.pwd) + 1);
+	ft_strlcat(prompt, NC, ft_strlen(prompt) + ft_strlen(NC) + 1);
+	ft_strlcat(prompt, SIMBOL, ft_strlen(prompt) + ft_strlen(SIMBOL) + 1);
 }
 
-char *save_var(char *str)
+char	*build_prompt()
 {
-	char *var;
+	char *prompt;
+	char *dir;
 
-	var = ft_strchr(str, '=');
-	var++;
-	return (ft_strdup(var));
-}
-
-t_prompt	build_prompt(char **envp)
-{
-	int i;
-	char *aux;
-	t_prompt prompt;
-	
-	i = 0;
-	prompt.simbol = (char *)malloc(sizeof(char) * 100);
-	prompt.dir = set_directory(prompt.dir);
-	while (envp[i])
-	{
-		if (aux = ft_strnstr(envp[i], "USER", ft_strlen(envp[i])))
-			prompt.user = save_var(aux);
-		if (aux = ft_strnstr(envp[i], "NAME", ft_strlen(envp[i])))
-			prompt.hostname = save_var(aux);
-		i++;
-	}
+	prompt= (char *)malloc(sizeof(char) * 256);
+	vars.pwd = set_directory(dir);
 	join_elements(prompt);
 	return (prompt);
 }

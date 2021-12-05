@@ -1,30 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   env.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mmateo-t <mmateo-t@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/12/03 09:55:58 by mmateo-t          #+#    #+#             */
-/*   Updated: 2021/12/05 20:50:58 by mmateo-t         ###   ########.fr       */
+/*   Created: 2021/12/05 19:52:45 by mmateo-t          #+#    #+#             */
+/*   Updated: 2021/12/05 20:02:46 by mmateo-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-
-int	main(int argc, char **argv, char **envp)
+void	env(char **envp)
 {
-	char	*prompt;
-	char	*cmdline;
+	int i;
 
-	save_env(envp);
-	prompt = build_prompt(envp);
-	while (1)
+	i = 0;
+	while (envp[i])
 	{
-		cmdline = readline(prompt);
-		action(cmdline, envp);
-		free(cmdline);
+		printf("%s\n", envp[i]);
+		i++;
 	}
-	return (0);
 }
