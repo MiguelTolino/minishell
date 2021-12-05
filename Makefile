@@ -28,7 +28,7 @@ LIBFT_LIB:= -L$(LIBFT_PATH) $(LIBFT_PATH)/libft.a
 RM := rm -rvf
 DEBUG_FLAG:= -g
 
-all:	libft $(NAME)
+all:	libft $(NAME) # msg
 
 $(NAME): $(OBJS)
 		$(CC) $(CFLAGS) $(OBJS) -o $(NAME) $(LIBFT_LIB) $(SYS_LIB)
@@ -48,10 +48,17 @@ fclean:
 			cd $(LIBFT_PATH) && $(MAKE) fclean
 			$(RM) $(NAME)
 
-#msg
+#msg:	
+#	@echo "   	       _       _     _          _ _ "
+#	@echo "	 _ __ ___ (_)_ __ (_)___| |__   ___| | |"
+#	@echo "	| '_ ` _ \| | '_ \| / __| '_ \ / _ \ | |"
+#	@echo "	| | | | | | | | | | \__ \ | | |  __/ | |"
+#	@echo "	|_| |_| |_|_|_| |_|_|___/_| |_|\___|_|_|"
+#	@echo "\n./minishell"
 
 re:
 		make fclean all
 			@echo "All files has been deleted and recompiled"
 
 .PHONY: clean fclean all re objects debug libft msg
+                                        
