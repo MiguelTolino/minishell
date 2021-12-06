@@ -6,7 +6,7 @@
 /*   By: mmateo-t <mmateo-t@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/03 13:27:13 by mmateo-t          #+#    #+#             */
-/*   Updated: 2021/12/05 21:01:06 by mmateo-t         ###   ########.fr       */
+/*   Updated: 2021/12/06 11:48:41 by mmateo-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,9 +31,10 @@ typedef struct g_env
 
 g_env vars;
 
-char* build_prompt();
+char* build_prompt(char *prompt);
 void action(char *cmdline, char **envp);
 int	save_env(char **envp);
+void throw_error(const char *error);
 
 //Commands
 void	env(char **envp);

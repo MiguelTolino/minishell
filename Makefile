@@ -6,7 +6,7 @@
 #    By: mmateo-t <mmateo-t@student.42madrid>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/12/03 10:00:24 by mmateo-t          #+#    #+#              #
-#    Updated: 2021/12/03 10:47:32 by mmateo-t         ###   ########.fr        #
+#    Updated: 2021/12/06 20:51:50 by mmateo-t         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,18 +17,18 @@
 #make fclean		#remove all binaries and executable
 
 SRCS_DIR:= files/srcs/
-SRCS := $(wildcard $(SRCS_DIR)*.c)
+SRCS := $(wildcard $(SRCS_DIR)*.c) $(wildcard $(SRCS_DIR)commands/*.c)
 OBJS := $(SRCS:%.c=%.o)
 NAME:= minishell
 CC:= gcc
-#CFLAGS:= -Wall -Werror -Wextra
+CFLAGS:= $(DEBUG_FLAG)	#-Wall -Werror -Wextra
 SYS_LIB:= -lreadline
 LIBFT_PATH:= files/lib/libft
 LIBFT_LIB:= -L$(LIBFT_PATH) $(LIBFT_PATH)/libft.a
 RM := rm -rvf
 DEBUG_FLAG:= -g
 
-all:	libft $(NAME) # msg
+all:	libft $(NAME) msg
 
 $(NAME): $(OBJS)
 		$(CC) $(CFLAGS) $(OBJS) -o $(NAME) $(LIBFT_LIB) $(SYS_LIB)
@@ -48,17 +48,23 @@ fclean:
 			cd $(LIBFT_PATH) && $(MAKE) fclean
 			$(RM) $(NAME)
 
-#msg:	
-#	@echo "   	       _       _     _          _ _ "
-#	@echo "	 _ __ ___ (_)_ __ (_)___| |__   ___| | |"
-#	@echo "	| '_ ` _ \| | '_ \| / __| '_ \ / _ \ | |"
-#	@echo "	| | | | | | | | | | \__ \ | | |  __/ | |"
-#	@echo "	|_| |_| |_|_|_| |_|_|___/_| |_|\___|_|_|"
-#	@echo "\n./minishell"
+msg:	
+	
+	@echo	"																										"
+	@echo	"\033[1;34m██████   ██████ █████ ██████   █████ █████  █████████  █████   █████ ██████████ █████       █████      \033[0m"
+	@echo	"\033[1;34m░░██████ ██████ ░░███ ░░██████ ░░███ ░░███  ███░░░░░███░░███   ░░███ ░░███░░░░░█░░███       ░░███      \033[0m"
+	@echo	"\033[1;34m░███░█████░███  ░███  ░███░███ ░███  ░███ ░███    ░░░  ░███    ░███  ░███  █ ░  ░███        ░███       \033[0m"
+	@echo	"\033[1;34m░███░░███ ░███  ░███  ░███░░███░███  ░███ ░░█████████  ░███████████  ░██████    ░███        ░███       \033[0m"
+	@echo	"\033[1;34m░███ ░░░  ░███  ░███  ░███ ░░██████  ░███  ░░░░░░░░███ ░███░░░░░███  ░███░░█    ░███        ░███       \033[0m"
+	@echo	"\033[1;34m░███      ░███  ░███  ░███  ░░█████  ░███  ███    ░███ ░███    ░███  ░███ ░   █ ░███      █ ░███      █\033[0m"
+	@echo	"\033[1;34m█████     █████ █████ █████  ░░█████ █████░░█████████  █████   █████ ██████████ ███████████ ███████████\033[0m"
+	@echo	"\033[1;34m░░░░░     ░░░░░ ░░░░░ ░░░░░    ░░░░░ ░░░░░  ░░░░░░░░░  ░░░░░   ░░░░░ ░░░░░░░░░░ ░░░░░░░░░░░ ░░░░░░░░░░░\033[0m"
+	@echo	"																										"
+	@echo	"Usage -> \033[1;36m./minishell\033[0m"
+	@echo	"																										"
 
 re:
 		make fclean all
 			@echo "All files has been deleted and recompiled"
 
 .PHONY: clean fclean all re objects debug libft msg
-                                        

@@ -6,7 +6,7 @@
 /*   By: mmateo-t <mmateo-t@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/05 17:46:43 by mmateo-t          #+#    #+#             */
-/*   Updated: 2021/12/05 20:41:54 by mmateo-t         ###   ########.fr       */
+/*   Updated: 2021/12/06 11:54:01 by mmateo-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ void join_elements(char *prompt)
 	ft_strlcat(prompt, SIMBOL, ft_strlen(prompt) + ft_strlen(SIMBOL) + 1);
 }
 
-char	*build_prompt()
+char	*build_prompt(char *prompt_old) //FIXME: When 2 iterations prompt fails
 {
 	char *prompt;
 	char *dir;

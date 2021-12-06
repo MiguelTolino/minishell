@@ -6,7 +6,7 @@
 /*   By: mmateo-t <mmateo-t@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/05 18:02:29 by mmateo-t          #+#    #+#             */
-/*   Updated: 2021/12/05 18:28:17 by mmateo-t         ###   ########.fr       */
+/*   Updated: 2021/12/06 11:48:07 by mmateo-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,8 @@ Light Gray  0;37     White         1;37
 \033[5m es el código de control
 */
 
+#ifndef COLORS_H
+# define COLORS_H
 #define NC "\033[0m" //No Color
 #define BLACK "\033[0;30m"
 #define RED "\033[0;31m"
@@ -37,3 +39,5 @@ Light Gray  0;37     White         1;37
 #define CYAN "\033[0;36m"
 
 #define COLOR(x,y) "\033["#x";"#y"m"    // x: fondo, y: primer plano
+
+#endif

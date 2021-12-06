@@ -6,26 +6,20 @@
 /*   By: mmateo-t <mmateo-t@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/05 20:13:01 by mmateo-t          #+#    #+#             */
-/*   Updated: 2021/12/05 20:55:35 by mmateo-t         ###   ########.fr       */
+/*   Updated: 2021/12/06 11:50:28 by mmateo-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-void change_directory(char *old_path)
+void change_directory(char *path)
 {
 	char *new_path;
-	if (!*old_path)
+	new_path = strrchr(path, ' ');
+	if (!new_path)
 	{
 		new_path = vars.home;
 	}
-	if(*old_path == '.')
-	{
-		new_path = vars.pwd;
-	}
-	if(ft_strnstr(old_path, "..", ft_strlen(old_path)))
-	{
-		
-	}
-	chdir(new_path);
+	if (chdir(new_path) < 0)
+		throw_error("Chdir Error:");
 }
