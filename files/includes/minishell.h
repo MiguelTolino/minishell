@@ -6,7 +6,7 @@
 /*   By: mmateo-t <mmateo-t@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/03 13:27:13 by mmateo-t          #+#    #+#             */
-/*   Updated: 2021/12/06 11:48:41 by mmateo-t         ###   ########.fr       */
+/*   Updated: 2021/12/06 20:56:31 by mmateo-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ char* build_prompt(char *prompt);
 void action(char *cmdline, char **envp);
 int	save_env(char **envp);
 void throw_error(const char *error);
+void check_args(int argc);
 
 //Commands
 void	env(char **envp);

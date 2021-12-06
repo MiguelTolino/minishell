@@ -1,25 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cd.c                                               :+:      :+:    :+:   */
+/*   errors.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mmateo-t <mmateo-t@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/12/05 20:13:01 by mmateo-t          #+#    #+#             */
-/*   Updated: 2021/12/06 11:50:28 by mmateo-t         ###   ########.fr       */
+/*   Created: 2021/12/06 11:45:39 by mmateo-t          #+#    #+#             */
+/*   Updated: 2021/12/06 20:57:08 by mmateo-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-void change_directory(char *path)
+void throw_error(const char *error)
 {
-	char *new_path;
-	new_path = strrchr(path, ' ');
-	if (!new_path)
-	{
-		new_path = vars.home;
-	}
-	if (chdir(new_path) < 0)
-		throw_error("Chdir Error:");
+	perror(error);
+	exit(EXIT_FAILURE);
+}
+
+void check_args(int argc)
+{
+	if (argc != 1)
+		throw_error("Numbers of arguments invalid");
 }
