@@ -6,7 +6,7 @@
 #    By: mmateo-t <mmateo-t@student.42madrid>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/12/03 10:00:24 by mmateo-t          #+#    #+#              #
-#    Updated: 2021/12/06 20:51:50 by mmateo-t         ###   ########.fr        #
+#    Updated: 2021/12/07 11:39:19 by mmateo-t         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,16 +17,22 @@
 #make fclean		#remove all binaries and executable
 
 SRCS_DIR:= files/srcs/
-SRCS := $(wildcard $(SRCS_DIR)*.c) $(wildcard $(SRCS_DIR)commands/*.c)
+SRCS := $(wildcard $(SRCS_DIR)*.c) $(wildcard $(SRCS_DIR)builtins/*.c)
 OBJS := $(SRCS:%.c=%.o)
 NAME:= minishell
 CC:= gcc
+DEBUG_FLAG:= -g
 CFLAGS:= $(DEBUG_FLAG)	#-Wall -Werror -Wextra
 SYS_LIB:= -lreadline
 LIBFT_PATH:= files/lib/libft
 LIBFT_LIB:= -L$(LIBFT_PATH) $(LIBFT_PATH)/libft.a
 RM := rm -rvf
-DEBUG_FLAG:= -g
+UNAME_S := $(shell uname -s)
+ifeq (${UNAME_S}, Darwin)
+	LEAKS:= leaks ./minishell
+else
+	LEAKS:= valgrind --leak-check=full ./minishell
+endif
 
 all:	libft $(NAME) msg
 
@@ -39,6 +45,12 @@ $(%.o): $(%.c)
 
 libft:
 			make -C $(LIBFT_PATH)
+
+leaks:	all
+		$(LEAKS)
+
+run:	all
+		./minishell
 
 clean:
 			@echo "Removing objects"
@@ -67,4 +79,4 @@ re:
 		make fclean all
 			@echo "All files has been deleted and recompiled"
 
-.PHONY: clean fclean all re objects debug libft msg
+.PHONY: clean fclean all re objects debug libft msg run leaks

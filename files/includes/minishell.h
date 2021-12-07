@@ -6,7 +6,7 @@
 /*   By: mmateo-t <mmateo-t@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/03 13:27:13 by mmateo-t          #+#    #+#             */
-/*   Updated: 2021/12/06 20:56:31 by mmateo-t         ###   ########.fr       */
+/*   Updated: 2021/12/07 11:53:11 by mmateo-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 # include "../lib/libft/libft.h"
 # include "colors.h"
 
-# define SIMBOL "> $ "
+# define SIMBOL "$> "
 
 typedef struct g_env
 {
@@ -40,6 +40,7 @@ void check_args(int argc);
 //Commands
 void	env(char **envp);
 void change_directory(char *str);
-
+void	echo(char *str, char option);
+void 	exit_shell();
 
 #endif

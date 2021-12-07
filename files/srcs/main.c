@@ -6,7 +6,7 @@
 /*   By: mmateo-t <mmateo-t@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/03 09:55:58 by mmateo-t          #+#    #+#             */
-/*   Updated: 2021/12/06 20:56:54 by mmateo-t         ###   ########.fr       */
+/*   Updated: 2021/12/07 11:47:58 by mmateo-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,11 +19,13 @@ int	main(int argc, char **argv, char **envp)
 	int		pid;
 
 	check_args(argc);
-	save_env(envp);
+	prompt = build_prompt(prompt);
 	while (1)
 	{
-		prompt = build_prompt(prompt);
 		cmdline = readline(prompt);
+		//format
+		//parse
+		//execute
 		action(cmdline, envp);
 		free(cmdline);
 	}
