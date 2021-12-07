@@ -1,34 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   echo.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mmateo-t <mmateo-t@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/12/03 09:55:58 by mmateo-t          #+#    #+#             */
-/*   Updated: 2021/12/07 12:36:45 by mmateo-t         ###   ########.fr       */
+/*   Created: 2021/12/07 11:16:30 by mmateo-t          #+#    #+#             */
+/*   Updated: 2021/12/07 11:18:19 by mmateo-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/minishell.h"
+#include "../../includes/minishell.h"
 
-int	main(int argc, char **argv, char **envp)
+void	echo(char *str, char option)
 {
-	char	*prompt;
-	char	*cmdline;
-	int		pid;
-
-	check_args(argc);
-	prompt = build_prompt(prompt);
-	while (1)
-	{
-		cmdline = readline(prompt);
-		add_history(cmdline);
-		//format
-		//parse
-		//execute
-		action(cmdline, envp);
-		free(cmdline);
-	}
-	return (0);
+	if (option == 'n')
+		printf("%s", str);
+	else
+		printf("%s\n", str);	
 }

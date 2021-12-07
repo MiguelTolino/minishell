@@ -1,34 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   cd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mmateo-t <mmateo-t@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/12/03 09:55:58 by mmateo-t          #+#    #+#             */
-/*   Updated: 2021/12/07 12:36:45 by mmateo-t         ###   ########.fr       */
+/*   Created: 2021/12/05 20:13:01 by mmateo-t          #+#    #+#             */
+/*   Updated: 2021/12/07 11:52:09 by mmateo-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/minishell.h"
+#include "../../includes/minishell.h"
 
-int	main(int argc, char **argv, char **envp)
+void change_directory(char *path)
 {
-	char	*prompt;
-	char	*cmdline;
-	int		pid;
-
-	check_args(argc);
-	prompt = build_prompt(prompt);
-	while (1)
+	char *new_path;
+	new_path = strrchr(path, ' ');
+	if (!new_path)
 	{
-		cmdline = readline(prompt);
-		add_history(cmdline);
-		//format
-		//parse
-		//execute
-		action(cmdline, envp);
-		free(cmdline);
+		new_path =	getenv("HOME");
 	}
-	return (0);
+	if (chdir(new_path) < 0)
+		throw_error("Chdir Error");
 }

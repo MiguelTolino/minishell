@@ -6,7 +6,7 @@
 /*   By: mmateo-t <mmateo-t@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/03 13:27:13 by mmateo-t          #+#    #+#             */
-/*   Updated: 2021/12/07 11:53:11 by mmateo-t         ###   ########.fr       */
+/*   Updated: 2021/12/07 12:36:24 by mmateo-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 # include <stdio.h>
 # include <stdlib.h>
 # include <readline/readline.h>
+# include <readline/history.h>
 # include "../lib/libft/libft.h"
 # include "colors.h"
 
