@@ -6,7 +6,7 @@
 /*   By: mmateo-t <mmateo-t@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/05 20:13:01 by mmateo-t          #+#    #+#             */
-/*   Updated: 2021/12/07 11:52:09 by mmateo-t         ###   ########.fr       */
+/*   Updated: 2021/12/09 14:13:43 by mmateo-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,11 +15,11 @@
 void change_directory(char *path)
 {
 	char *new_path;
-	new_path = strrchr(path, ' ');
-	if (!new_path)
+	
+	if (!path)
 	{
 		new_path =	getenv("HOME");
 	}
 	if (chdir(new_path) < 0)
-		throw_error("Chdir Error");
+		perror("Chdir Error");
 }
