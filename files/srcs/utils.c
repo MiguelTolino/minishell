@@ -1,25 +1,42 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   errors.c                                           :+:      :+:    :+:   */
+/*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mmateo-t <mmateo-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/12/06 11:45:39 by mmateo-t          #+#    #+#             */
-/*   Updated: 2021/12/10 21:50:33 by mmateo-t         ###   ########.fr       */
+/*   Created: 2021/12/10 20:11:30 by mmateo-t          #+#    #+#             */
+/*   Updated: 2021/12/10 20:39:21 by mmateo-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-void	throw_error(const char *error)
+int	search_pipes(char *cmdline)
 {
-	perror(error);
-	exit(EXIT_FAILURE);
+	int n_pipes;
+	char *str;
+
+	n_pipes = 0;
+	str = cmdline;
+	while((str = ft_strchr(str, '|')) != NULL)
+	{
+		str++;
+		n_pipes++;
+	}
+	return (n_pipes);
 }
 
-void	check_args(int argc)
+int	len_array(char **array)
 {
-	if (argc != 1)
-		throw_error("Numbers of arguments invalid");
+	int i;
+
+	i = 0;
+	if (!array)
+		return (0);
+	while (array[i])
+	{
+		i++;
+	}
+	return (i);
 }
