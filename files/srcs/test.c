@@ -1,30 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   exec.c                                             :+:      :+:    :+:   */
+/*   test.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mmateo-t <mmateo-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/12/10 18:08:02 by mmateo-t          #+#    #+#             */
-/*   Updated: 2021/12/11 20:34:52 by mmateo-t         ###   ########.fr       */
+/*   Created: 2021/12/11 20:02:48 by mmateo-t          #+#    #+#             */
+/*   Updated: 2021/12/11 20:31:34 by mmateo-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-int exec(char **cmds, char **envp)
+void test(t_shell shell)
 {
-	int pid;
-
-	pid = fork();
-	if (!pid)
+	int i;
+	
+	i = 0;
+	printf("CMDLINE: %s\n", shell.cmdline);
+	while (*shell.words)
 	{
-		execve(cmds[0], cmds, envp);
-		perror("Execution error");
+		printf("CMD[%i]: %s\n", i++, *shell.words);
+		shell.words++;
 	}
-	else if(pid)
-		wait(NULL);
-	else
-		perror("Fork error\n");
-	return(0);
 }

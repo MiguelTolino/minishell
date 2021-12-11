@@ -6,7 +6,7 @@
 /*   By: mmateo-t <mmateo-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/10 18:50:51 by mmateo-t          #+#    #+#             */
-/*   Updated: 2021/12/11 12:08:38 by mmateo-t         ###   ########.fr       */
+/*   Updated: 2021/12/11 20:28:07 by mmateo-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,8 @@ char	*search_cmd(char *cmd, char **paths)
 	return (NULL);
 }
 
-/*	1. Check cmd and paths is different of null
+/*	
+	1. Check cmd and paths is different of null
 	2. check cmd is an actually path
 	3. if dont -> add_path and check if exists
 	4. double free
@@ -65,7 +66,7 @@ char *check_cmd(char *cmd)
 	if (!(access(cmd, X_OK)))
 		new_cmd = cmd;
 	else
-		cmd = search_cmd(cmd, paths);
+		new_cmd = search_cmd(cmd, paths);
 	dfree(paths);
 	return (new_cmd);
 }

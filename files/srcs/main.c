@@ -6,7 +6,7 @@
 /*   By: mmateo-t <mmateo-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/03 09:55:58 by mmateo-t          #+#    #+#             */
-/*   Updated: 2021/12/11 11:56:39 by mmateo-t         ###   ########.fr       */
+/*   Updated: 2021/12/11 20:40:25 by mmateo-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,10 @@ int	main(int argc, char **argv, char **envp)
 	{
 		shell.prompt = build_prompt();
 		shell.cmdline = readline(shell.prompt);
-		if (ft_strlen(shell.cmdline))
-			add_history(shell.cmdline);
+		if (!ft_strlen(shell.cmdline))
+			continue;	
+		add_history(shell.cmdline);
+		quoting(&shell);
 /* 		n_pipes = search_pipes(cmdline);
 		if (n_pipes)
 		{
@@ -48,11 +50,22 @@ int	main(int argc, char **argv, char **envp)
 		if(!shell.is_exec)
 			exec(shell.cmds, envp);
 		*/
-		shell.cmd = check_cmd(shell.cmdline);
-		if (!shell.cmd)
+/* 	if (!shell.n_pipes)
+	{
+ 		parsing(&shell);
+		if (!shell.words[0])
 			perror("CMD does not have permissions");
-		free(shell.cmdline);
-		free(shell.prompt);
+
+	} */
+
+			
+		if (!exec_builtins(shell.words, envp))
+		{
+				if (!parsing(&shell))
+							exec(shell.words, envp);
+		}
+		//test(shell);
+		free_struct(shell); // If cmdline is empty ocurss a leak
 	}
 	return (0);
 }

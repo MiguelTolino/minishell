@@ -6,26 +6,11 @@
 /*   By: mmateo-t <mmateo-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/10 20:11:30 by mmateo-t          #+#    #+#             */
-/*   Updated: 2021/12/11 12:05:18 by mmateo-t         ###   ########.fr       */
+/*   Updated: 2021/12/11 14:16:42 by mmateo-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
-
-int	search_pipes(char *cmdline)
-{
-	int n_pipes;
-	char *str;
-
-	n_pipes = 0;
-	str = cmdline;
-	while((str = ft_strchr(str, '|')) != NULL)
-	{
-		str++;
-		n_pipes++;
-	}
-	return (n_pipes);
-}
 
 int	len_array(char **array)
 {

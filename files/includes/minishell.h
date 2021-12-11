@@ -6,7 +6,7 @@
 /*   By: mmateo-t <mmateo-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/03 13:27:13 by mmateo-t          #+#    #+#             */
-/*   Updated: 2021/12/11 12:05:27 by mmateo-t         ###   ########.fr       */
+/*   Updated: 2021/12/11 20:05:36 by mmateo-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,8 +41,10 @@ typedef struct s_shell
 	char *prompt;
 	char **cmds;
 	char *cmd;
-	int is_exec;
-	char *history[MAXHIST];
+	char **words;
+	char **operators;
+	int	n_pipes;
+	char **cmds_pipe[MAXCOM];
 }	t_shell;
 
 typedef struct g_global
@@ -56,18 +58,22 @@ typedef struct g_global
 g_global global;
 
 char* build_prompt();
-int action(char **cmd, char **envp);
+int exec_builtins(char **cmd, char **envp);
 int	save_env(char **envp);
 void throw_error(const char *error);
 void check_args(int argc);
-char **parsing(char *cmdline, char **envp);
+int parsing(t_shell *shell);
 int exec(char **cmds, char **envp);
 int	search_pipes(char *cmdline);
 int	len_array(char **array);
 char *check_cmd(char *cmd);
 int	dfree(char **array);
+void free_struct(t_shell shell);
+int quoting(t_shell *shell);
+void test(t_shell shell);
 
-//Commands
+
+//Builtins
 void	env(char **envp);
 void change_directory(char *str);
 void	echo(char **str, char option);

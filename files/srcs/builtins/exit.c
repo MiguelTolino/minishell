@@ -3,16 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmateo-t <mmateo-t@student.42madrid>       +#+  +:+       +#+        */
+/*   By: mmateo-t <mmateo-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/07 11:21:04 by mmateo-t          #+#    #+#             */
-/*   Updated: 2021/12/07 11:35:52 by mmateo-t         ###   ########.fr       */
+/*   Updated: 2021/12/11 20:41:53 by mmateo-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-void exit_shell()
+void exit_shell(t_shell shell)
 {
+	free_struct(shell);
 	exit(EXIT_SUCCESS);
 }

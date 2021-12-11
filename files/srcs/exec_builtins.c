@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   action.c                                           :+:      :+:    :+:   */
+/*   exec_builtins.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mmateo-t <mmateo-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/05 19:14:58 by mmateo-t          #+#    #+#             */
-/*   Updated: 2021/12/10 18:33:00 by mmateo-t         ###   ########.fr       */
+/*   Updated: 2021/12/11 12:13:07 by mmateo-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-int action(char **cmd, char **envp)
+int exec_builtins(char **cmd, char **envp)
 {
 	if (!ft_strncmp(cmd[0], "pwd", ft_strlen(cmd[0])))
 	{
