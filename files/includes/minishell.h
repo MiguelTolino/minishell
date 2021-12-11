@@ -6,7 +6,7 @@
 /*   By: mmateo-t <mmateo-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/03 13:27:13 by mmateo-t          #+#    #+#             */
-/*   Updated: 2021/12/10 21:45:18 by mmateo-t         ###   ########.fr       */
+/*   Updated: 2021/12/11 12:05:27 by mmateo-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,17 +28,28 @@
 
 #define MAXCOM 1024 // max number of letters to be supported
 #define MAXLIST 100 // max number of commands to be supported
+#define MAXHIST 128 // max number of commands to be saved
+
+typedef struct s_history
+{
+	
+} t_history;
 
 typedef struct s_shell
 {
 	char *cmdline;
 	char *prompt;
+	char **cmds;
+	char *cmd;
+	int is_exec;
+	char *history[MAXHIST];
 }	t_shell;
 
 typedef struct g_global
 {
 	char **envp;
 	char **local_env;
+
 	//Signals
 }	g_global;
 
@@ -51,9 +62,10 @@ void throw_error(const char *error);
 void check_args(int argc);
 char **parsing(char *cmdline, char **envp);
 int exec(char **cmds, char **envp);
-char *add_path(char *cmd, char **envp);
 int	search_pipes(char *cmdline);
 int	len_array(char **array);
+char *check_cmd(char *cmd);
+int	dfree(char **array);
 
 //Commands
 void	env(char **envp);

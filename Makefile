@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: mmateo-t <mmateo-t@student.42madrid>       +#+  +:+       +#+         #
+#    By: mmateo-t <mmateo-t@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/12/03 10:00:24 by mmateo-t          #+#    #+#              #
-#    Updated: 2021/12/07 11:39:19 by mmateo-t         ###   ########.fr        #
+#    Updated: 2021/12/11 11:58:41 by mmateo-t         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,14 +22,14 @@ OBJS := $(SRCS:%.c=%.o)
 NAME:= minishell
 CC:= gcc
 DEBUG_FLAG:= -g
-CFLAGS:= $(DEBUG_FLAG)	#-Wall -Werror -Wextra
+CFLAGS:= $(DEBUG_FLAG) #-Wall -Werror -Wextra
 SYS_LIB:= -lreadline
 LIBFT_PATH:= files/lib/libft
 LIBFT_LIB:= -L$(LIBFT_PATH) $(LIBFT_PATH)/libft.a
 RM := rm -rvf
 UNAME_S := $(shell uname -s)
 ifeq (${UNAME_S}, Darwin)
-	LEAKS:= leaks ./minishell
+	LEAKS:= leaks minishell
 else
 	LEAKS:= valgrind --leak-check=full ./minishell
 endif

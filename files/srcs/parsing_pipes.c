@@ -6,7 +6,7 @@
 /*   By: mmateo-t <mmateo-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/10 20:34:35 by mmateo-t          #+#    #+#             */
-/*   Updated: 2021/12/10 20:45:01 by mmateo-t         ###   ########.fr       */
+/*   Updated: 2021/12/11 11:45:29 by mmateo-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,6 @@ char ***parsing_pipes(char *cmdline, int n_pipes)
 		split_cmds[i] = ft_split(split_pipes[i], ' ');
 		i++;
 	}
-	split_cmds[i] = '\0';
+	//split_cmds[i] = '\0';
 	return (split_cmds);
 }
