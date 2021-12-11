@@ -6,7 +6,7 @@
 /*   By: mmateo-t <mmateo-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/03 13:27:13 by mmateo-t          #+#    #+#             */
-/*   Updated: 2021/12/11 20:05:36 by mmateo-t         ###   ########.fr       */
+/*   Updated: 2021/12/11 22:33:38 by mmateo-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,9 @@
 #define MAXLIST 100 // max number of commands to be supported
 #define MAXHIST 128 // max number of commands to be saved
 
+# define READ_END 0
+# define WRITE_END 1
+
 typedef struct s_history
 {
 	
@@ -44,7 +47,7 @@ typedef struct s_shell
 	char **words;
 	char **operators;
 	int	n_pipes;
-	char **cmds_pipe[MAXCOM];
+	char **cmds_pipe[MAXLIST];
 }	t_shell;
 
 typedef struct g_global
@@ -71,6 +74,7 @@ int	dfree(char **array);
 void free_struct(t_shell shell);
 int quoting(t_shell *shell);
 void test(t_shell shell);
+void	exec_pipes(char **cmd[MAXLIST], int n_pipes, char **envp);
 
 
 //Builtins

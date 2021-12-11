@@ -6,7 +6,7 @@
 /*   By: mmateo-t <mmateo-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/03 09:55:58 by mmateo-t          #+#    #+#             */
-/*   Updated: 2021/12/11 20:40:25 by mmateo-t         ###   ########.fr       */
+/*   Updated: 2021/12/11 23:40:56 by mmateo-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,15 +14,15 @@
 
 void init_shell()
 {
-printf("%s        .__       .__       .__           .__  .__   \n", COLOR(1, 31));
-printf("  _____ |__| ____ |__| _____|  |__   ____ |  | |  |  \n");
-printf(" /     \\|  |/    \\|  |/  ___/  |  \\_/ __ \\|  | |  |  \n");
-printf("|  Y Y  \\  |   |  \\  |\\___ \\|   Y  \\  ___/|  |_|  |__\n");
-printf("|__|_|  /__|___|  /__/____  >___|  /\\___  >____/____/\n");
-printf("      \\/        \\/        \\/     \\/     \\/           \n\n%s", NC);
+	printf("%s        .__       .__       .__           .__  .__   \n", COLOR(1, 31));
+	printf("  _____ |__| ____ |__| _____|  |__   ____ |  | |  |  \n");
+	printf(" /     \\|  |/    \\|  |/  ___/  |  \\_/ __ \\|  | |  |  \n");
+	printf("|  Y Y  \\  |   |  \\  |\\___ \\|   Y  \\  ___/|  |_|  |__\n");
+	printf("|__|_|  /__|___|  /__/____  >___|  /\\___  >____/____/\n");
+	printf("      \\/        \\/        \\/     \\/     \\/           \n\n%s", NC);
 }
 
-int	main(int argc, char **argv, char **envp)
+int main(int argc, char **argv, char **envp)
 {
 	t_shell shell;
 
@@ -33,38 +33,20 @@ int	main(int argc, char **argv, char **envp)
 		shell.prompt = build_prompt();
 		shell.cmdline = readline(shell.prompt);
 		if (!ft_strlen(shell.cmdline))
-			continue;	
+		{
+			free(shell.prompt);
+			free(shell.cmdline);
+			continue;
+		}
 		add_history(shell.cmdline);
 		quoting(&shell);
-/* 		n_pipes = search_pipes(cmdline);
-		if (n_pipes)
-		{
-			cmds_pipe = parsing_pipes(cmdline, n_pipes);
-			exec_pipes(cmds_pipe);
-		}
+		parsing(&shell);
+ 		//test(shell);
+ 		if (shell.n_pipes)
+			exec_pipes(shell.cmds_pipe, shell.n_pipes, envp);
 		else
-		{
-		*/
- 	/*	shell.cmds = parsing(shell.cmdline, envp);
-		shell.is_exec = action(shell.cmds, envp);
-		if(!shell.is_exec)
-			exec(shell.cmds, envp);
-		*/
-/* 	if (!shell.n_pipes)
-	{
- 		parsing(&shell);
-		if (!shell.words[0])
-			perror("CMD does not have permissions");
-
-	} */
-
-			
-		if (!exec_builtins(shell.words, envp))
-		{
-				if (!parsing(&shell))
-							exec(shell.words, envp);
-		}
-		//test(shell);
+			exec(shell.words, envp);
+ 	 	//if (!exec_builtins(shell.words, envp))
 		free_struct(shell); // If cmdline is empty ocurss a leak
 	}
 	return (0);
