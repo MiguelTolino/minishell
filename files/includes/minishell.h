@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmateo-t <mmateo-t@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mmateo-t <mmateo-t@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/03 13:27:13 by mmateo-t          #+#    #+#             */
-/*   Updated: 2021/12/11 22:33:38 by mmateo-t         ###   ########.fr       */
+/*   Updated: 2021/12/17 20:16:09 by mmateo-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 # include <stdio.h>
 # include <stdlib.h>
 # include <unistd.h>
+# include <signal.h>
 # include <readline/readline.h>
 # include <readline/history.h>
 # include <sys/types.h>
@@ -75,12 +76,13 @@ void free_struct(t_shell shell);
 int quoting(t_shell *shell);
 void test(t_shell shell);
 void	exec_pipes(char **cmd[MAXLIST], int n_pipes, char **envp);
+void	signal_handler();
 
 
 //Builtins
 void	env(char **envp);
 void change_directory(char *str);
-void	echo(char **str, char option);
+void	echo(char **cmd);
 void 	exit_shell();
 
 #endif
