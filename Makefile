@@ -6,7 +6,7 @@
 #    By: mmateo-t <mmateo-t@student.42madrid>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/12/03 10:00:24 by mmateo-t          #+#    #+#              #
-#    Updated: 2021/12/17 12:20:19 by mmateo-t         ###   ########.fr        #
+#    Updated: 2021/12/19 13:23:11 by mmateo-t         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,7 +22,7 @@ OBJS := $(SRCS:%.c=%.o)
 NAME:= minishell
 CC:= gcc
 DEBUG_FLAG:= -g
-CFLAGS:= #-Wall -Werror -Wextra
+CFLAGS:= -g #-Wall -Werror -Wextra 
 SYS_LIB:= -lreadline
 LIBFT_PATH:= files/lib/libft
 LIBFT_LIB:= -L$(LIBFT_PATH) $(LIBFT_PATH)/libft.a

@@ -6,7 +6,7 @@
 /*   By: mmateo-t <mmateo-t@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/03 13:27:13 by mmateo-t          #+#    #+#             */
-/*   Updated: 2021/12/17 20:16:09 by mmateo-t         ###   ########.fr       */
+/*   Updated: 2021/12/18 14:07:57 by mmateo-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,7 @@ int quoting(t_shell *shell);
 void test(t_shell shell);
 void	exec_pipes(char **cmd[MAXLIST], int n_pipes, char **envp);
 void	signal_handler();
+void	lexer(t_shell *shell);
 
 
 //Builtins
