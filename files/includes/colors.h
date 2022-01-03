@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   colors.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmateo-t <mmateo-t@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mmateo-t <mmateo-t@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/05 18:02:29 by mmateo-t          #+#    #+#             */
-/*   Updated: 2021/12/11 22:32:44 by mmateo-t         ###   ########.fr       */
+/*   Updated: 2022/01/03 13:21:30 by mmateo-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,15 +29,15 @@ Light Gray  0;37     White         1;37
 
 #ifndef COLORS_H
 # define COLORS_H
-#define NC "\033[0m" //No Color
-#define BLACK "\033[0;30m"
-#define RED "\033[0;31m"
-#define GREEN "\033[0;32m"
-#define BROWN "\033[0;33m"
-#define BLUE "\033[0;34m"
-#define PURPLE "\033[0;35m"
-#define CYAN "\033[0;36m"
+#define NC "\001\033[0m\002" //No Color
+#define BLACK "\001\033[0;30m\002"
+#define RED "\001\033[0;31m\002"
+#define GREEN "\001\033[0;32m\002"
+#define BROWN "\001\033[0;33m\002"
+#define BLUE "\001\033[0;34m\002"
+#define PURPLE "\001\033[0;35m\002"
+#define CYAN "\001\033[0;36m\002"
 
-#define COLOR(x,y) "\033["#x";"#y"m"    // x: fondo, y: primer plano
+#define COLOR(x,y) "\001\033["#x";"#y"m\002"    // x: fondo, y: primer plano
 
 #endif
