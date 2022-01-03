@@ -3,61 +3,78 @@
 /*                                                        :::      ::::::::   */
 /*   quoting.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmateo-t <mmateo-t@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mmateo-t <mmateo-t@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/12/11 13:42:24 by mmateo-t          #+#    #+#             */
-/*   Updated: 2021/12/11 23:38:47 by mmateo-t         ###   ########.fr       */
+/*   Created: 2021/12/18 13:16:41 by mmateo-t          #+#    #+#             */
+/*   Updated: 2022/01/03 19:41:58 by mmateo-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-// (   ls  )
-// 1.Calcular len
+//TODO: Study lists and look how to use it
 
-char *trim(char *str)
+//TODO:
+/*	While a quote exists (USING LISTS)
+	1º Find quote
+	2º Create str = 'quote SPACES' which contains the size of quote1
+	3º Use strlcpy or memcpy to copy the string in cmdline 
+*/
+
+void replace_quotes(char *shell)
 {
-	char *aux;
+	//ft_strnstr(shell->cmdline, quote1, ft_strlen(shell->cmdline));
+}
+
+char *new_quote(char *cmdline, char quote, int *index)
+{
+	int start;
+	int j;
+	int len;
+	int closed;
+	char *cmd;
 	
-	aux = ft_strtrim(str, " ");
-	free(str);
-	return (aux);
-}
-
-int	search_pipes(char *cmdline)
-{
-	int		n_pipes;
-	char	*str;
-
-	n_pipes = 0;
-	str = ft_strchr(cmdline, '|');
-	while (str != NULL)
+	start = *index + 1;
+	j = *index + 1;
+	cmd = NULL;
+	closed = 0;
+	while (!closed && cmdline[j])
 	{
-		str++;
-		n_pipes++;
-		str = ft_strchr(str, '|');
+		j++;
+		if (cmdline[j] == quote)
+			closed = 1;
 	}
-	return (n_pipes);
+	len = j - *index - 1;
+	if (closed)
+		cmd = ft_substr(cmdline, start, len);
+	*index = j;
+	return (cmd);
 }
 
-int	quoting(t_shell *shell)
+void search_quotes(t_shell *shell)
 {
-	int		i;
-	char	*ptr;
+	int i;
+	char *cmd;
 
 	i = 0;
-	shell->n_pipes = search_pipes(shell->cmdline);
-	if (shell->n_pipes)
+	cmd = NULL;
+	while (shell->cmdline[i])
 	{
-		shell->words = ft_split(shell->cmdline, '|');
-		while (i <= shell->n_pipes && i < MAXLIST)
+		if (shell->cmdline[i] == '\'')
 		{
-			shell->words[i] = trim(shell->words[i]);
-			shell->cmds_pipe[i] = ft_split(shell->words[i], ' ');
-			i++;
+			cmd = new_quote(shell->cmdline, '\'', &i);
 		}
+		if (shell->cmdline[i] == '\"')
+		{
+			cmd = new_quote(shell->cmdline, '\"', &i);
+		}
+		i++;
 	}
-	else
-		shell->words = ft_split(shell->cmdline, ' ');
-	return (0);
+	printf("Quote: %s\n", cmd);
+}
+
+void lexer(t_shell *shell)
+{
+	search_quotes(shell);
+	//replace_quotes(shell);
 }

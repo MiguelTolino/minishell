@@ -6,7 +6,7 @@
 /*   By: mmateo-t <mmateo-t@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/03 13:27:13 by mmateo-t          #+#    #+#             */
-/*   Updated: 2021/12/18 14:07:57 by mmateo-t         ###   ########.fr       */
+/*   Updated: 2022/01/03 18:10:37 by mmateo-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,13 +34,19 @@
 # define READ_END 0
 # define WRITE_END 1
 
-typedef struct s_history
+typedef struct quotes
 {
-	
-} t_history;
+
+	char **s_quotes;
+	char **d_quotes;
+} t_quotes;
+
 
 typedef struct s_shell
 {
+
+	int	num_squote;
+	int	num_dquote;
 	char *cmdline;
 	char *prompt;
 	char **cmds;

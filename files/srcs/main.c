@@ -6,7 +6,7 @@
 /*   By: mmateo-t <mmateo-t@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/03 09:55:58 by mmateo-t          #+#    #+#             */
-/*   Updated: 2021/12/19 13:28:57 by mmateo-t         ###   ########.fr       */
+/*   Updated: 2022/01/03 17:47:55 by mmateo-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ int main(int argc, char **argv, char **envp)
 			else
 				exec(shell.words, envp);
 		} */
-		free_struct(shell); // If cmdline is empty ocurss a leak
+		//free_struct(shell); // If cmdline is empty ocurss a leak
 	}
 	return (0);
 }
