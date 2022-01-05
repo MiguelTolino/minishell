@@ -6,7 +6,7 @@
 /*   By: mmateo-t <mmateo-t@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/05 17:05:47 by mmateo-t          #+#    #+#             */
-/*   Updated: 2022/01/05 18:14:27 by mmateo-t         ###   ########.fr       */
+/*   Updated: 2022/01/05 18:43:28 by mmateo-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ void search_cmdline(t_shell *shell, int single, int doble)
 	start = 0;
 	while (shell->cmdline[i])
 	{
-		if (shell->cmdline[i] == '|') //FIXME: ¿SEVERAL PIPES?
+		if (shell->cmdline[i] == '|')
 		{
 			word = ft_substr(shell->cmdline, start, i - start);
 			list = ft_lstnew(word);
@@ -79,10 +79,5 @@ void	quoting(t_shell *shell)
 	shell->cmd_list = NULL;
 	n_single = count_closed_quotes(shell->cmdline, '\'') / 2;
 	n_doble = count_closed_quotes(shell->cmdline, '\"') / 2;
-	printf("S:%i\n", n_single);
-	printf("D:%i\n", n_doble);
 	search_cmdline(shell, n_single, n_doble);
-	printf("LEN: %i\n", ft_lstsize(shell->cmd_list));
-	printf("WORD: %s\n", ((char *)shell->cmd_list->content));
-	printf("WORD: %s\n", ((char *)shell->cmd_list->next->content));
 }
