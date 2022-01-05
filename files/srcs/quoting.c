@@ -5,76 +5,84 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: mmateo-t <mmateo-t@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/12/18 13:16:41 by mmateo-t          #+#    #+#             */
-/*   Updated: 2022/01/03 19:41:58 by mmateo-t         ###   ########.fr       */
+/*   Created: 2022/01/05 17:05:47 by mmateo-t          #+#    #+#             */
+/*   Updated: 2022/01/05 18:14:27 by mmateo-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-//TODO: Study lists and look how to use it
-
-//TODO:
-/*	While a quote exists (USING LISTS)
-	1º Find quote
-	2º Create str = 'quote SPACES' which contains the size of quote1
-	3º Use strlcpy or memcpy to copy the string in cmdline 
-*/
-
-void replace_quotes(char *shell)
+int	count_closed_quotes(char *cmdline, char quote)
 {
-	//ft_strnstr(shell->cmdline, quote1, ft_strlen(shell->cmdline));
-}
+	int num;
+	char *aux;
 
-char *new_quote(char *cmdline, char quote, int *index)
-{
-	int start;
-	int j;
-	int len;
-	int closed;
-	char *cmd;
-	
-	start = *index + 1;
-	j = *index + 1;
-	cmd = NULL;
-	closed = 0;
-	while (!closed && cmdline[j])
+	num = 0;
+	aux = ft_strchr(cmdline, quote);
+	while (aux)
 	{
-		j++;
-		if (cmdline[j] == quote)
-			closed = 1;
+		aux++;
+		num++;
+		aux = ft_strchr(aux, quote);
 	}
-	len = j - *index - 1;
-	if (closed)
-		cmd = ft_substr(cmdline, start, len);
-	*index = j;
-	return (cmd);
+	return (num);
 }
 
-void search_quotes(t_shell *shell)
+void search_cmdline(t_shell *shell, int single, int doble)
 {
 	int i;
-	char *cmd;
+	int start;
+	t_list *list;
+	char *word;
 
 	i = 0;
-	cmd = NULL;
+	start = 0;
 	while (shell->cmdline[i])
 	{
-		if (shell->cmdline[i] == '\'')
+		if (shell->cmdline[i] == '|') //FIXME: ¿SEVERAL PIPES?
 		{
-			cmd = new_quote(shell->cmdline, '\'', &i);
+			word = ft_substr(shell->cmdline, start, i - start);
+			list = ft_lstnew(word);
+			ft_lstadd_back(&shell->cmd_list, list);
+			start = i + 1;
 		}
-		if (shell->cmdline[i] == '\"')
+		if(shell->cmdline[i] == '\'' && single)
 		{
-			cmd = new_quote(shell->cmdline, '\"', &i);
+			i++;
+			while (shell->cmdline[i] != '\'')
+			{
+				i++;
+			}
+			single--;
+		}
+		if ( shell->cmdline[i] == '\"' && doble)
+		{
+			i++;
+			while (shell->cmdline[i] != '\"')
+			{
+				i++;
+			}
+			doble--;
 		}
 		i++;
 	}
-	printf("Quote: %s\n", cmd);
+	word = ft_substr(shell->cmdline, start, i - start);
+	list = ft_lstnew(word);
+	ft_lstadd_back(&shell->cmd_list, list);
 }
 
-void lexer(t_shell *shell)
+void	quoting(t_shell *shell)
 {
-	search_quotes(shell);
-	//replace_quotes(shell);
+	int n_single;
+	int n_doble;
+	
+	shell->cmd_list = NULL;
+	n_single = count_closed_quotes(shell->cmdline, '\'') / 2;
+	n_doble = count_closed_quotes(shell->cmdline, '\"') / 2;
+	printf("S:%i\n", n_single);
+	printf("D:%i\n", n_doble);
+	search_cmdline(shell, n_single, n_doble);
+	printf("LEN: %i\n", ft_lstsize(shell->cmd_list));
+	printf("WORD: %s\n", ((char *)shell->cmd_list->content));
+	printf("WORD: %s\n", ((char *)shell->cmd_list->next->content));
 }

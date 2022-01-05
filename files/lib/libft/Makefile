@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: mmateo-t <marvin@42.fr>                    +#+  +:+       +#+         #
+#    By: mmateo-t <mmateo-t@student.42madrid>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/12/04 12:19:05 by mmateo-t          #+#    #+#              #
-#    Updated: 2019/12/04 12:19:08 by mmateo-t         ###   ########.fr        #
+#    Updated: 2022/01/05 11:38:44 by mmateo-t         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -67,7 +67,7 @@ RM          = rm -f
 ${NAME}:    ${OBJS}
 			ar rc ${NAME} ${OBJS}
 bonus:      ${OBJS} ${OBJS_BONUS}
-			ar rc ${NAME} ${OBJS_BONUS}
+			ar rc ${NAME} ${OBJS_BONUS} ${OBJS}
 all:        ${NAME}
 clean:
 			${RM} ${OBJS} ${OBJS_BONUS}
