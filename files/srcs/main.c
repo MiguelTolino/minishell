@@ -6,7 +6,7 @@
 /*   By: mmateo-t <mmateo-t@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/03 09:55:58 by mmateo-t          #+#    #+#             */
-/*   Updated: 2021/12/19 13:28:57 by mmateo-t         ###   ########.fr       */
+/*   Updated: 2022/01/05 18:42:57 by mmateo-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,7 @@ int main(int argc, char **argv, char **envp)
 	{
 		shell.prompt = build_prompt();
 		shell.cmdline = readline(shell.prompt);
-		lexer(&shell);
-/* 		if (!ft_strlen(shell.cmdline))
+		if (!ft_strlen(shell.cmdline))
 		{
 			free(shell.prompt);
 			free(shell.cmdline);
@@ -42,6 +41,7 @@ int main(int argc, char **argv, char **envp)
 		}
 		add_history(shell.cmdline);
 		quoting(&shell);
+/*
 		parsing(&shell);
  		if (!(exec_builtins(shell.words, envp)))
 		{	 
@@ -50,7 +50,7 @@ int main(int argc, char **argv, char **envp)
 			else
 				exec(shell.words, envp);
 		} */
-		free_struct(shell); // If cmdline is empty ocurss a leak
+		//free_struct(shell); // If cmdline is empty ocurss a leak
 	}
 	return (0);
 }

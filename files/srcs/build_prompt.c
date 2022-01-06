@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   build_prompt.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmateo-t <mmateo-t@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mmateo-t <mmateo-t@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/05 17:46:43 by mmateo-t          #+#    #+#             */
-/*   Updated: 2021/12/10 21:52:40 by mmateo-t         ###   ########.fr       */
+/*   Updated: 2022/01/03 13:21:39 by mmateo-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,6 @@ char	*build_prompt(void)
 	char	*user;
 
 	user = getenv("USER");
-	if (!user)
-		throw_error(PROMPT_ERROR);
 	dir = set_directory(dir);
 	prompt = (char *)malloc(sizeof(char) * MAXCOM);
 	ft_strlcat(prompt, COLOR(1, 33), ft_strlen(COLOR(1, 33)) + 1);

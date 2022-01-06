@@ -6,7 +6,7 @@
 #    By: mmateo-t <mmateo-t@student.42madrid>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/12/03 10:00:24 by mmateo-t          #+#    #+#              #
-#    Updated: 2021/12/19 13:23:11 by mmateo-t         ###   ########.fr        #
+#    Updated: 2022/01/05 11:38:55 by mmateo-t         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -44,7 +44,7 @@ $(%.o): $(%.c)
 					@echo "Creating objects"
 
 libft:
-			make -C $(LIBFT_PATH)
+			make bonus -C $(LIBFT_PATH)
 
 leaks:	all
 		$(LEAKS)

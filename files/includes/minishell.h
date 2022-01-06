@@ -6,7 +6,7 @@
 /*   By: mmateo-t <mmateo-t@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/03 13:27:13 by mmateo-t          #+#    #+#             */
-/*   Updated: 2021/12/18 14:07:57 by mmateo-t         ###   ########.fr       */
+/*   Updated: 2022/01/05 17:23:53 by mmateo-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,13 +34,22 @@
 # define READ_END 0
 # define WRITE_END 1
 
-typedef struct s_history
+typedef struct s_quote
 {
-	
-} t_history;
+	int simple;
+	int doble;
+	char *str;
+} t_quote;
+
+typedef	struct s_word
+{
+	char	*word;
+} t_word;
 
 typedef struct s_shell
 {
+	t_list *quote_list;
+	t_list *cmd_list;
 	char *cmdline;
 	char *prompt;
 	char **cmds;
@@ -73,12 +82,11 @@ int	len_array(char **array);
 char *check_cmd(char *cmd);
 int	dfree(char **array);
 void free_struct(t_shell shell);
-int quoting(t_shell *shell);
+void	quoting(t_shell *shell);
 void test(t_shell shell);
 void	exec_pipes(char **cmd[MAXLIST], int n_pipes, char **envp);
 void	signal_handler();
 void	lexer(t_shell *shell);
-
 
 //Builtins
 void	env(char **envp);
