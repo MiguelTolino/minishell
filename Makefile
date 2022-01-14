@@ -22,8 +22,10 @@ OBJS := $(SRCS:%.c=%.o)
 NAME:= minishell
 CC:= gcc
 DEBUG_FLAG:= -g
-CFLAGS:= -g #-Wall -Werror -Wextra 
-SYS_LIB:= -lreadline
+CFLAGS:= -g #-Wall -Werror -Wextra
+MACBOOK:= -L /opt/homebrew/opt/readline/lib -I /opt/homebrew/opt/readline/include/readline/include
+SYS_LIB:= -lreadline #$(MACBOOK)
+
 LIBFT_PATH:= files/lib/libft
 LIBFT_LIB:= -L$(LIBFT_PATH) $(LIBFT_PATH)/libft.a
 RM := rm -rvf
@@ -38,7 +40,7 @@ all:	libft $(NAME) msg
 
 $(NAME): $(OBJS)
 		$(CC) $(CFLAGS) $(OBJS) -o $(NAME) $(LIBFT_LIB) $(SYS_LIB)
-			
+
 $(%.o): $(%.c)
 			$(CC) -c $^ -o $@
 					@echo "Creating objects"
@@ -60,8 +62,8 @@ fclean:
 			cd $(LIBFT_PATH) && $(MAKE) fclean
 			$(RM) $(NAME)
 
-msg:	
-	
+msg:
+
 	@echo	"																										"
 	@echo	"\033[1;34m██████   ██████ █████ ██████   █████ █████  █████████  █████   █████ ██████████ █████       █████      \033[0m"
 	@echo	"\033[1;34m░░██████ ██████ ░░███ ░░██████ ░░███ ░░███  ███░░░░░███░░███   ░░███ ░░███░░░░░█░░███       ░░███      \033[0m"

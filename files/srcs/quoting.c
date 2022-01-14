@@ -33,17 +33,19 @@ void search_cmdline(t_shell *shell, int single, int doble)
 	int i;
 	int start;
 	t_list *list;
-	char *word;
+	t_cmd_data *cmd_data;
 
 	i = 0;
 	start = 0;
+	list = NULL;
 	while (shell->cmdline[i])
 	{
+		cmd_data = (t_cmd_data *)malloc(sizeof(cmd_data));
 		if (shell->cmdline[i] == '|')
 		{
-			word = ft_substr(shell->cmdline, start, i - start);
-			list = ft_lstnew(word);
-			ft_lstadd_back(&shell->cmd_list, list);
+			cmd_data->cmd = ft_substr(shell->cmdline, start, i - start);
+			list = ft_lstnew(cmd_data);
+			ft_lstadd_back(&shell->cmdlist, list);
 			start = i + 1;
 		}
 		if(shell->cmdline[i] == '\'' && single)
@@ -66,17 +68,17 @@ void search_cmdline(t_shell *shell, int single, int doble)
 		}
 		i++;
 	}
-	word = ft_substr(shell->cmdline, start, i - start);
-	list = ft_lstnew(word);
-	ft_lstadd_back(&shell->cmd_list, list);
+	cmd_data->cmd = ft_substr(shell->cmdline, start, i - start);
+	list = ft_lstnew(cmd_data);
+	ft_lstadd_back(&shell->cmdlist, list);
 }
 
 void	quoting(t_shell *shell)
 {
 	int n_single;
 	int n_doble;
-	
-	shell->cmd_list = NULL;
+
+	shell->cmdlist = NULL;
 	n_single = count_closed_quotes(shell->cmdline, '\'') / 2;
 	n_doble = count_closed_quotes(shell->cmdline, '\"') / 2;
 	search_cmdline(shell, n_single, n_doble);

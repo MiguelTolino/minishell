@@ -41,10 +41,11 @@ int main(int argc, char **argv, char **envp)
 		}
 		add_history(shell.cmdline);
 		quoting(&shell);
+		test(shell);
 /*
 		parsing(&shell);
  		if (!(exec_builtins(shell.words, envp)))
-		{	 
+		{
  			if (shell.n_pipes)
 				exec_pipes(shell.cmds_pipe, shell.n_pipes, envp);
 			else

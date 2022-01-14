@@ -14,7 +14,7 @@
 
 void sigint_handler(int sig)
 {
-	rl_replace_line("", 0);
+	//FIXME: rl_replace_line("", 0);
 	ft_putstr_fd("\b\b", STDOUT_FILENO);
 	ft_putstr_fd("  ", STDOUT_FILENO);
 	ft_putchar_fd('\n', STDOUT_FILENO);

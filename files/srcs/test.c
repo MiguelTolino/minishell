@@ -14,25 +14,12 @@
 
 void test(t_shell shell)
 {
-	int i;
-	int j;
+	t_list *list;
+	list = shell.cmdlist;
 
-	i = 0;
-	j = 0;
-	printf("CMDLINE:%s\n", shell.cmdline);
-	printf("NUM_PIPES:%i\n", shell.n_pipes);
-	while (*shell.words)
+	while (list)
 	{
-		printf("CMD[%i]:%s\n", i++, *shell.words);
-		shell.words++;
-	}
-	i = 0;
-	if (shell.n_pipes)
-	{
-		while (i <= shell.n_pipes)
-		{
-			printf("CMD[%i][0]:(%s)\n", i, shell.cmds_pipe[i][0]);
-			i++;
-		}
+		printf("%s\n", ((t_cmd_data *)list->content)->cmd);
+		list = list->next;
 	}
 }

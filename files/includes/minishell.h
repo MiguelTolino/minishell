@@ -24,7 +24,7 @@
 # include "colors.h"
 # include "error.h"
 
-# define SIMBOL1 " <" 
+# define SIMBOL1 " <"
 # define SIMBOL2 "> $ "
 
 #define MAXCOM 1024 // max number of letters to be supported
@@ -34,6 +34,20 @@
 # define READ_END 0
 # define WRITE_END 1
 
+enum type
+{
+	NONE, //defaut set
+	ARG, //word
+	FILE_IN, //word == '<'
+	HERE_DOC, // word == '<<'
+	FILE_OUT, //word == '>'
+	FILE_OUT_SUR, //word == '>>'
+	OPEN_FILE, // word following '<'
+	LIMITOR, // word following '<<'
+	EXIT_FILE, // word followinf '>'
+	EXIT_FILE_RET // word following '>>'
+};
+
 typedef struct s_quote
 {
 	int simple;
@@ -41,18 +55,23 @@ typedef struct s_quote
 	char *str;
 } t_quote;
 
-typedef	struct s_word
+typedef struct s_token
 {
 	char	*word;
-} t_word;
+	enum	type;
+}	t_token;
+
+typedef struct	s_cmd_data
+{
+	char		*cmd;
+	t_list		*token;
+} t_cmd_data;
 
 typedef struct s_shell
 {
-	t_list *quote_list;
-	t_list *cmd_list;
+	t_list *cmdlist;
 	char *cmdline;
 	char *prompt;
-	char **cmds;
 	char *cmd;
 	char **words;
 	char **operators;
