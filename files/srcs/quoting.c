@@ -6,11 +6,24 @@
 /*   By: mmateo-t <mmateo-t@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/05 17:05:47 by mmateo-t          #+#    #+#             */
-/*   Updated: 2022/01/05 18:43:28 by mmateo-t         ###   ########.fr       */
+/*   Updated: 2022/01/15 19:48:35 by mmateo-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
+
+void	ignore_quotes(char *cmd, char type, int *i, int num)
+{
+	if(cmd[*i] == type && num)
+	{
+		(*i)++;
+		while (cmd[*i] != type)
+		{
+			(*i)++;
+		}
+		num--;
+	}
+}
 
 int	count_closed_quotes(char *cmdline, char quote)
 {
@@ -48,24 +61,8 @@ void search_cmdline(t_shell *shell, int single, int doble)
 			ft_lstadd_back(&shell->cmdlist, list);
 			start = i + 1;
 		}
-		if(shell->cmdline[i] == '\'' && single)
-		{
-			i++;
-			while (shell->cmdline[i] != '\'')
-			{
-				i++;
-			}
-			single--;
-		}
-		if ( shell->cmdline[i] == '\"' && doble)
-		{
-			i++;
-			while (shell->cmdline[i] != '\"')
-			{
-				i++;
-			}
-			doble--;
-		}
+		ignore_quotes(shell->cmdline, '\'', &i, single);
+		ignore_quotes(shell->cmdline, '\"', &i, doble);
 		i++;
 	}
 	cmd_data->cmd = ft_substr(shell->cmdline, start, i - start);
@@ -82,4 +79,5 @@ void	quoting(t_shell *shell)
 	n_single = count_closed_quotes(shell->cmdline, '\'') / 2;
 	n_doble = count_closed_quotes(shell->cmdline, '\"') / 2;
 	search_cmdline(shell, n_single, n_doble);
+	dividing(shell, n_single, n_doble);
 }

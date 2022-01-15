@@ -6,7 +6,7 @@
 /*   By: mmateo-t <mmateo-t@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/03 13:27:13 by mmateo-t          #+#    #+#             */
-/*   Updated: 2022/01/05 17:23:53 by mmateo-t         ###   ########.fr       */
+/*   Updated: 2022/01/15 19:43:16 by mmateo-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,10 +102,13 @@ char *check_cmd(char *cmd);
 int	dfree(char **array);
 void free_struct(t_shell shell);
 void	quoting(t_shell *shell);
-void test(t_shell shell);
+void	test(t_shell shell);
 void	exec_pipes(char **cmd[MAXLIST], int n_pipes, char **envp);
 void	signal_handler();
 void	lexer(t_shell *shell);
+void dividing(t_shell *shell, int single, int doble);
+void	ignore_quotes(char *cmd, char type, int *i, int num);
+
 
 //Builtins
 void	env(char **envp);
