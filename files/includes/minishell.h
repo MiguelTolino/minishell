@@ -6,7 +6,7 @@
 /*   By: mmateo-t <mmateo-t@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/03 13:27:13 by mmateo-t          #+#    #+#             */
-/*   Updated: 2022/01/05 17:23:53 by mmateo-t         ###   ########.fr       */
+/*   Updated: 2022/01/17 17:59:22 by mmateo-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@
 # include "colors.h"
 # include "error.h"
 
-# define SIMBOL1 " <" 
+# define SIMBOL1 " <"
 # define SIMBOL2 "> $ "
 
 #define MAXCOM 1024 // max number of letters to be supported
@@ -34,25 +34,37 @@
 # define READ_END 0
 # define WRITE_END 1
 
-typedef struct s_quote
+enum	e_type
 {
-	int simple;
-	int doble;
-	char *str;
-} t_quote;
+	CMD, //defaut set
+	ARG, //word
+	FILE_IN, //word == '<'
+	HERE_DOC, // word == '<<'
+	FILE_OUT, //word == '>'
+	FILE_OUT_SUR, //word == '>>'
+	OPEN_FILE, // word following '<'
+	LIMITOR, // word following '<<'
+	EXIT_FILE, // word followinf '>'
+	EXIT_FILE_RET // word following '>>'
+};
 
-typedef	struct s_word
+typedef struct s_token
 {
 	char	*word;
-} t_word;
+	enum	e_type type;
+}	t_token;
+
+typedef struct	s_cmd_data
+{
+	char		*cmd;
+	t_list		*token;
+} t_cmd_data;
 
 typedef struct s_shell
 {
-	t_list *quote_list;
-	t_list *cmd_list;
+	t_list *cmdlist;
 	char *cmdline;
 	char *prompt;
-	char **cmds;
 	char *cmd;
 	char **words;
 	char **operators;
@@ -83,10 +95,13 @@ char *check_cmd(char *cmd);
 int	dfree(char **array);
 void free_struct(t_shell shell);
 void	quoting(t_shell *shell);
-void test(t_shell shell);
+void	test(t_shell shell);
 void	exec_pipes(char **cmd[MAXLIST], int n_pipes, char **envp);
 void	signal_handler();
 void	lexer(t_shell *shell);
+void dividing(t_shell *shell, int single, int doble);
+void	ignore_quotes(char *cmd, char type, int *i, int num);
+
 
 //Builtins
 void	env(char **envp);
