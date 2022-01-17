@@ -6,7 +6,7 @@
 /*   By: mmateo-t <mmateo-t@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/11 20:02:48 by mmateo-t          #+#    #+#             */
-/*   Updated: 2022/01/16 13:37:12 by mmateo-t         ###   ########.fr       */
+/*   Updated: 2022/01/17 18:58:57 by mmateo-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,18 +34,3 @@ void test(t_shell shell)
 		list = list->next;
 	}
 }
-
-
-/* void test(t_shell shell)
-{
-	t_list *list;
-	list = shell.cmdlist;
-	t_token *token;
-
-	while (list)
-	{
-		token = ((t_cmd_data *)list->content)->token;
-		printf("%s\n", token->word);
-		list = list->next;
-	}
-} */

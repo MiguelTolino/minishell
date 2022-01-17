@@ -6,21 +6,19 @@
 /*   By: mmateo-t <mmateo-t@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/14 12:14:24 by mmateo-t          #+#    #+#             */
-/*   Updated: 2022/01/17 18:51:49 by mmateo-t         ###   ########.fr       */
+/*   Updated: 2022/01/17 19:03:57 by mmateo-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-// TODO: Divide by tokens and assign a type
+//Divide by tokens and assign a type
 /*
-	1º Recorrer la lista hasta encontrar un spacio
+	1º Recorrer la lista hasta encontrar un espacio
 	2º Crear una nueva lista de token y guardar el substring en dicha lista
 	3º Asignar que tipo de palabra o comando es
 	4º Terminar la lista de token y empezar con el siguiente comando
 */
-
-// TODO: Select type of redirections to perform commands. See redirections
 
 unsigned int select_type(t_token *token, int old_type)
 {
