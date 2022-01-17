@@ -6,7 +6,7 @@
 /*   By: mmateo-t <mmateo-t@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/03 13:27:13 by mmateo-t          #+#    #+#             */
-/*   Updated: 2022/01/15 19:43:16 by mmateo-t         ###   ########.fr       */
+/*   Updated: 2022/01/17 17:59:22 by mmateo-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,9 +34,9 @@
 # define READ_END 0
 # define WRITE_END 1
 
-enum type
+enum	e_type
 {
-	NONE, //defaut set
+	CMD, //defaut set
 	ARG, //word
 	FILE_IN, //word == '<'
 	HERE_DOC, // word == '<<'
@@ -48,17 +48,10 @@ enum type
 	EXIT_FILE_RET // word following '>>'
 };
 
-typedef struct s_quote
-{
-	int simple;
-	int doble;
-	char *str;
-} t_quote;
-
 typedef struct s_token
 {
 	char	*word;
-	enum	type;
+	enum	e_type type;
 }	t_token;
 
 typedef struct	s_cmd_data

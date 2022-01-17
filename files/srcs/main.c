@@ -6,7 +6,7 @@
 /*   By: mmateo-t <mmateo-t@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/03 09:55:58 by mmateo-t          #+#    #+#             */
-/*   Updated: 2022/01/15 19:28:25 by mmateo-t         ###   ########.fr       */
+/*   Updated: 2022/01/16 13:32:04 by mmateo-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ int main(int argc, char **argv, char **envp)
 		}
 		add_history(shell.cmdline);
 		quoting(&shell);
-		//test(shell);
+		test(shell);
 /*
 		parsing(&shell);
  		if (!(exec_builtins(shell.words, envp)))
