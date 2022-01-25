@@ -6,7 +6,7 @@
 /*   By: mmateo-t <mmateo-t@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/05 17:05:47 by mmateo-t          #+#    #+#             */
-/*   Updated: 2022/01/15 19:48:35 by mmateo-t         ###   ########.fr       */
+/*   Updated: 2022/01/25 20:25:05 by mmateo-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,11 +51,12 @@ void search_cmdline(t_shell *shell, int single, int doble)
 	i = 0;
 	start = 0;
 	list = NULL;
+
 	while (shell->cmdline[i])
 	{
-		cmd_data = (t_cmd_data *)malloc(sizeof(cmd_data));
 		if (shell->cmdline[i] == '|')
 		{
+			cmd_data = (t_cmd_data *)malloc(sizeof(cmd_data));
 			cmd_data->cmd = ft_substr(shell->cmdline, start, i - start);
 			list = ft_lstnew(cmd_data);
 			ft_lstadd_back(&shell->cmdlist, list);
@@ -65,6 +66,7 @@ void search_cmdline(t_shell *shell, int single, int doble)
 		ignore_quotes(shell->cmdline, '\"', &i, doble);
 		i++;
 	}
+	cmd_data = (t_cmd_data *)malloc(sizeof(cmd_data));
 	cmd_data->cmd = ft_substr(shell->cmdline, start, i - start);
 	list = ft_lstnew(cmd_data);
 	ft_lstadd_back(&shell->cmdlist, list);
@@ -79,5 +81,5 @@ void	quoting(t_shell *shell)
 	n_single = count_closed_quotes(shell->cmdline, '\'') / 2;
 	n_doble = count_closed_quotes(shell->cmdline, '\"') / 2;
 	search_cmdline(shell, n_single, n_doble);
-	dividing(shell, n_single, n_doble);
+	//dividing(shell, n_single, n_doble);
 }

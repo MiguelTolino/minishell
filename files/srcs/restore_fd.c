@@ -1,32 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   errors.c                                           :+:      :+:    :+:   */
+/*   restore_fd.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mmateo-t <mmateo-t@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/12/06 11:45:39 by mmateo-t          #+#    #+#             */
-/*   Updated: 2022/01/25 10:12:24 by mmateo-t         ###   ########.fr       */
+/*   Created: 2022/01/25 10:42:21 by mmateo-t          #+#    #+#             */
+/*   Updated: 2022/01/25 10:46:47 by mmateo-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-void	exit_shell()
+int	restore_fd(void)
 {
-	exit(EXIT_SUCCESS);
-}
+	int fd;
+	char buff[8];
 
-void	throw_error(const char *error)
-{
-	perror(error);
-}
-
-void	check_args(int argc)
-{
-	if (argc != 1)
+	if (!read(STDIN_FILENO, buff, 8))
 	{
-		throw_error("Numbers of arguments invalid");
-		exit(EXIT_FAILURE);
+		exit_shell();
 	}
+	return (0);
 }

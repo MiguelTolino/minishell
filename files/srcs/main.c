@@ -6,7 +6,7 @@
 /*   By: mmateo-t <mmateo-t@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/03 09:55:58 by mmateo-t          #+#    #+#             */
-/*   Updated: 2022/01/16 13:32:04 by mmateo-t         ###   ########.fr       */
+/*   Updated: 2022/01/25 20:11:50 by mmateo-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ int main(int argc, char **argv, char **envp)
 	check_args(argc);
 	init_shell();
 	signal_handler();
+	global.env = envp;
 	while (1)
 	{
 		shell.prompt = build_prompt();
@@ -41,17 +42,14 @@ int main(int argc, char **argv, char **envp)
 		}
 		add_history(shell.cmdline);
 		quoting(&shell);
-		test(shell);
-/*
-		parsing(&shell);
- 		if (!(exec_builtins(shell.words, envp)))
-		{
- 			if (shell.n_pipes)
-				exec_pipes(shell.cmds_pipe, shell.n_pipes, envp);
-			else
-				exec(shell.words, envp);
-		} */
-		//free_struct(shell); // If cmdline is empty ocurss a leak
+		free_shell(&shell); // If cmdline is empty ocurss a leak
+		//test(shell);
+		//parsing
+		//redirections(&shell);
+		//execution(&shell);
+		//restore_fd();
+		//ft_lstclear(&shell.cmdlist, free);
+		system("leaks minishell");
 	}
 	return (0);
 }

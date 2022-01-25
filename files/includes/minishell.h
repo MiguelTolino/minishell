@@ -6,13 +6,14 @@
 /*   By: mmateo-t <mmateo-t@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/03 13:27:13 by mmateo-t          #+#    #+#             */
-/*   Updated: 2022/01/17 17:59:22 by mmateo-t         ###   ########.fr       */
+/*   Updated: 2022/01/25 18:50:19 by mmateo-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINISHELL_H
 # define MINISHELL_H
 # include <stdio.h>
+# include <fcntl.h>
 # include <stdlib.h>
 # include <unistd.h>
 # include <signal.h>
@@ -27,9 +28,9 @@
 # define SIMBOL1 " <"
 # define SIMBOL2 "> $ "
 
-#define MAXCOM 1024 // max number of letters to be supported
-#define MAXLIST 100 // max number of commands to be supported
-#define MAXHIST 128 // max number of commands to be saved
+# define MAXCOM 1024 // max number of letters to be supported
+# define MAXLIST 100 // max number of commands to be supported
+# define MAXHIST 128 // max number of commands to be saved
 
 # define READ_END 0
 # define WRITE_END 1
@@ -58,55 +59,50 @@ typedef struct	s_cmd_data
 {
 	char		*cmd;
 	t_list		*token;
-} t_cmd_data;
+	char		**exec_cmd;
+}	t_cmd_data;
 
 typedef struct s_shell
 {
 	t_list *cmdlist;
 	char *cmdline;
 	char *prompt;
-	char *cmd;
-	char **words;
-	char **operators;
-	int	n_pipes;
-	char **cmds_pipe[MAXLIST];
 }	t_shell;
 
 typedef struct g_global
 {
-	char **envp;
-	char **local_env;
-
-	//Signals
+	char	**env;
+	int		exit_status;
 }	g_global;
 
 g_global global;
 
-char* build_prompt();
-int exec_builtins(char **cmd, char **envp);
-int	save_env(char **envp);
-void throw_error(const char *error);
-void check_args(int argc);
-int parsing(t_shell *shell);
-int exec(char **cmds, char **envp);
-int	search_pipes(char *cmdline);
-int	len_array(char **array);
-char *check_cmd(char *cmd);
-int	dfree(char **array);
-void free_struct(t_shell shell);
+char*	build_prompt();
+int		exec_builtins(char **cmd);
+int		save_env(char **envp);
+void	throw_error(const char *error);
+void	check_args(int argc);
+int		parsing(t_shell *shell);
+int		execution(t_shell *shell);
+int		search_pipes(char *cmdline);
+int		len_array(char **array);
+char	*check_cmd(char *cmd);
+int		dfree(char **array);
+void	free_shell(t_shell *shell);
 void	quoting(t_shell *shell);
 void	test(t_shell shell);
 void	exec_pipes(char **cmd[MAXLIST], int n_pipes, char **envp);
 void	signal_handler();
 void	lexer(t_shell *shell);
-void dividing(t_shell *shell, int single, int doble);
+void	dividing(t_shell *shell, int single, int doble);
 void	ignore_quotes(char *cmd, char type, int *i, int num);
-
+void	redirections(t_shell *shell);
+int		restore_fd(void);
 
 //Builtins
 void	env(char **envp);
-void change_directory(char *str);
+void	change_directory(char *str);
 void	echo(char **cmd);
-void 	exit_shell();
+void	exit_shell();
 
 #endif

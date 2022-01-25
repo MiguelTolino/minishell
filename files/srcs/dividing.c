@@ -6,7 +6,7 @@
 /*   By: mmateo-t <mmateo-t@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/14 12:14:24 by mmateo-t          #+#    #+#             */
-/*   Updated: 2022/01/17 19:03:57 by mmateo-t         ###   ########.fr       */
+/*   Updated: 2022/01/25 11:22:24 by mmateo-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,6 @@ void save_token(char *cmd, t_list **token_list, int single, int doble)
 	t_list *list;
 	int i;
 	int start;
-	int len;
 	int old_type;
 	t_token *token;
 

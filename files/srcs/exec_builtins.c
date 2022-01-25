@@ -6,13 +6,13 @@
 /*   By: mmateo-t <mmateo-t@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/05 19:14:58 by mmateo-t          #+#    #+#             */
-/*   Updated: 2021/12/17 20:41:54 by mmateo-t         ###   ########.fr       */
+/*   Updated: 2022/01/18 18:56:14 by mmateo-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-int	exec_builtins(char **cmd, char **envp)
+int	exec_builtins(char **cmd)
 {
 	if (!ft_strncmp(cmd[0], "pwd", ft_strlen(cmd[0])))
 	{
@@ -21,7 +21,7 @@ int	exec_builtins(char **cmd, char **envp)
 	}
 	if (!ft_strncmp(cmd[0], "env", ft_strlen(cmd[0])))
 	{
-		env(envp);
+		env(global.env);
 		return (1);
 	}
 	if (!ft_strncmp(cmd[0], "cd", ft_strlen(cmd[0])))

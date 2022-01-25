@@ -6,7 +6,7 @@
 #    By: mmateo-t <mmateo-t@student.42madrid>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/12/03 10:00:24 by mmateo-t          #+#    #+#              #
-#    Updated: 2022/01/05 11:38:55 by mmateo-t         ###   ########.fr        #
+#    Updated: 2022/01/24 12:32:53 by mmateo-t         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,9 +23,8 @@ NAME:= minishell
 CC:= gcc
 DEBUG_FLAG:= -g
 CFLAGS:= -g #-Wall -Werror -Wextra
-MACBOOK:= -L /opt/homebrew/opt/readline/lib -I /opt/homebrew/opt/readline/include/readline/include
-SYS_LIB:= -lreadline #$(MACBOOK)
-
+MACBOOK:= -lreadline -L/Users/$(USER)/.brew/opt/readline/lib -I/Users/$(USER)/.brew/opt/readline/include
+SYS_LIB:= -lreadline -L/Users/$(USER)/.brew/opt/readline/lib -I/Users/$(USER)/.brew/opt/readline/include
 LIBFT_PATH:= files/lib/libft
 LIBFT_LIB:= -L$(LIBFT_PATH) $(LIBFT_PATH)/libft.a
 RM := rm -rvf
@@ -39,7 +38,7 @@ endif
 all:	libft $(NAME) msg
 
 $(NAME): $(OBJS)
-		$(CC) $(CFLAGS) $(OBJS) -o $(NAME) $(LIBFT_LIB) $(SYS_LIB)
+		$(CC) $(CFLAGS) $(OBJS) -o $(NAME) $(LIBFT_LIB) -lreadline
 
 $(%.o): $(%.c)
 			$(CC) -c $^ -o $@
