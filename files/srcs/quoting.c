@@ -6,11 +6,13 @@
 /*   By: mmateo-t <mmateo-t@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/05 17:05:47 by mmateo-t          #+#    #+#             */
-/*   Updated: 2022/01/25 20:32:12 by mmateo-t         ###   ########.fr       */
+/*   Updated: 2022/02/02 14:24:08 by mmateo-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
+
+
 
 void	ignore_quotes(char *cmd, char type, int *i, int num)
 {
@@ -41,6 +43,7 @@ int	count_closed_quotes(char *cmdline, char quote)
 	return (num);
 }
 
+//FIXME: Fix cmd mallocs
 void search_cmdline(t_shell *shell, int single, int doble)
 {
 	int i;
@@ -52,24 +55,26 @@ void search_cmdline(t_shell *shell, int single, int doble)
 	start = 0;
 	list = NULL;
 
-	while (shell->cmdline[i])
+	while (i <= ft_strlen(shell->cmdline))
 	{
-		if (shell->cmdline[i] == '|')
+		if (shell->cmdline[i] == '|' || shell->cmdline[i] == '\0')
 		{
 			cmd_data = (t_cmd_data *)malloc(sizeof(cmd_data));
 			cmd_data->cmd = ft_substr(shell->cmdline, start, i - start);
 			list = ft_lstnew(cmd_data);
 			ft_lstadd_back(&shell->cmdlist, list);
+			if (shell->cmdline[i] == '\0')
+				break;
 			start = i + 1;
 		}
 		ignore_quotes(shell->cmdline, '\'', &i, single);
 		ignore_quotes(shell->cmdline, '\"', &i, doble);
 		i++;
 	}
-	cmd_data = (t_cmd_data *)malloc(sizeof(cmd_data));
+/* 	cmd_data = (t_cmd_data *)malloc(sizeof(cmd_data));
 	cmd_data->cmd = ft_substr(shell->cmdline, start, i - start);
 	list = ft_lstnew(cmd_data);
-	ft_lstadd_back(&shell->cmdlist, list);
+	ft_lstadd_back(&shell->cmdlist, list); */
 }
 
 void	quoting(t_shell *shell)
@@ -81,5 +86,5 @@ void	quoting(t_shell *shell)
 	n_single = count_closed_quotes(shell->cmdline, '\'') / 2;
 	n_doble = count_closed_quotes(shell->cmdline, '\"') / 2;
 	search_cmdline(shell, n_single, n_doble);
-	dividing(shell, n_single, n_doble);
+	//dividing(shell, n_single, n_doble);
 }

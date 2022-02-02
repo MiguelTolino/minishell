@@ -6,7 +6,7 @@
 /*   By: mmateo-t <mmateo-t@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/03 13:27:13 by mmateo-t          #+#    #+#             */
-/*   Updated: 2022/01/25 18:50:19 by mmateo-t         ###   ########.fr       */
+/*   Updated: 2022/01/26 20:44:09 by mmateo-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,7 @@ typedef struct	s_cmd_data
 	char		*cmd;
 	t_list		*token;
 	char		**exec_cmd;
+	int			cmd_len;
 }	t_cmd_data;
 
 typedef struct s_shell
@@ -82,7 +83,7 @@ int		exec_builtins(char **cmd);
 int		save_env(char **envp);
 void	throw_error(const char *error);
 void	check_args(int argc);
-int		parsing(t_shell *shell);
+void	parsing(t_shell *shell);
 int		execution(t_shell *shell);
 int		search_pipes(char *cmdline);
 int		len_array(char **array);
@@ -91,13 +92,14 @@ int		dfree(char **array);
 void	free_shell(t_shell *shell);
 void	quoting(t_shell *shell);
 void	test(t_shell shell);
-void	exec_pipes(char **cmd[MAXLIST], int n_pipes, char **envp);
 void	signal_handler();
 void	lexer(t_shell *shell);
 void	dividing(t_shell *shell, int single, int doble);
 void	ignore_quotes(char *cmd, char type, int *i, int num);
 void	redirections(t_shell *shell);
 int		restore_fd(void);
+
+void print(void *content);
 
 //Builtins
 void	env(char **envp);
