@@ -6,7 +6,7 @@
 /*   By: mmateo-t <mmateo-t@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/14 12:14:24 by mmateo-t          #+#    #+#             */
-/*   Updated: 2022/01/26 20:11:22 by mmateo-t         ###   ########.fr       */
+/*   Updated: 2022/02/02 23:01:39 by mmateo-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,6 +101,7 @@ void dividing(t_shell *shell, int single, int doble)
 	while (cmdlist)
 	{
 		data = ((t_cmd_data *)cmdlist->content);
+		data->token = NULL;
 		save_token(data->cmd, &data->token, single, doble);
 		cmdlist = cmdlist->next;
 	}

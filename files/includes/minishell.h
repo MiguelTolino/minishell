@@ -6,7 +6,7 @@
 /*   By: mmateo-t <mmateo-t@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/03 13:27:13 by mmateo-t          #+#    #+#             */
-/*   Updated: 2022/01/26 20:44:09 by mmateo-t         ###   ########.fr       */
+/*   Updated: 2022/02/02 23:18:03 by mmateo-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,7 @@ int		len_array(char **array);
 char	*check_cmd(char *cmd);
 int		dfree(char **array);
 void	free_shell(t_shell *shell);
-void	quoting(t_shell *shell);
+int		quoting(t_shell *shell);
 void	test(t_shell shell);
 void	signal_handler();
 void	lexer(t_shell *shell);

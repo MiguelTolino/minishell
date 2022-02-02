@@ -6,7 +6,7 @@
 /*   By: mmateo-t <mmateo-t@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/11 20:02:48 by mmateo-t          #+#    #+#             */
-/*   Updated: 2022/02/02 14:22:22 by mmateo-t         ###   ########.fr       */
+/*   Updated: 2022/02/02 21:35:03 by mmateo-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ void test(t_shell shell)
 	{
 		cmd_data = ((t_cmd_data *)shell.cmdlist->content);
 		printf("CMD:|%s|\n", cmd_data->cmd);
-/* 		token_list = ((t_list *)cmd_data->token);
+ 		token_list = ((t_list *)cmd_data->token);
 		printf("TOKENS\n");
 		printf("------\n");
 		while (token_list)
@@ -40,8 +40,8 @@ void test(t_shell shell)
 			printf("TYPE:|%i|\n", ((t_token *)token_list->content)->type);
 			printf("\n");
 			token_list = token_list->next;
-		} */
-/* 		printf("EXEC_CMD:");
+		}
+/*  		printf("EXEC_CMD:");
 		while(*cmd_data->exec_cmd)
 		{
 			printf("[%s]", *cmd_data->exec_cmd);

@@ -6,13 +6,11 @@
 /*   By: mmateo-t <mmateo-t@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/11 12:11:17 by mmateo-t          #+#    #+#             */
-/*   Updated: 2022/02/02 15:03:28 by mmateo-t         ###   ########.fr       */
+/*   Updated: 2022/02/02 20:55:22 by mmateo-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
-
-//FIXME: FREE tokens
 
  void del_token(void *content)
 {
@@ -20,7 +18,7 @@
 
 	token = ((t_token *)content);
 	free(token->word);
-	free(content);
+	free(token);
 }
 
 void del_data(void *content)
@@ -30,11 +28,10 @@ void del_data(void *content)
 
 	data = ((t_cmd_data *)content);
 	free(data->cmd);
-	free(content);
-/*
 	//dfree(data->exec_cmd);
-	token = ((t_cmd_data *)content)->token;
-	ft_lstclear(&token, del_token); */
+	token = data->token;
+	ft_lstclear(&token, del_token);
+	free(data);
 }
 
 void free_shell(t_shell *shell)

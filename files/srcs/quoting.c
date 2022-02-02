@@ -6,13 +6,42 @@
 /*   By: mmateo-t <mmateo-t@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/05 17:05:47 by mmateo-t          #+#    #+#             */
-/*   Updated: 2022/02/02 14:24:08 by mmateo-t         ###   ########.fr       */
+/*   Updated: 2022/02/03 00:01:41 by mmateo-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
+int		validate_token(t_list *cmdlist)
+{
+	t_cmd_data *data;
+	t_list *token_list;
+	t_token *token;
+	t_token *next_token;
 
+	while (cmdlist)
+	{
+		data = ((t_cmd_data *)cmdlist->content);
+		token_list = data->token;
+		while (token_list)
+		{
+			token = (t_token *)token_list->content;
+			if (token_list->next == NULL)
+			{
+				break;
+			}
+			next_token = (t_token *)token_list->next->content;
+			if (token->type >= 2 && token->type <= 5 && next_token->type >= 2 && next_token->type <= 5)
+			{
+				throw_error("Unexpected parse error near redirections");
+				return (1);
+			}
+			token_list = token_list->next;
+		}
+		cmdlist = cmdlist->next;
+	}
+	return (0);
+}
 
 void	ignore_quotes(char *cmd, char type, int *i, int num)
 {
@@ -43,7 +72,6 @@ int	count_closed_quotes(char *cmdline, char quote)
 	return (num);
 }
 
-//FIXME: Fix cmd mallocs
 void search_cmdline(t_shell *shell, int single, int doble)
 {
 	int i;
@@ -71,13 +99,9 @@ void search_cmdline(t_shell *shell, int single, int doble)
 		ignore_quotes(shell->cmdline, '\"', &i, doble);
 		i++;
 	}
-/* 	cmd_data = (t_cmd_data *)malloc(sizeof(cmd_data));
-	cmd_data->cmd = ft_substr(shell->cmdline, start, i - start);
-	list = ft_lstnew(cmd_data);
-	ft_lstadd_back(&shell->cmdlist, list); */
 }
 
-void	quoting(t_shell *shell)
+int	quoting(t_shell *shell)
 {
 	int n_single;
 	int n_doble;
@@ -86,5 +110,8 @@ void	quoting(t_shell *shell)
 	n_single = count_closed_quotes(shell->cmdline, '\'') / 2;
 	n_doble = count_closed_quotes(shell->cmdline, '\"') / 2;
 	search_cmdline(shell, n_single, n_doble);
-	//dividing(shell, n_single, n_doble);
+	dividing(shell, n_single, n_doble);
+ 	if (validate_token(shell->cmdlist))
+		return (1);
+	return (0);
 }
