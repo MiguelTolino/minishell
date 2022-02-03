@@ -22,7 +22,7 @@ OBJS := $(SRCS:%.c=%.o)
 NAME:= minishell
 CC:= gcc
 DEBUG_FLAG:= -g
-CFLAGS:= -g #-Wall -Werror -Wextra
+CFLAGS:= -g -Wall -Werror -Wextra
 MACBOOK:= -lreadline -L/Users/$(USER)/.brew/opt/readline/lib -I/Users/$(USER)/.brew/opt/readline/include
 SYS_LIB:= -lreadline -L/Users/$(USER)/.brew/opt/readline/lib -I/Users/$(USER)/.brew/opt/readline/include
 LIBFT_PATH:= files/lib/libft

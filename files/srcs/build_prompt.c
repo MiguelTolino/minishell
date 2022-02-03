@@ -6,7 +6,7 @@
 /*   By: mmateo-t <mmateo-t@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/05 17:46:43 by mmateo-t          #+#    #+#             */
-/*   Updated: 2022/01/25 10:38:23 by mmateo-t         ###   ########.fr       */
+/*   Updated: 2022/02/03 13:53:08 by mmateo-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,10 @@ char	*set_directory(char *dir)
 	char	*ptr;
 
 	size = MAXCOM;
+	ptr = NULL;
 	dir = (char *)malloc((size_t)size);
-	if (dir != NULL)
-		ptr = getcwd(dir, (size_t)size);
-	else
+	ptr = getcwd(dir, (size_t)size);
+	if (!ptr)
 		throw_error(PROMPT_ERROR);
 	return (ptr);
 }
@@ -33,6 +33,7 @@ char	*build_prompt(void)
 	char	*user;
 
 	user = getenv("USER");
+	dir = NULL;
 	dir = set_directory(dir);
 	prompt = (char *)malloc(sizeof(char) * MAXCOM);
 	ft_strlcat(prompt, COLOR(1, 33), ft_strlen(COLOR(1, 33)) + 1);

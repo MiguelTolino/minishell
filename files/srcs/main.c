@@ -6,7 +6,7 @@
 /*   By: mmateo-t <mmateo-t@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/03 09:55:58 by mmateo-t          #+#    #+#             */
-/*   Updated: 2022/02/03 13:03:15 by mmateo-t         ###   ########.fr       */
+/*   Updated: 2022/02/03 13:56:52 by mmateo-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ int main(int argc, char **argv, char **envp)
 	init_shell();
 	signal_handler();
 	global.env = envp;
+	(void)argv;
 	while (1)
 	{
 		shell.prompt = build_prompt();

@@ -6,7 +6,7 @@
 /*   By: mmateo-t <mmateo-t@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/03 13:27:13 by mmateo-t          #+#    #+#             */
-/*   Updated: 2022/02/03 12:56:49 by mmateo-t         ###   ########.fr       */
+/*   Updated: 2022/02/03 13:08:14 by mmateo-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,7 +97,7 @@ void	lexer(t_shell *shell);
 void	dividing(t_shell *shell, int single, int doble);
 void	ignore_quotes(char *cmd, char type, int *i, int num);
 void	redirections(t_shell *shell);
-int		restore_fd(void);
+void	restore_fd(void);
 void	exit_ctrld();
 
 void print(void *content);

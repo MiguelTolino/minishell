@@ -6,7 +6,7 @@
 /*   By: mmateo-t <mmateo-t@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/05 17:05:47 by mmateo-t          #+#    #+#             */
-/*   Updated: 2022/02/03 00:01:41 by mmateo-t         ###   ########.fr       */
+/*   Updated: 2022/02/03 13:55:33 by mmateo-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,7 @@ void search_cmdline(t_shell *shell, int single, int doble)
 	start = 0;
 	list = NULL;
 
-	while (i <= ft_strlen(shell->cmdline))
+	while (i <= (int)ft_strlen(shell->cmdline))
 	{
 		if (shell->cmdline[i] == '|' || shell->cmdline[i] == '\0')
 		{
