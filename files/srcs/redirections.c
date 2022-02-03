@@ -6,7 +6,7 @@
 /*   By: mmateo-t <mmateo-t@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/24 12:00:24 by mmateo-t          #+#    #+#             */
-/*   Updated: 2022/01/24 12:41:07 by mmateo-t         ###   ########.fr       */
+/*   Updated: 2022/02/03 12:19:45 by mmateo-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ void select_redirection(t_token *token)
 {
 	int fd;
 
+	fd = 0;
 	if (token->type == OPEN_FILE)
 	{
 		fd = open(token->word, O_RDONLY);
@@ -39,7 +40,7 @@ void select_redirection(t_token *token)
 	}
 	if (token->type == EXIT_FILE_RET)
 	{
-		fd = open(token->word, O_CREAT | O_WRONLY, 0644);
+		fd = open(token->word, O_CREAT | O_WRONLY | O_APPEND, 0644);
 		if (fd < 0)
 			throw_error("Error opening a file");
 		if (dup2(fd, STDOUT_FILENO) < 0)
@@ -50,7 +51,8 @@ void select_redirection(t_token *token)
 		fd = open(token->word, O_RDONLY);
 		// TODO: HERE_DOC
 	}
-	close(fd);
+	if (fd)
+		close(fd);
 }
 
 void redirections(t_shell *shell)

@@ -6,11 +6,17 @@
 /*   By: mmateo-t <mmateo-t@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/11 12:11:17 by mmateo-t          #+#    #+#             */
-/*   Updated: 2022/02/02 20:55:22 by mmateo-t         ###   ########.fr       */
+/*   Updated: 2022/02/03 12:32:51 by mmateo-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
+
+int	restore_fd(void)
+{
+	dup2(STDIN_FILENO, STDIN_FILENO);
+	dup2(STDOUT_FILENO, STDOUT_FILENO);
+}
 
  void del_token(void *content)
 {
@@ -39,4 +45,5 @@ void free_shell(t_shell *shell)
 	free(shell->cmdline);
 	free(shell->prompt);
 	ft_lstclear(&shell->cmdlist, del_data);
+	restore_fd();
 }

@@ -6,7 +6,7 @@
 /*   By: mmateo-t <mmateo-t@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/03 09:55:58 by mmateo-t          #+#    #+#             */
-/*   Updated: 2022/02/02 23:40:05 by mmateo-t         ###   ########.fr       */
+/*   Updated: 2022/02/03 12:59:26 by mmateo-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,8 @@ int main(int argc, char **argv, char **envp)
 	{
 		shell.prompt = build_prompt();
 		shell.cmdline = readline(shell.prompt);
+		if (shell.cmdline == NULL)
+			exit_ctrld();
 		if (!ft_strlen(shell.cmdline))
 		{
 			free(shell.prompt);
@@ -48,7 +50,7 @@ int main(int argc, char **argv, char **envp)
 		}
 		//parsing(&shell);
 		test(shell);
-		//redirections(&shell);
+		redirections(&shell);
 		//execution(&shell);
 		//restore_fd();
 		free_shell(&shell); // If cmdline is empty ocurss a leak
