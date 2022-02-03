@@ -6,7 +6,7 @@
 /*   By: mmateo-t <mmateo-t@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/03 09:55:58 by mmateo-t          #+#    #+#             */
-/*   Updated: 2022/02/03 12:59:26 by mmateo-t         ###   ########.fr       */
+/*   Updated: 2022/02/03 13:03:15 by mmateo-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ int main(int argc, char **argv, char **envp)
 		shell.prompt = build_prompt();
 		shell.cmdline = readline(shell.prompt);
 		if (shell.cmdline == NULL)
-			exit_ctrld();
+			exit_ctrld(shell);
 		if (!ft_strlen(shell.cmdline))
 		{
 			free(shell.prompt);
