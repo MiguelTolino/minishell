@@ -6,7 +6,7 @@
 /*   By: mmateo-t <mmateo-t@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/06 11:45:39 by mmateo-t          #+#    #+#             */
-/*   Updated: 2022/02/03 13:00:51 by mmateo-t         ###   ########.fr       */
+/*   Updated: 2022/02/04 00:30:33 by mmateo-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	exit_ctrld(t_shell shell)
 
 void	exit_shell()
 {
-	exit(EXIT_SUCCESS);
+	exit(global.exit_status);
 }
 
 void	throw_error(const char *error)

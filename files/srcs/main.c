@@ -6,7 +6,7 @@
 /*   By: mmateo-t <mmateo-t@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/03 09:55:58 by mmateo-t          #+#    #+#             */
-/*   Updated: 2022/02/03 13:56:52 by mmateo-t         ###   ########.fr       */
+/*   Updated: 2022/02/03 20:38:50 by mmateo-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,10 +49,10 @@ int main(int argc, char **argv, char **envp)
 			free_shell(&shell);
 			continue;
 		}
-		//parsing(&shell);
-		test(shell);
-		redirections(&shell);
-		//execution(&shell);
+		parsing(&shell);
+		//test(shell);
+		//redirections(&shell);
+		execution(&shell);
 		//restore_fd();
 		free_shell(&shell); // If cmdline is empty ocurss a leak
 	}

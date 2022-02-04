@@ -6,7 +6,7 @@
 #    By: mmateo-t <mmateo-t@student.42madrid>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/12/04 12:19:05 by mmateo-t          #+#    #+#              #
-#    Updated: 2022/01/05 11:38:44 by mmateo-t         ###   ########.fr        #
+#    Updated: 2022/02/04 11:44:01 by mmateo-t         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -62,16 +62,21 @@ OBJS_BONUS  = ${BONUS:.c=.o}
 CC          = gcc
 CFLAGS      = -Wall -Wextra -Werror -I. -c
 RM          = rm -f
+
+all:		${NAME}
+
 .c.o:
 	${CC} ${CFLAGS} -c $< -o ${<:.c=.o}
-${NAME}:    ${OBJS}
-			ar rc ${NAME} ${OBJS}
-bonus:      ${OBJS} ${OBJS_BONUS}
-			ar rc ${NAME} ${OBJS_BONUS} ${OBJS}
-all:        ${NAME}
+
+$(NAME):	${OBJS} ${OBJS_BONUS}
+			ar rc $@ ${OBJS} ${OBJS_BONUS}
+
 clean:
 			${RM} ${OBJS} ${OBJS_BONUS}
-fclean:     clean
+
+fclean:		clean
 	${RM} ${NAME}
-re:         fclean all
-.PHONY:     all clean fclean re
+
+re:			fclean all
+
+.PHONY:		all clean fclean re bonus

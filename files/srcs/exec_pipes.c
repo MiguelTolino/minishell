@@ -6,7 +6,7 @@
 /*   By: mmateo-t <mmateo-t@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/10 19:57:35 by mmateo-t          #+#    #+#             */
-/*   Updated: 2022/01/25 18:22:15 by mmateo-t         ###   ########.fr       */
+/*   Updated: 2022/02/03 20:36:20 by mmateo-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,11 @@ void	loop_pipe(t_list *cmdlist)
 	int	fd_in;
 	char **cmd;
 
-	fd_in = 0;
+	fd_in = STDIN_FILENO;
 	while (cmdlist)
 	{
 		cmd = ((t_cmd_data *)cmdlist->content)->exec_cmd;
+		cmd[0] = check_cmd(cmd[0]);
 		if (pipe(p) < 0)
 			throw_error("Pipe Error:");
 		if ((pid = fork()) < 0)

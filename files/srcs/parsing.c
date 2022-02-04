@@ -6,7 +6,7 @@
 /*   By: mmateo-t <mmateo-t@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/26 11:51:44 by mmateo-t          #+#    #+#             */
-/*   Updated: 2022/02/02 21:04:51 by mmateo-t         ###   ########.fr       */
+/*   Updated: 2022/02/03 19:55:18 by mmateo-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,10 +46,7 @@ void	prepare_execution(void	*content)
 	{
 		token = ((t_token *)token_list->content);
 		if (token->type == CMD || token->type == ARG)
-		{
-			data->exec_cmd[i] = ft_strdup(token->word);
-			i++;
-		}
+			data->exec_cmd[i++] = ft_strdup(token->word);
 		token_list = token_list->next;
 	}
 }
@@ -58,8 +55,8 @@ void	prepare_execution(void	*content)
 
 void	parsing(t_shell *shell)
 {
-	ft_lstiter(shell->cmdlist, print);
+//	ft_lstiter(shell->cmdlist, print);
 	ft_lstiter(shell->cmdlist, prepare_execution);
-	ft_lstiter(shell->cmdlist, print);
+//	ft_lstiter(shell->cmdlist, print);
 
 }
