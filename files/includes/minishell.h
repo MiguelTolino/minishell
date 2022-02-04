@@ -6,7 +6,7 @@
 /*   By: rgirondo <rgirondo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/03 13:27:13 by mmateo-t          #+#    #+#             */
-/*   Updated: 2022/01/24 19:01:02 by rgirondo         ###   ########.fr       */
+/*   Updated: 2022/02/04 19:48:42 by rgirondo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,6 +100,7 @@ void	lexer(t_shell *shell);
 void dividing(t_shell *shell, int single, int doble);
 void	ignore_quotes(char *cmd, char type, int *i, int num);
 char **init_env(char **envp);
+int	count_closed_quotes(char *cmdline, char quote);
 
 
 
@@ -112,5 +113,8 @@ void    export(char *cmd, char **envp);
 void 	unset(char *cmd, char **envp);
 char    *getvar(char *cmd, char **vars);
 void    change_val(char *var_name, char *cmd, char **envp);
+
+//Expansion
+void	expansion(t_shell *shell);
 
 #endif

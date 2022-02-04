@@ -6,7 +6,7 @@
 /*   By: rgirondo <rgirondo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/03 09:55:58 by mmateo-t          #+#    #+#             */
-/*   Updated: 2022/01/24 19:09:44 by rgirondo         ###   ########.fr       */
+/*   Updated: 2022/01/26 18:36:24 by rgirondo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ int main(int argc, char **argv, char **envp)
 	{
 		shell.prompt = build_prompt();
 		shell.cmdline = readline(shell.prompt);
+		expansion(&shell);
 		if (!ft_strlen(shell.cmdline))
 		{
 			free(shell.prompt);
