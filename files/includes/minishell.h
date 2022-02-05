@@ -6,7 +6,7 @@
 /*   By: mmateo-t <mmateo-t@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/03 13:27:13 by mmateo-t          #+#    #+#             */
-/*   Updated: 2022/02/03 19:53:26 by mmateo-t         ###   ########.fr       */
+/*   Updated: 2022/02/05 19:17:50 by mmateo-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,8 @@ typedef struct	s_cmd_data
 	char		*cmd;
 	t_list		*token;
 	char		**exec_cmd;
+	int			n_single;
+	int			n_double;
 }	t_cmd_data;
 
 typedef struct s_shell
@@ -99,6 +101,9 @@ void	redirections(t_shell *shell);
 void	restore_fd(void);
 void	exit_ctrld();
 void	loop_pipe(t_list *cmdlist);
+void	init_global(char **envp, char **argv);
+int	count_closed_quotes(char *cmdline, char quote);
+char *expand_word(char *cmd);
 
 void print(void *content);
 

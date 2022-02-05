@@ -6,7 +6,7 @@
 /*   By: mmateo-t <mmateo-t@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/03 09:55:58 by mmateo-t          #+#    #+#             */
-/*   Updated: 2022/02/03 20:38:50 by mmateo-t         ###   ########.fr       */
+/*   Updated: 2022/02/05 19:33:16 by mmateo-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,9 +28,8 @@ int main(int argc, char **argv, char **envp)
 
 	check_args(argc);
 	init_shell();
+	init_global(envp, argv);
 	signal_handler();
-	global.env = envp;
-	(void)argv;
 	while (1)
 	{
 		shell.prompt = build_prompt();
@@ -49,10 +48,10 @@ int main(int argc, char **argv, char **envp)
 			free_shell(&shell);
 			continue;
 		}
-		parsing(&shell);
+		//parsing(&shell);
 		//test(shell);
 		//redirections(&shell);
-		execution(&shell);
+		//execution(&shell);
 		//restore_fd();
 		free_shell(&shell); // If cmdline is empty ocurss a leak
 	}

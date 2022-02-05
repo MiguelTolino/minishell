@@ -1,32 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   signals.c                                          :+:      :+:    :+:   */
+/*   init_env.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mmateo-t <mmateo-t@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/12/17 12:22:42 by mmateo-t          #+#    #+#             */
-/*   Updated: 2022/02/05 19:45:49 by mmateo-t         ###   ########.fr       */
+/*   Created: 2022/01/24 18:56:26 by rgirondo          #+#    #+#             */
+/*   Updated: 2022/02/04 19:04:26 by mmateo-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-// FIXME: REPLACE_LINE
-
-void sigint_handler(int sig)
+char	**init_env(char **envp)
 {
-	if (sig == SIGINT)
+    char **new_envp;
+	int i;
+
+	i = 0;
+	new_envp = (char **)malloc(sizeof(char *) * 2000);
+	while (envp[i])
 	{
-		write(1, "\n", 1);
-		rl_on_new_line();
-		rl_replace_line("", 0);
-		rl_redisplay();
+		new_envp[i] = ft_strdup(envp[i]);
+		i++;
 	}
+	new_envp[i] = NULL;
+	return (new_envp);
 }
 
-void signal_handler()
+void	init_global(char **envp, char **argv)
 {
-	signal(SIGINT, &sigint_handler);
-	signal(SIGQUIT, SIG_IGN);
+	global.env = init_env(envp);
+	global.exit_status = 0;
+	(void)argv;
 }

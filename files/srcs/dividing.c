@@ -6,11 +6,13 @@
 /*   By: mmateo-t <mmateo-t@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/14 12:14:24 by mmateo-t          #+#    #+#             */
-/*   Updated: 2022/02/03 18:58:27 by mmateo-t         ###   ########.fr       */
+/*   Updated: 2022/02/05 00:27:53 by mmateo-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
+
+
 
 //Divide by tokens and assign a type
 /*
@@ -96,13 +98,15 @@ void dividing(t_shell *shell, int single, int doble)
 {
 	t_list *cmdlist;
 	t_cmd_data *data;
+	char *aux;
 
 	cmdlist = shell->cmdlist;
 	while (cmdlist)
 	{
 		data = ((t_cmd_data *)cmdlist->content);
 		data->token = NULL;
-		//EXPAND_WORD
+		//EXPAND_WORD SIN COMILLAS
+		aux = expand_word(data->cmd);
 		save_token(data->cmd, &data->token, single, doble);
 		cmdlist = cmdlist->next;
 	}
