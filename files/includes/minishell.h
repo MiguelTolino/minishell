@@ -6,7 +6,7 @@
 /*   By: mmateo-t <mmateo-t@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/03 13:27:13 by mmateo-t          #+#    #+#             */
-/*   Updated: 2022/02/05 19:17:50 by mmateo-t         ###   ########.fr       */
+/*   Updated: 2022/02/05 23:41:37 by mmateo-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@
 # include <readline/history.h>
 # include <sys/types.h>
 # include <sys/wait.h>
+# include <stdbool.h>
 # include "../lib/libft/libft.h"
 # include "colors.h"
 # include "error.h"
@@ -35,7 +36,14 @@
 # define READ_END 0
 # define WRITE_END 1
 
-enum	e_type
+typedef enum e_quote
+{
+	NONE,
+	SINGLE,
+	DOUBLE
+}	e_quote;
+
+typedef	enum	e_type
 {
 	CMD, //defaut set
 	ARG, //word
@@ -47,12 +55,13 @@ enum	e_type
 	LIMITOR, // word following '<<'
 	EXIT_FILE, // word followinf '>'
 	EXIT_FILE_RET // word following '>>'
-};
+}	e_type;
 
 typedef struct s_token
 {
 	char	*word;
-	enum	e_type type;
+	e_type	type;
+	e_quote	quote;
 }	t_token;
 
 typedef struct	s_cmd_data
@@ -95,8 +104,9 @@ int		quoting(t_shell *shell);
 void	test(t_shell shell);
 void	signal_handler();
 void	lexer(t_shell *shell);
-void	dividing(t_shell *shell, int single, int doble);
-void	ignore_quotes(char *cmd, char type, int *i, int num);
+void	dividing_by_token(t_shell *shell, int single, int doble);
+int		validate_token(t_list *cmdlist);
+int		ignore_quotes(char *cmd, char type, int *i, int num);
 void	redirections(t_shell *shell);
 void	restore_fd(void);
 void	exit_ctrld();

@@ -6,7 +6,7 @@
 /*   By: mmateo-t <mmateo-t@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/11 20:02:48 by mmateo-t          #+#    #+#             */
-/*   Updated: 2022/02/03 19:18:00 by mmateo-t         ###   ########.fr       */
+/*   Updated: 2022/02/05 23:42:45 by mmateo-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ void test(t_shell shell)
 		{
 			printf("WORD:|%s|\n", ((t_token *)token_list->content)->word);
 			printf("TYPE:|%i|\n", ((t_token *)token_list->content)->type);
+			printf("QUOTE:|%i|\n", ((t_token *)token_list->content)->quote);
 			printf("\n");
 			token_list = token_list->next;
 		}

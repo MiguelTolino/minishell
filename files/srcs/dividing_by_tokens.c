@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   dividing.c                                         :+:      :+:    :+:   */
+/*   dividing_by_token.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mmateo-t <mmateo-t@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -21,6 +21,37 @@
 	3º Asignar que tipo de palabra o comando es
 	4º Terminar la lista de token y empezar con el siguiente comando
 */
+
+int		validate_token(t_list *cmdlist)
+{
+	t_cmd_data *data;
+	t_list *token_list;
+	t_token *token;
+	t_token *next_token;
+
+	while (cmdlist)
+	{
+		data = ((t_cmd_data *)cmdlist->content);
+		token_list = data->token;
+		while (token_list)
+		{
+			token = (t_token *)token_list->content;
+			if (token_list->next == NULL)
+			{
+				break;
+			}
+			next_token = (t_token *)token_list->next->content;
+			if (token->type >= 2 && token->type <= 5 && next_token->type >= 2 && next_token->type <= 5)
+			{
+				throw_error("Unexpected parse error near redirections");
+				return (1);
+			}
+			token_list = token_list->next;
+		}
+		cmdlist = cmdlist->next;
+	}
+	return (0);
+}
 
 unsigned int select_type(t_token *token, int old_type)
 {
@@ -66,6 +97,7 @@ void save_token(char *cmd, t_list **token_list, int single, int doble)
 	int start;
 	int old_type;
 	t_token *token;
+	int quote;
 
 	i = 0;
 	list = NULL;
@@ -77,10 +109,13 @@ void save_token(char *cmd, t_list **token_list, int single, int doble)
 		if (!cmd[i])
 			break;
 		start = i;
-		while (cmd[i] != ' ')
+		while (cmd[i] != ' ' && cmd[i])
 		{
-			ignore_quotes(cmd, '\'', &i, single);
-			ignore_quotes(cmd, '\"', &i, doble);
+			quote = ignore_quotes(cmd, '\'', &i, single);
+			if (!quote)
+				quote = ignore_quotes(cmd, '\"', &i, doble);
+			else
+				ignore_quotes(cmd, '\"', &i, doble);
 			if (!cmd[i])
 				break;
 			i++;
@@ -88,25 +123,25 @@ void save_token(char *cmd, t_list **token_list, int single, int doble)
 		token = (t_token *)malloc(sizeof(t_token));
 		token->word = ft_substr(cmd, start, i - start);
 		token->type = select_type(token, old_type);
+		token->quote = quote;
 		old_type = token->type;
 		list = ft_lstnew(token);
 		ft_lstadd_back(token_list, list);
 	}
 }
 
-void dividing(t_shell *shell, int single, int doble)
+void dividing_by_token(t_shell *shell, int single, int doble)
 {
 	t_list *cmdlist;
 	t_cmd_data *data;
-	char *aux;
+//	char *aux;
 
 	cmdlist = shell->cmdlist;
 	while (cmdlist)
 	{
 		data = ((t_cmd_data *)cmdlist->content);
 		data->token = NULL;
-		//EXPAND_WORD SIN COMILLAS
-		aux = expand_word(data->cmd);
+		//aux = expand_word(data->cmd);
 		save_token(data->cmd, &data->token, single, doble);
 		cmdlist = cmdlist->next;
 	}

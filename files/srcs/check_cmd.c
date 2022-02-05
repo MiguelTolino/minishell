@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_cmd.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmateo-t <mmateo-t@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mmateo-t <mmateo-t@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/10 18:50:51 by mmateo-t          #+#    #+#             */
-/*   Updated: 2021/12/11 20:28:07 by mmateo-t         ###   ########.fr       */
+/*   Updated: 2022/02/05 23:23:11 by mmateo-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 char	*add_slash(char *path)
 {
 	char *new_path;
-	
+
 	if (!path)
 		return (NULL);
 	new_path = ft_strjoin(path, "/");
@@ -27,10 +27,8 @@ char	*search_cmd(char *cmd, char **paths)
 	int i;
 	char *aux;
 	char *full_cmd;
-	int	bool;
 
 	i = 0;
-	bool = 0;
 	while (paths[i])
 	{
 		aux = add_slash(paths[i]);
@@ -45,7 +43,7 @@ char	*search_cmd(char *cmd, char **paths)
 	return (NULL);
 }
 
-/*	
+/*
 	1. Check cmd and paths is different of null
 	2. check cmd is an actually path
 	3. if dont -> add_path and check if exists

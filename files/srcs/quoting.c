@@ -6,45 +6,18 @@
 /*   By: mmateo-t <mmateo-t@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/05 17:05:47 by mmateo-t          #+#    #+#             */
-/*   Updated: 2022/02/04 19:36:45 by mmateo-t         ###   ########.fr       */
+/*   Updated: 2022/02/05 23:41:05 by mmateo-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-int		validate_token(t_list *cmdlist)
-{
-	t_cmd_data *data;
-	t_list *token_list;
-	t_token *token;
-	t_token *next_token;
 
-	while (cmdlist)
-	{
-		data = ((t_cmd_data *)cmdlist->content);
-		token_list = data->token;
-		while (token_list)
-		{
-			token = (t_token *)token_list->content;
-			if (token_list->next == NULL)
-			{
-				break;
-			}
-			next_token = (t_token *)token_list->next->content;
-			if (token->type >= 2 && token->type <= 5 && next_token->type >= 2 && next_token->type <= 5)
-			{
-				throw_error("Unexpected parse error near redirections");
-				return (1);
-			}
-			token_list = token_list->next;
-		}
-		cmdlist = cmdlist->next;
-	}
-	return (0);
-}
-
-void	ignore_quotes(char *cmd, char type, int *i, int num)
+int	ignore_quotes(char *cmd, char type, int *i, int num)
 {
+	int quote;
+
+	quote = NONE;
 	if(cmd[*i] == type && num)
 	{
 		(*i)++;
@@ -53,7 +26,12 @@ void	ignore_quotes(char *cmd, char type, int *i, int num)
 			(*i)++;
 		}
 		num--;
+		if (type == '\'')
+			quote = SINGLE;
+		else
+			quote = DOUBLE;
 	}
+	return (quote);
 }
 
 int	count_closed_quotes(char *cmdline, char quote)
@@ -110,7 +88,7 @@ int	quoting(t_shell *shell)
 	n_single = count_closed_quotes(shell->cmdline, '\'') / 2;
 	n_doble = count_closed_quotes(shell->cmdline, '\"') / 2;
 	search_cmdline(shell, n_single, n_doble);
-	dividing(shell, n_single, n_doble);
+	dividing_by_token(shell, n_single, n_doble);
  	if (validate_token(shell->cmdlist))
 		return (1);
 	return (0);
