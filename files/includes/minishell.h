@@ -6,7 +6,7 @@
 /*   By: mmateo-t <mmateo-t@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/03 13:27:13 by mmateo-t          #+#    #+#             */
-/*   Updated: 2022/02/05 23:41:37 by mmateo-t         ###   ########.fr       */
+/*   Updated: 2022/02/06 01:05:53 by mmateo-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,6 +116,8 @@ int	count_closed_quotes(char *cmdline, char quote);
 char *expand_word(char *cmd);
 
 void print(void *content);
+
+int	expand_word2(t_list *cmdlist);
 
 //Builtins
 void	env(char **envp);
