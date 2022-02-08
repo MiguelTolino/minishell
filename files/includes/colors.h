@@ -38,6 +38,6 @@ Light Gray  0;37     White         1;37
 #define PURPLE "\001\033[0;35m\002"
 #define CYAN "\001\033[0;36m\002"
 
-#define COLOR(x,y) "\001\033["#x";"#y"m\002"    // x: fondo, y: primer plano
+#define COLOR(x,y) "\001\033["#x";"#y"m\002"	// x: fondo, y: primer plano
 
 #endif

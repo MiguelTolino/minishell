@@ -14,7 +14,7 @@
 
 // FIXME: REPLACE_^C
 
-void sigint_handler(int sig)
+void	sigint_handler(int sig)
 {
 	if (sig == SIGINT)
 	{
@@ -25,7 +25,7 @@ void sigint_handler(int sig)
 	}
 }
 
-void signal_handler()
+void	signal_handler(void)
 {
 	signal(SIGINT, &sigint_handler);
 	signal(SIGQUIT, SIG_IGN);

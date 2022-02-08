@@ -21,6 +21,34 @@ void print(void *content)
 	printf("\n");
 }
 
+void test_token_list(t_cmd_data *cmd_data)
+{
+	t_list *token_list;
+	token_list = ((t_list *)cmd_data->token);
+	printf("\nTOKENS\n");
+	printf("---------------------\n");
+	while (token_list)
+	{
+		printf("WORD:{%s}\n", ((t_token *)token_list->content)->word);
+		printf("TYPE:{%i}\n", ((t_token *)token_list->content)->type);
+		printf("QUOTE:{%i}\n", ((t_token *)token_list->content)->quote);
+		printf("-----------------------");
+		printf("\n");
+		token_list = token_list->next;
+	}
+}
+
+void test_exec_cmd(t_cmd_data *cmd_data)
+{
+	printf("EXEC_CMD:");
+	while (*cmd_data->exec_cmd)
+	{
+		printf("[%s]", *cmd_data->exec_cmd);
+		cmd_data->exec_cmd++;
+	}
+	printf("\n");
+}
+
 void test(t_shell shell)
 {
 	t_list *token_list;
@@ -31,24 +59,8 @@ void test(t_shell shell)
 	{
 		cmd_data = ((t_cmd_data *)shell.cmdlist->content);
 		printf("CMD:{%s}\n", cmd_data->cmd);
-/*  		token_list = ((t_list *)cmd_data->token);
-		printf("TOKENS\n");
-		printf("------\n");
-		while (token_list)
-		{
-			printf("WORD:|%s|\n", ((t_token *)token_list->content)->word);
-			printf("TYPE:|%i|\n", ((t_token *)token_list->content)->type);
-			printf("QUOTE:|%i|\n", ((t_token *)token_list->content)->quote);
-			printf("\n");
-			token_list = token_list->next;
-		} */
-/*  		printf("EXEC_CMD:");
-		while(*cmd_data->exec_cmd)
-		{
-			printf("[%s]", *cmd_data->exec_cmd);
-			cmd_data->exec_cmd++;
-		} */
-		printf("\n");
+		test_token_list(cmd_data);
+	//	test_exec_cmd(cmd_data);
 		shell.cmdlist = shell.cmdlist->next;
 	}
 }

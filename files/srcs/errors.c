@@ -18,7 +18,7 @@ void	exit_ctrld(t_shell shell)
 	exit_shell();
 }
 
-void	exit_shell()
+void	exit_shell(void)
 {
 	exit(global.exit_status);
 }

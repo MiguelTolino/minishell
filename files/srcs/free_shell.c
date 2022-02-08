@@ -27,10 +27,10 @@ void	restore_fd(void)
 	free(token);
 }
 
-void del_data(void *content)
+void	del_data(void *content)
 {
-	t_cmd_data *data;
-	t_list *token;
+	t_cmd_data	*data;
+	t_list		*token;
 
 	data = ((t_cmd_data *)content);
 	free(data->cmd);
@@ -40,10 +40,11 @@ void del_data(void *content)
 	free(data);
 }
 
-void free_shell(t_shell *shell)
+void	free_shell(t_shell *shell)
 {
 	free(shell->cmdline);
 	free(shell->prompt);
 	ft_lstclear(&shell->cmdlist, del_data);
 	restore_fd();
 }
+ 

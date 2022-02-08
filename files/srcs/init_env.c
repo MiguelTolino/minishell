@@ -14,8 +14,8 @@
 
 char	**init_env(char **envp)
 {
-	char **new_envp;
-	int i;
+	char	**new_envp;
+	int		i;
 
 	i = 0;
 	new_envp = (char **)malloc(sizeof(char *) * 2000); //FIXME: Mejor contar cuantos punteros tiene env y despues ir liberando

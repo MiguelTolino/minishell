@@ -12,19 +12,21 @@
 
 #include "../includes/minishell.h"
 
-void init_shell()
+void	init_shell(void)
 {
-	printf("%s        .__       .__       .__           .__  .__   \n", COLOR(1, 31));
+	printf("%s        .__       .__       .__           .__  .__   \n",
+		COLOR(1, 31));
 	printf("  _____ |__| ____ |__| _____|  |__   ____ |  | |  |  \n");
 	printf(" /     \\|  |/    \\|  |/  ___/  |  \\_/ __ \\|  | |  |  \n");
 	printf("|  Y Y  \\  |   |  \\  |\\___ \\|   Y  \\  ___/|  |_|  |__\n");
 	printf("|__|_|  /__|___|  /__/____  >___|  /\\___  >____/____/\n");
-	printf("      \\/        \\/        \\/     \\/     \\/           \n\n%s", NC);
+	printf("      \\/        \\/        \\/     \\/     \\/           \n\n%s",
+		NC);
 }
 
-int main(int argc, char **argv, char **envp)
+int	main(int argc, char **argv, char **envp)
 {
-	t_shell shell;
+	t_shell	shell;
 
 	check_args(argc);
 	init_shell();
@@ -40,17 +42,17 @@ int main(int argc, char **argv, char **envp)
 		{
 			free(shell.prompt);
 			free(shell.cmdline);
-			continue;
+			continue ;
 		}
 		add_history(shell.cmdline);
 		if (quoting(&shell))
 		{
 			free_shell(&shell);
-			continue;
+			continue ;
 		}
+		parsing(&shell);
 		test(shell);
 		//expand_word2(shell.cmdlist);
-		//parsing(&shell);
 		//redirections(&shell);
 		//execution(&shell);
 		//restore_fd();

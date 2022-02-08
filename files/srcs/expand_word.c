@@ -15,7 +15,7 @@
 //Expand word without quotes
 //Example: $> $LSH -l -> ls -h -l
 
-char *expand_word(char *cmd)
+/* char *expand_word(char *cmd)
 {
 	char *aux;
 	char *var_name;
@@ -57,7 +57,7 @@ char *expand_word(char *cmd)
 	aux = ft_substr(cmd, start, i);
 	printf("%s\n", new_cmd);
 	return (new_cmd);
-}
+} */
 
 /*
 1. Iterar sobre la lista de tokens

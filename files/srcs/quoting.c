@@ -87,6 +87,8 @@ int	quoting(t_shell *shell)
 	n_single = count_closed_quotes(shell->cmdline, '\'') / 2;
 	n_doble = count_closed_quotes(shell->cmdline, '\"') / 2;
 	search_cmdline(shell, &n_single, &n_doble);
+	n_single = count_closed_quotes(shell->cmdline, '\'') / 2;
+	n_doble = count_closed_quotes(shell->cmdline, '\"') / 2;
 	dividing_by_token(shell, &n_single, &n_doble);
  	if (validate_token(shell->cmdlist))
 		return (1);

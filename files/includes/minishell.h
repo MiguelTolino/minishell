@@ -43,18 +43,31 @@ typedef enum e_quote
 	DOUBLE
 }	e_quote;
 
-typedef	enum	e_type
-{
+/*
 	CMD, //defaut set
 	ARG, //word
 	FILE_IN, //word == '<'
 	HERE_DOC, // word == '<<'
 	FILE_OUT, //word == '>'
 	FILE_OUT_SUR, //word == '>>'
-	OPEN_FILE, // word following '<'
-	LIMITOR, // word following '<<'
+	OPEN_FILE, //word following '<'
+	LIMITOR, //word following '<<'
 	EXIT_FILE, // word followinf '>'
-	EXIT_FILE_RET // word following '>>'
+	EXIT_FILE_RET //word following '>>'
+*/
+
+typedef enum	e_type
+{
+	CMD,
+	ARG,
+	FILE_IN,
+	HERE_DOC,
+	FILE_OUT,
+	FILE_OUT_SUR,
+	OPEN_FILE,
+	LIMITOR,
+	EXIT_FILE,
+	EXIT_FILE_RET
 }	e_type;
 
 typedef struct s_token
@@ -68,9 +81,9 @@ typedef struct	s_cmd_data
 {
 	char		*cmd;
 	t_list		*token;
-	char		**exec_cmd;
 	int			n_single;
 	int			n_double;
+	char		**exec_cmd;
 }	t_cmd_data;
 
 typedef struct s_shell
@@ -112,8 +125,8 @@ void	restore_fd(void);
 void	exit_ctrld();
 void	loop_pipe(t_list *cmdlist);
 void	init_global(char **envp, char **argv);
-int	count_closed_quotes(char *cmdline, char quote);
-char *expand_word(char *cmd);
+int		count_closed_quotes(char *cmdline, char quote);
+char	*expand_word(char *cmd);
 
 void print(void *content);
 

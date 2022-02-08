@@ -43,6 +43,7 @@ int		validate_token(t_list *cmdlist)
 			next_token = (t_token *)token_list->next->content;
 			if (token->type >= 2 && token->type <= 5 && next_token->type >= 2 && next_token->type <= 5)
 			{
+				global.exit_status = EXIT_FAILURE;
 				throw_error("Unexpected parse error near redirections");
 				return (1);
 			}

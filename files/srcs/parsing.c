@@ -12,7 +12,7 @@
 
 #include "../includes/minishell.h"
 
-int		cmd_size(t_list *token_list)
+int	cmd_size(t_list *token_list)
 {
 	int len;
 	t_token *token;
@@ -30,9 +30,9 @@ int		cmd_size(t_list *token_list)
 
 void	prepare_execution(void	*content)
 {
-	t_cmd_data *data;
-	t_list *token_list;
-	t_token *token;
+	t_cmd_data	*data;
+	t_list		*token_list;
+	t_token		*token;
 	int i;
 	int len;
 
@@ -42,6 +42,7 @@ void	prepare_execution(void	*content)
 	len = cmd_size(token_list);
 	data->exec_cmd = (char **)malloc(sizeof(char *) * (len + 1));
 	data->exec_cmd[len] = NULL;
+	printf("AAA:%s\n", data->cmd);
 	while (token_list)
 	{
 		token = ((t_token *)token_list->content);
@@ -55,8 +56,8 @@ void	prepare_execution(void	*content)
 
 void	parsing(t_shell *shell)
 {
-//	ft_lstiter(shell->cmdlist, print);
-	ft_lstiter(shell->cmdlist, prepare_execution);
-//	ft_lstiter(shell->cmdlist, print);
+	ft_lstiter(shell->cmdlist, print);
+	//ft_lstiter(shell->cmdlist, prepare_execution);
+	ft_lstiter(shell->cmdlist, print);
 
 }
