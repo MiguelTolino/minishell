@@ -81,9 +81,9 @@ typedef struct	s_cmd_data
 {
 	char		*cmd;
 	t_list		*token;
+	char		**exec_cmd;
 	int			n_single;
 	int			n_double;
-	char		**exec_cmd;
 }	t_cmd_data;
 
 typedef struct s_shell

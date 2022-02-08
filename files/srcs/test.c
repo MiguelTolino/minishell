@@ -46,7 +46,7 @@ void test_exec_cmd(t_cmd_data *cmd_data)
 		printf("[%s]", *cmd_data->exec_cmd);
 		cmd_data->exec_cmd++;
 	}
-	printf("\n");
+	printf("\n\n");
 }
 
 void test(t_shell shell)

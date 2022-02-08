@@ -50,7 +50,7 @@ int	main(int argc, char **argv, char **envp)
 			free_shell(&shell);
 			continue ;
 		}
-		parsing(&shell);
+		//parsing(&shell);
 		test(shell);
 		//expand_word2(shell.cmdlist);
 		//redirections(&shell);

@@ -40,9 +40,11 @@ void	prepare_execution(void	*content)
 	data = ((t_cmd_data *)content);
 	token_list = data->token;
 	len = cmd_size(token_list);
+	printf("AAA:%s\n", data->cmd);
+	printf("LEN:%i\n", len);
 	data->exec_cmd = (char **)malloc(sizeof(char *) * (len + 1));
 	data->exec_cmd[len] = NULL;
-	printf("AAA:%s\n", data->cmd);
+	printf("BBB:%s\n", data->cmd);
 	while (token_list)
 	{
 		token = ((t_token *)token_list->content);
@@ -57,7 +59,7 @@ void	prepare_execution(void	*content)
 void	parsing(t_shell *shell)
 {
 	ft_lstiter(shell->cmdlist, print);
-	//ft_lstiter(shell->cmdlist, prepare_execution);
+	ft_lstiter(shell->cmdlist, prepare_execution);
 	ft_lstiter(shell->cmdlist, print);
 
 }

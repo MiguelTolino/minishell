@@ -135,14 +135,12 @@ void dividing_by_token(t_shell *shell, int *single, int *doble)
 {
 	t_list *cmdlist;
 	t_cmd_data *data;
-//	char *aux;
 
 	cmdlist = shell->cmdlist;
 	while (cmdlist)
 	{
 		data = ((t_cmd_data *)cmdlist->content);
 		data->token = NULL;
-		//aux = expand_word(data->cmd);
 		save_token(data->cmd, &data->token, single, doble);
 		cmdlist = cmdlist->next;
 	}
