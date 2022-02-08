@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   test.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmateo-t <mmateo-t@student.42madrid>       +#+  +:+       +#+        */
+/*   By: mmateo-t <mmateo-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/11 20:02:48 by mmateo-t          #+#    #+#             */
-/*   Updated: 2022/02/05 23:42:45 by mmateo-t         ###   ########.fr       */
+/*   Updated: 2022/02/08 13:03:54 by mmateo-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,12 +26,12 @@ void test(t_shell shell)
 	t_list *token_list;
 	t_cmd_data *cmd_data;
 	token_list = NULL;
-	printf("CMDLINE:|%s|\n\n", shell.cmdline);
+	printf("CMDLINE:{%s}\n\n", shell.cmdline);
 	while (shell.cmdlist)
 	{
 		cmd_data = ((t_cmd_data *)shell.cmdlist->content);
-		printf("CMD:|%s|\n", cmd_data->cmd);
- 		token_list = ((t_list *)cmd_data->token);
+		printf("CMD:{%s}\n", cmd_data->cmd);
+/*  		token_list = ((t_list *)cmd_data->token);
 		printf("TOKENS\n");
 		printf("------\n");
 		while (token_list)
@@ -41,7 +41,7 @@ void test(t_shell shell)
 			printf("QUOTE:|%i|\n", ((t_token *)token_list->content)->quote);
 			printf("\n");
 			token_list = token_list->next;
-		}
+		} */
 /*  		printf("EXEC_CMD:");
 		while(*cmd_data->exec_cmd)
 		{

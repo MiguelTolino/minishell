@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_env.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmateo-t <mmateo-t@student.42madrid>       +#+  +:+       +#+        */
+/*   By: mmateo-t <mmateo-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/24 18:56:26 by rgirondo          #+#    #+#             */
-/*   Updated: 2022/02/04 19:04:26 by mmateo-t         ###   ########.fr       */
+/*   Updated: 2022/02/08 13:05:40 by mmateo-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,11 @@
 
 char	**init_env(char **envp)
 {
-    char **new_envp;
+	char **new_envp;
 	int i;
 
 	i = 0;
-	new_envp = (char **)malloc(sizeof(char *) * 2000);
+	new_envp = (char **)malloc(sizeof(char *) * 2000); //FIXME: Mejor contar cuantos punteros tiene env y despues ir liberando
 	while (envp[i])
 	{
 		new_envp[i] = ft_strdup(envp[i]);

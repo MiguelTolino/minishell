@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   execution.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmateo-t <mmateo-t@student.42madrid>       +#+  +:+       +#+        */
+/*   By: mmateo-t <mmateo-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/10 18:08:02 by mmateo-t          #+#    #+#             */
-/*   Updated: 2022/02/03 20:42:50 by mmateo-t         ###   ########.fr       */
+/*   Updated: 2022/02/08 12:43:15 by mmateo-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-void	exec(t_list *cmdlist)
+void	exec_pipe(t_list *cmdlist)
 {
 	int	p[2];
 	pid_t pid;
@@ -51,7 +51,7 @@ void	exec(t_list *cmdlist)
 }
 
 
-/* int exec(char **cmds)
+int exec_simple(char **cmds)
 {
 	int pid;
 
@@ -66,7 +66,7 @@ void	exec(t_list *cmdlist)
 	else
 		perror("Fork error\n");
 	return (0);
-} */
+}
 
 int execution(t_shell *shell)
 {
@@ -75,7 +75,7 @@ int execution(t_shell *shell)
 
 	list = shell->cmdlist;
 	data = (t_cmd_data *)list->content;
-/* 	if (ft_lstsize(list) > 1)
+ 	if (ft_lstsize(list) > 1)
 	{
 		loop_pipe(list);
 	}
@@ -84,9 +84,8 @@ int execution(t_shell *shell)
 		if (!exec_builtins(data->exec_cmd))
 		{
 			data->exec_cmd[0] = check_cmd(data->exec_cmd[0]);
-			exec(data->exec_cmd);
+			exec_simple(data->exec_cmd);
 		}
-	} */
-	exec(list);
+	}
 	return (global.exit_status);
 }

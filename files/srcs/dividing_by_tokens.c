@@ -90,7 +90,7 @@ void ignore_spaces(char *cmd, int *i)
 		(*i)++;
 }
 
-void save_token(char *cmd, t_list **token_list, int single, int doble)
+void save_token(char *cmd, t_list **token_list, int *single, int *doble)
 {
 	t_list *list;
 	int i;
@@ -130,7 +130,7 @@ void save_token(char *cmd, t_list **token_list, int single, int doble)
 	}
 }
 
-void dividing_by_token(t_shell *shell, int single, int doble)
+void dividing_by_token(t_shell *shell, int *single, int *doble)
 {
 	t_list *cmdlist;
 	t_cmd_data *data;

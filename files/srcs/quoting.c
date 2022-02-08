@@ -13,19 +13,19 @@
 #include "../includes/minishell.h"
 
 
-int	ignore_quotes(char *cmd, char type, int *i, int num)
+int	ignore_quotes(char *cmd, char type, int *i, int *num)
 {
 	int quote;
 
 	quote = NONE;
-	if(cmd[*i] == type && num)
+	if(cmd[*i] == type && *num)
 	{
 		(*i)++;
-		while (cmd[*i] != type)
+		while (cmd[*i] != type && cmd[*i])
 		{
 			(*i)++;
 		}
-		num--;
+		(*num)--;
 		if (type == '\'')
 			quote = SINGLE;
 		else
@@ -50,7 +50,7 @@ int	count_closed_quotes(char *cmdline, char quote)
 	return (num);
 }
 
-void search_cmdline(t_shell *shell, int single, int doble)
+void search_cmdline(t_shell *shell, int *single, int *doble)
 {
 	int i;
 	int start;
@@ -60,7 +60,6 @@ void search_cmdline(t_shell *shell, int single, int doble)
 	i = 0;
 	start = 0;
 	list = NULL;
-
 	while (i <= (int)ft_strlen(shell->cmdline))
 	{
 		if (shell->cmdline[i] == '|' || shell->cmdline[i] == '\0')
@@ -87,8 +86,8 @@ int	quoting(t_shell *shell)
 	shell->cmdlist = NULL;
 	n_single = count_closed_quotes(shell->cmdline, '\'') / 2;
 	n_doble = count_closed_quotes(shell->cmdline, '\"') / 2;
-	search_cmdline(shell, n_single, n_doble);
-	dividing_by_token(shell, n_single, n_doble);
+	search_cmdline(shell, &n_single, &n_doble);
+	dividing_by_token(shell, &n_single, &n_doble);
  	if (validate_token(shell->cmdlist))
 		return (1);
 	return (0);
