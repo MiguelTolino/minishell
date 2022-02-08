@@ -34,7 +34,6 @@ int main(int argc, char **argv, char **envp)
 	{
 		shell.prompt = build_prompt();
 		shell.cmdline = readline(shell.prompt);
-		expansion(&shell);
 		if (!ft_strlen(shell.cmdline))
 		{
 			free(shell.prompt);
@@ -43,6 +42,7 @@ int main(int argc, char **argv, char **envp)
 		}
 		add_history(shell.cmdline);
 		quoting(&shell);
+		token_expansion(&shell);
 		//test(shell);
 		//parsing(&shell);
 		exec_builtins(shell, global.envp);
