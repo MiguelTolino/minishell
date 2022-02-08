@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expand_word.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmateo-t <mmateo-t@student.42madrid>       +#+  +:+       +#+        */
+/*   By: mmateo-t <mmateo-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/05 00:25:26 by mmateo-t          #+#    #+#             */
-/*   Updated: 2022/02/06 01:30:19 by mmateo-t         ###   ########.fr       */
+/*   Updated: 2022/02/08 11:53:58 by mmateo-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,6 +116,7 @@ int	search_dollar(t_token *token)
 		free(token->word);
 		token->word = new_word;
 	}
+	return (0);
 }
 
 void	iteration(void *content)

@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: mmateo-t <mmateo-t@student.42madrid>       +#+  +:+       +#+         #
+#    By: mmateo-t <mmateo-t@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/12/03 10:00:24 by mmateo-t          #+#    #+#              #
-#    Updated: 2022/02/04 11:43:05 by mmateo-t         ###   ########.fr        #
+#    Updated: 2022/02/08 12:18:24 by mmateo-t         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,10 +23,20 @@ NAME:= minishell
 CC:= gcc
 DEBUG_FLAG:= -g
 CFLAGS:= -g -Wall -Werror -Wextra
-SYS_LIB:= -lreadline -L/opt/homebrew/opt/readline/lib -I/opt/homebrew/opt/readline/include
+
 LIBFT_PATH:= files/lib/libft
 LIBFT_LIB:= -L$(LIBFT_PATH) $(LIBFT_PATH)/libft.a
 RM := rm -rvf
+UNAME_R:= uname -m
+
+#.......SCHOOL······························#
+	LDFLAGS=-L/Users/${USER}/.brew/opt/readline/lib
+	CPPFLAGS=-I/Users/${USER}/.brew/opt/readline/include
+#-------MacBook Air--------------------------#
+#	LDFLAGS=-L/opt/homebrew/opt/readline/lib
+#	CPPFLAGS=-I/opt/homebrew/opt/readline/include
+SYS_LIB:= -lreadline $(LDFLAGS) $(CPPFLAGS)
+
 UNAME_S := $(shell uname -s)
 ifeq (${UNAME_S}, Darwin)
 	LEAKS:= leaks minishell
