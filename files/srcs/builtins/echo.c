@@ -3,36 +3,20 @@
 /*                                                        :::      ::::::::   */
 /*   echo.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmateo-t <mmateo-t@student.42madrid>       +#+  +:+       +#+        */
+/*   By: rgirondo <rgirondo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/07 11:16:30 by mmateo-t          #+#    #+#             */
-/*   Updated: 2021/12/17 20:25:22 by mmateo-t         ###   ########.fr       */
+/*   Updated: 2022/01/24 17:11:41 by rgirondo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-void echo(char **cmd)
+void echo(char *token)
 {
-	int i;
-	int option;
-
-	if (!ft_strncmp(cmd[1], "-n", ft_strlen(cmd[1])))
-	{
-		i = 2;
-		option = 1;
-	}
+	/*if (option)
+		printf("%s", cmd);
 	else
-	{
-		i = 1;
-		option = 0;
-	}
-	while (cmd[i])
-	{
-		if (option)
-			printf("%s", cmd[i]);
-		else
-			printf("%s\n", cmd[i]);
-		i++;
-	}
+		printf("%s\n", cmd);*/
+	printf("%s ", token);
 }

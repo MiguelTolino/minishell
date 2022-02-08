@@ -51,6 +51,7 @@ int	main(int argc, char **argv, char **envp)
 			continue ;
 		}
 		//parsing(&shell);
+		token_expansion(&shell);
 		test(shell);
 		//expand_word2(shell.cmdlist);
 		//redirections(&shell);

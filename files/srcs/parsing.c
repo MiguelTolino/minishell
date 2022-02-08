@@ -59,7 +59,7 @@ void	prepare_execution(void	*content)
 void	parsing(t_shell *shell)
 {
 	ft_lstiter(shell->cmdlist, print);
-	ft_lstiter(shell->cmdlist, prepare_execution);
+	//ft_lstiter(shell->cmdlist, prepare_execution);
 	ft_lstiter(shell->cmdlist, print);
 
 }

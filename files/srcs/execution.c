@@ -33,7 +33,7 @@ void	exec_pipe(t_list *cmdlist)
 			if (cmdlist->next != NULL)
 				dup2(p[WRITE_END], STDOUT_FILENO);
 			close(p[READ_END]);
-			if (!exec_builtins(cmd))
+			if (!exec_builtins(cmd, global.env))
 			{
 				cmd[0] = check_cmd(cmd[0]);
 				execve(cmd[0], cmd, global.env);
@@ -81,7 +81,7 @@ int execution(t_shell *shell)
 	}
 	else
 	{
-		if (!exec_builtins(data->exec_cmd))
+		if (!exec_builtins(data->exec_cmd, global.env))
 		{
 			data->exec_cmd[0] = check_cmd(data->exec_cmd[0]);
 			exec_simple(data->exec_cmd);
