@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmateo-t <mmateo-t@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rgirondo <rgirondo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/03 09:55:58 by mmateo-t          #+#    #+#             */
-/*   Updated: 2022/02/08 22:37:45 by mmateo-t         ###   ########.fr       */
+/*   Updated: 2022/02/12 18:31:33 by rgirondo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,8 @@ int	main(int argc, char **argv, char **envp)
 			free_shell(&shell);
 			continue ;
 		}
-		parsing(&shell);
+		//parsing(&shell);
+		token_expansion(&shell);
 		test(shell);
 		//redirections(&shell);
 		//execution(&shell);

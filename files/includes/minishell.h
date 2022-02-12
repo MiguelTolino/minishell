@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmateo-t <mmateo-t@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rgirondo <rgirondo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/03 13:27:13 by mmateo-t          #+#    #+#             */
-/*   Updated: 2022/02/08 21:03:34 by mmateo-t         ###   ########.fr       */
+/*   Updated: 2022/02/12 15:41:50 by rgirondo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,7 +104,7 @@ typedef struct g_global
 g_global global;
 
 char*	build_prompt();
-int		exec_builtins(char **cmd);
+int exec_builtins(char **cmd, char **envp);
 int		save_env(char **envp);
 void	throw_error(const char *error);
 void	check_args(int argc);
@@ -129,16 +129,26 @@ void	loop_pipe(t_list *cmdlist);
 void	init_global(char **envp, char **argv);
 int		count_closed_quotes(char *cmdline, char quote);
 char	*expand_word(char *cmd);
+void	token_expansion(t_shell *shell);
 int		limitor_function(char *limit);
-
 void print(void *content);
-
 int	expand_word2(t_list *cmdlist);
 
 //Builtins
 void	env(char **envp);
-void	change_directory(char *str);
-void	echo(char **cmd);
+void change_directory(char *path, char **envp);
+void	echo(char *cmd);
 void	exit_shell();
+void    export(char *cmd, char **envp);
+void unset(char *cmd, char **envp);
+char    *getvar(char *cmd, char **vars);
+void    change_val(char *var_name, char *cmd, char **envp);
+
+//Expansion
+char	*expand_str(char *str);
+void unsplit(char **matrix, t_token *token);
+void	new_token(t_list *token_list);
+void	remove_quote(t_token *token, char *set);
+void free_matrix(char **mtx);
 
 #endif
