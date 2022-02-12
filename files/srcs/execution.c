@@ -6,7 +6,7 @@
 /*   By: mmateo-t <mmateo-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/10 18:08:02 by mmateo-t          #+#    #+#             */
-/*   Updated: 2022/02/08 12:43:15 by mmateo-t         ###   ########.fr       */
+/*   Updated: 2022/02/08 22:18:29 by mmateo-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ void	exec_pipe(t_list *cmdlist)
 	char **cmd;
 
 	fd_in = STDIN_FILENO;
+	cmd = NULL;
 	while (cmdlist)
 	{
 		cmd = ((t_cmd_data *)cmdlist->content)->exec_cmd;
@@ -35,7 +36,7 @@ void	exec_pipe(t_list *cmdlist)
 			close(p[READ_END]);
 			if (!exec_builtins(cmd, global.env))
 			{
-				cmd[0] = check_cmd(cmd[0]);
+				check_path(cmd[0]);
 				execve(cmd[0], cmd, global.env);
 			}
 			throw_error("Execution Error:");
@@ -43,6 +44,7 @@ void	exec_pipe(t_list *cmdlist)
 		else
 		{
 			wait(&global.exit_status);
+			wait(NULL);
 			close(p[WRITE_END]);
 			fd_in = p[READ_END]; //save the input for the next command
 			cmdlist = cmdlist->next;
@@ -71,19 +73,15 @@ int exec_simple(char **cmds)
 int execution(t_shell *shell)
 {
 	t_cmd_data *data;
-	t_list *list;
 
-	list = shell->cmdlist;
-	data = (t_cmd_data *)list->content;
- 	if (ft_lstsize(list) > 1)
-	{
-		loop_pipe(list);
-	}
+	data = (t_cmd_data *)shell->cmdlist->content;
+ 	if (ft_lstsize(shell->cmdlist) > 1)
+		exec_pipe(shell->cmdlist);
 	else
 	{
 		if (!exec_builtins(data->exec_cmd, global.env))
 		{
-			data->exec_cmd[0] = check_cmd(data->exec_cmd[0]);
+			check_path(data->exec_cmd[0]);
 			exec_simple(data->exec_cmd);
 		}
 	}
