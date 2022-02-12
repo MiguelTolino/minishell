@@ -6,7 +6,7 @@
 /*   By: mmateo-t <mmateo-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/03 09:55:58 by mmateo-t          #+#    #+#             */
-/*   Updated: 2022/02/08 13:12:41 by mmateo-t         ###   ########.fr       */
+/*   Updated: 2022/02/08 22:37:45 by mmateo-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,9 +50,8 @@ int	main(int argc, char **argv, char **envp)
 			free_shell(&shell);
 			continue ;
 		}
-		//parsing(&shell);
+		parsing(&shell);
 		test(shell);
-		//expand_word2(shell.cmdlist);
 		//redirections(&shell);
 		//execution(&shell);
 		//restore_fd();

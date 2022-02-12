@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free_shell.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmateo-t <mmateo-t@student.42madrid>       +#+  +:+       +#+        */
+/*   By: mmateo-t <mmateo-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/11 12:11:17 by mmateo-t          #+#    #+#             */
-/*   Updated: 2022/02/03 20:38:41 by mmateo-t         ###   ########.fr       */
+/*   Updated: 2022/02/08 22:20:33 by mmateo-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 void	restore_fd(void)
 {
-	dup2(STDIN_FILENO, STDIN_FILENO);
-	dup2(STDOUT_FILENO, STDOUT_FILENO);
+	dup2(global.fd_stdin, STDIN_FILENO);
+	dup2(global.fd_stdout, STDOUT_FILENO);
 }
 
  void del_token(void *content)

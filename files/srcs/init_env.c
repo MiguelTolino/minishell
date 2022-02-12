@@ -32,5 +32,7 @@ void	init_global(char **envp, char **argv)
 {
 	global.env = init_env(envp);
 	global.exit_status = 0;
+	global.fd_stdin = dup(STDIN_FILENO);
+	global.fd_stdout = dup(STDOUT_FILENO);
 	(void)argv;
 }

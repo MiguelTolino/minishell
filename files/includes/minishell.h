@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmateo-t <mmateo-t@student.42madrid>       +#+  +:+       +#+        */
+/*   By: mmateo-t <mmateo-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/03 13:27:13 by mmateo-t          #+#    #+#             */
-/*   Updated: 2022/02/06 01:05:53 by mmateo-t         ###   ########.fr       */
+/*   Updated: 2022/02/08 21:03:34 by mmateo-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,6 +97,8 @@ typedef struct g_global
 {
 	char	**env;
 	int		exit_status;
+	int		fd_stdin;
+	int		fd_stdout;
 }	g_global;
 
 g_global global;
@@ -110,7 +112,7 @@ void	parsing(t_shell *shell);
 int		execution(t_shell *shell);
 int		search_pipes(char *cmdline);
 int		len_array(char **array);
-char	*check_cmd(char *cmd);
+int		check_path(char *cmd);
 int		dfree(char **array);
 void	free_shell(t_shell *shell);
 int		quoting(t_shell *shell);
@@ -127,6 +129,7 @@ void	loop_pipe(t_list *cmdlist);
 void	init_global(char **envp, char **argv);
 int		count_closed_quotes(char *cmdline, char quote);
 char	*expand_word(char *cmd);
+int		limitor_function(char *limit);
 
 void print(void *content);
 
