@@ -6,7 +6,7 @@
 /*   By: rgirondo <rgirondo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/03 13:27:13 by mmateo-t          #+#    #+#             */
-/*   Updated: 2022/02/06 01:05:53 by mmateo-t         ###   ########.fr       */
+/*   Updated: 2022/02/12 15:41:50 by rgirondo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -142,5 +142,12 @@ void    export(char *cmd, char **envp);
 void unset(char *cmd, char **envp);
 char    *getvar(char *cmd, char **vars);
 void    change_val(char *var_name, char *cmd, char **envp);
+
+//Expansion
+char	*expand_str(char *str);
+void unsplit(char **matrix, t_token *token);
+void	new_token(t_list *token_list);
+void	remove_quote(t_token *token, char *set);
+void free_matrix(char **mtx);
 
 #endif

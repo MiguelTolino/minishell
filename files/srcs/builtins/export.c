@@ -6,7 +6,7 @@
 /*   By: rgirondo <rgirondo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/07 11:19:52 by mmateo-t          #+#    #+#             */
-/*   Updated: 2022/01/24 17:57:35 by rgirondo         ###   ########.fr       */
+/*   Updated: 2022/02/12 16:54:36 by rgirondo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,12 +31,13 @@ char    *getvar(char *cmd, char **vars)
     char *str;
 
     i = 0;
-    str = 0;
+    str = NULL;
     while (vars[i] && !ft_strnstr(vars[i], cmd, ft_strlen(cmd)))
         i++;
     if (vars[i] && ft_strnstr(vars[i], cmd, ft_strlen(cmd)))
     {
-        str = vars[i] + (ft_strlen(cmd) + 1);
+        if (vars[i][ft_strlen(cmd)] == '=')
+            str = vars[i] + (ft_strlen(cmd) + 1);
     }
     else
         return (NULL);
