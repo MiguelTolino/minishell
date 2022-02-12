@@ -53,7 +53,6 @@ int	main(int argc, char **argv, char **envp)
 		//parsing(&shell);
 		token_expansion(&shell);
 		test(shell);
-		//expand_word2(shell.cmdlist);
 		//redirections(&shell);
 		//execution(&shell);
 		//restore_fd();

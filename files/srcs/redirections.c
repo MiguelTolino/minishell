@@ -3,19 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   redirections.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmateo-t <mmateo-t@student.42madrid>       +#+  +:+       +#+        */
+/*   By: mmateo-t <mmateo-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/24 12:00:24 by mmateo-t          #+#    #+#             */
-/*   Updated: 2022/02/03 12:19:45 by mmateo-t         ###   ########.fr       */
+/*   Updated: 2022/02/08 20:47:25 by mmateo-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
-
-// TODO:
-// 1.Recorrer la lista hasta encontrar tipos de redirecciones
-// 2.Si existen abrir cada fd correspondiente y cambiar con dup2
-// 3.Recuerda cerrar los fd al final
 
 void select_redirection(t_token *token)
 {
@@ -48,32 +43,30 @@ void select_redirection(t_token *token)
 	}
 	if (token->type == LIMITOR)
 	{
-		fd = open(token->word, O_RDONLY);
+		//fd = limitor_function(token->word);
 		// TODO: HERE_DOC
 	}
 	if (fd)
 		close(fd);
 }
 
-void redirections(t_shell *shell)
+void iterate_tokens(void *content)
 {
-	t_list *list;
-	t_list *token_list;
 	t_cmd_data *cmd_data;
+	t_list *token_list;
 	t_token *token;
 
-	list = shell->cmdlist;
-	token_list = NULL;
-	while (list)
+	cmd_data = (t_cmd_data *)content;
+	token_list = cmd_data->token;
+	while (token_list)
 	{
-		cmd_data = ((t_cmd_data *)list->content);
-		token_list = ((t_list *)cmd_data->token);
-		while (token_list)
-		{
-			token = ((t_token *)token_list->content);
-			select_redirection(token);
-			token_list = token_list->next;
-		}
-		list = list->next;
+		token = ((t_token *)token_list->content);
+		select_redirection(token);
+		token_list = token_list->next;
 	}
+}
+
+void redirections(t_shell *shell)
+{
+	ft_lstiter(shell->cmdlist, iterate_tokens);
 }

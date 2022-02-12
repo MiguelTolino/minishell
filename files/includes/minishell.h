@@ -97,6 +97,8 @@ typedef struct g_global
 {
 	char	**env;
 	int		exit_status;
+	int		fd_stdin;
+	int		fd_stdout;
 }	g_global;
 
 g_global global;
@@ -110,7 +112,7 @@ void	parsing(t_shell *shell);
 int		execution(t_shell *shell);
 int		search_pipes(char *cmdline);
 int		len_array(char **array);
-char	*check_cmd(char *cmd);
+int		check_path(char *cmd);
 int		dfree(char **array);
 void	free_shell(t_shell *shell);
 int		quoting(t_shell *shell);
@@ -128,9 +130,8 @@ void	init_global(char **envp, char **argv);
 int		count_closed_quotes(char *cmdline, char quote);
 char	*expand_word(char *cmd);
 void	token_expansion(t_shell *shell);
-
+int		limitor_function(char *limit);
 void print(void *content);
-
 int	expand_word2(t_list *cmdlist);
 
 //Builtins

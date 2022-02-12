@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmateo-t <mmateo-t@student.42madrid>       +#+  +:+       +#+        */
+/*   By: mmateo-t <mmateo-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/26 11:51:44 by mmateo-t          #+#    #+#             */
-/*   Updated: 2022/02/06 01:07:26 by mmateo-t         ###   ########.fr       */
+/*   Updated: 2022/02/08 23:02:56 by mmateo-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,33 +33,36 @@ void	prepare_execution(void	*content)
 	t_cmd_data	*data;
 	t_list		*token_list;
 	t_token		*token;
+	t_list		*list;
 	int i;
 	int len;
 
 	i = 0;
 	data = ((t_cmd_data *)content);
 	token_list = data->token;
-	len = cmd_size(token_list);
-	printf("AAA:%s\n", data->cmd);
-	printf("LEN:%i\n", len);
+	list = data->token;
+	//len = cmd_size(token_list);
+	len = 50;
 	data->exec_cmd = (char **)malloc(sizeof(char *) * (len + 1));
 	data->exec_cmd[len] = NULL;
-	printf("BBB:%s\n", data->cmd);
-	while (token_list)
+	printf("222:%s\n", data->cmd);
+	while (list)
 	{
-		token = ((t_token *)token_list->content);
+		token = ((t_token *)list->content);
 		if (token->type == CMD || token->type == ARG)
-			data->exec_cmd[i++] = ft_strdup(token->word);
-		token_list = token_list->next;
+			data->exec_cmd[i] = ft_strdup(token->word);
+			printf("222:%s\n", data->exec_cmd[i]);
+		i++;
+		list = list->next;
 	}
 }
 
 //FIXME: Prepare execution breaks cmds;
+//HACERLO ITERANDO
 
 void	parsing(t_shell *shell)
 {
 	ft_lstiter(shell->cmdlist, print);
 	//ft_lstiter(shell->cmdlist, prepare_execution);
 	ft_lstiter(shell->cmdlist, print);
-
 }
