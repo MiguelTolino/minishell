@@ -6,7 +6,7 @@
 /*   By: mmateo-t <mmateo-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/10 18:08:02 by mmateo-t          #+#    #+#             */
-/*   Updated: 2022/02/08 22:18:29 by mmateo-t         ###   ########.fr       */
+/*   Updated: 2022/02/14 14:03:49 by mmateo-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ void	exec_pipe(t_list *cmdlist)
 			close(p[READ_END]);
 			if (!exec_builtins(cmd, global.env))
 			{
-				check_path(cmd[0]);
+				check_path(&cmd[0]);
 				execve(cmd[0], cmd, global.env);
 			}
 			throw_error("Execution Error:");
@@ -64,7 +64,7 @@ int exec_simple(char **cmds)
 		perror("Execution error");
 	}
 	else if (pid)
-		wait(&global.exit_status);
+		wait(NULL);
 	else
 		perror("Fork error\n");
 	return (0);
@@ -75,15 +75,13 @@ int execution(t_shell *shell)
 	t_cmd_data *data;
 
 	data = (t_cmd_data *)shell->cmdlist->content;
- 	if (ft_lstsize(shell->cmdlist) > 1)
-		exec_pipe(shell->cmdlist);
-	else
+/*  	if (ft_lstsize(shell->cmdlist) > 1)
+		exec_pipe(shell->cmdlist); */
 	{
-		if (!exec_builtins(data->exec_cmd, global.env))
-		{
-			check_path(data->exec_cmd[0]);
+/* 		if (!exec_builtins(data->exec_cmd, global.env))
+		{ */
+			check_path(&(data->exec_cmd[0]));
 			exec_simple(data->exec_cmd);
-		}
 	}
 	return (global.exit_status);
 }

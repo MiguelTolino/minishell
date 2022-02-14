@@ -6,7 +6,7 @@
 /*   By: mmateo-t <mmateo-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/03 09:55:58 by mmateo-t          #+#    #+#             */
-/*   Updated: 2022/02/12 20:26:04 by mmateo-t         ###   ########.fr       */
+/*   Updated: 2022/02/14 14:04:34 by mmateo-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ int	main(int argc, char **argv, char **envp)
 		shell.cmdline = readline(shell.prompt);
 		if (shell.cmdline == NULL)
 			exit_ctrld(shell);
-		if (!ft_strlen(shell.cmdline))
+		if (!ft_strlen(shell.cmdline) || error_parsing(shell.cmdline))
 		{
 			free(shell.prompt);
 			free(shell.cmdline);
@@ -50,12 +50,11 @@ int	main(int argc, char **argv, char **envp)
 			free_shell(&shell);
 			continue ;
 		}
-		//parsing(&shell);
 		//token_expansion(&shell);
-		test(shell);
+		parsing(&shell);
+		//test(shell);
 		//redirections(&shell);
-		//execution(&shell);
-		//restore_fd();
+		execution(&shell);
 		free_shell(&shell); // If cmdline is empty ocurss a leak
 		//system("leaks minishell");
 	}

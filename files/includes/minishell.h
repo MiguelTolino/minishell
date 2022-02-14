@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rgirondo <rgirondo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mmateo-t <mmateo-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/03 13:27:13 by mmateo-t          #+#    #+#             */
-/*   Updated: 2022/02/12 15:41:50 by rgirondo         ###   ########.fr       */
+/*   Updated: 2022/02/14 13:33:34 by mmateo-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,9 +88,9 @@ typedef struct	s_cmd_data
 
 typedef struct s_shell
 {
-	t_list *cmdlist;
 	char *cmdline;
 	char *prompt;
+	t_list *cmdlist;
 }	t_shell;
 
 typedef struct g_global
@@ -112,7 +112,7 @@ void	parsing(t_shell *shell);
 int		execution(t_shell *shell);
 int		search_pipes(char *cmdline);
 int		len_array(char **array);
-int		check_path(char *cmd);
+int		check_path(char **cmd);
 int		dfree(char **array);
 void	free_shell(t_shell *shell);
 int		quoting(t_shell *shell);
@@ -124,15 +124,15 @@ int		validate_token(t_list *cmdlist);
 int		ignore_quotes(char *cmd, char type, int *i, int *num);
 void	redirections(t_shell *shell);
 void	restore_fd(void);
-void	exit_ctrld();
+void	exit_ctrld(t_shell shell);
 void	loop_pipe(t_list *cmdlist);
 void	init_global(char **envp, char **argv);
 int		count_closed_quotes(char *cmdline, char quote);
 char	*expand_word(char *cmd);
 void	token_expansion(t_shell *shell);
 int		limitor_function(char *limit);
-void print(void *content);
-int	expand_word2(t_list *cmdlist);
+void	print(void *content);
+int		expand_word2(t_list *cmdlist);
 
 //Builtins
 void	env(char **envp);

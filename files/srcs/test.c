@@ -6,7 +6,7 @@
 /*   By: mmateo-t <mmateo-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/11 20:02:48 by mmateo-t          #+#    #+#             */
-/*   Updated: 2022/02/12 20:28:17 by mmateo-t         ###   ########.fr       */
+/*   Updated: 2022/02/14 14:03:17 by mmateo-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,11 +40,14 @@ void test_token_list(t_cmd_data *cmd_data)
 
 void test_exec_cmd(t_cmd_data *cmd_data)
 {
+	int i;
+
+	i = 0;
 	printf("EXEC_CMD:");
-	while (*cmd_data->exec_cmd)
+	while (cmd_data->exec_cmd[i])
 	{
-		printf("[%s]", *cmd_data->exec_cmd);
-		cmd_data->exec_cmd++;
+		printf("[%s]", cmd_data->exec_cmd[i]);
+		i++;
 	}
 	printf("\n\n");
 }
@@ -60,6 +63,7 @@ void test(t_shell shell)
 		cmd_data = ((t_cmd_data *)shell.cmdlist->content);
 		printf("CMD:{%s}\n", cmd_data->cmd);
 		test_token_list(cmd_data);
+		test_exec_cmd(cmd_data);
 		shell.cmdlist = shell.cmdlist->next;
 	}
 }

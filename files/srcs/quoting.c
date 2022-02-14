@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   quoting.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmateo-t <mmateo-t@student.42madrid>       +#+  +:+       +#+        */
+/*   By: mmateo-t <mmateo-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/05 17:05:47 by mmateo-t          #+#    #+#             */
-/*   Updated: 2022/02/05 23:41:05 by mmateo-t         ###   ########.fr       */
+/*   Updated: 2022/02/14 13:58:06 by mmateo-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ void search_cmdline(t_shell *shell, int *single, int *doble)
 	{
 		if (shell->cmdline[i] == '|' || shell->cmdline[i] == '\0')
 		{
-			cmd_data = (t_cmd_data *)malloc(sizeof(cmd_data));
+			cmd_data = (t_cmd_data *)malloc(sizeof(t_cmd_data));
 			cmd_data->cmd = ft_substr(shell->cmdline, start, i - start);
 			list = ft_lstnew(cmd_data);
 			ft_lstadd_back(&shell->cmdlist, list);

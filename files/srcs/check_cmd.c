@@ -6,7 +6,7 @@
 /*   By: mmateo-t <mmateo-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/10 18:50:51 by mmateo-t          #+#    #+#             */
-/*   Updated: 2022/02/08 22:02:18 by mmateo-t         ###   ########.fr       */
+/*   Updated: 2022/02/13 19:46:19 by mmateo-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,34 +53,28 @@ char	*search_cmd(char *cmd, char **paths)
 
 //FIXME: CHECK_CMD LEAKS, int function returns 0 or 1 and change cmd value
 
-int	check_path(char *cmd)
+int	check_path(char **cmd)
 {
 	char *path;
 	char **paths;
 	char *new_cmd;
-	int check;
-
-	check = 0;
-	path = getenv("PATH");
+	
+	path = getvar("PATH", global.env);
 	paths = ft_split(path, ':');
-	if (!cmd || !paths)
-		check = 0;
-	if (!(access(cmd, X_OK)))
-	{
-		new_cmd = cmd;
-		check = 1;
-	}
+	if (!*cmd || !path || !paths)
+		return (0);
+	if (!(access(*cmd, X_OK)))
+		return (1);
 	else
 	{
-		new_cmd = search_cmd(cmd, paths);
+		new_cmd = search_cmd(*cmd, paths);
+		dfree(paths);
 		if (new_cmd)
-			check = 1;
+		{
+			free(*cmd);
+			*cmd = new_cmd;
+			return (1);
+		}
 	}
-	dfree(paths);
-	if (check)
-	{
-		
-	}
-	
-	return (check);
+	return (0);
 }
