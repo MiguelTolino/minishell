@@ -6,7 +6,7 @@
 /*   By: mmateo-t <mmateo-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/03 13:27:13 by mmateo-t          #+#    #+#             */
-/*   Updated: 2022/02/14 13:33:34 by mmateo-t         ###   ########.fr       */
+/*   Updated: 2022/02/14 16:30:12 by mmateo-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,7 +104,7 @@ typedef struct g_global
 g_global global;
 
 char*	build_prompt();
-int exec_builtins(char **cmd, char **envp);
+int		exec_builtins(char **cmd);
 int		save_env(char **envp);
 void	throw_error(const char *error);
 void	check_args(int argc);
@@ -137,11 +137,11 @@ int		expand_word2(t_list *cmdlist);
 //Builtins
 void	env(char **envp);
 void change_directory(char *path, char **envp);
-void	echo(char *cmd);
+void	echo(char **cmd);
 void	exit_shell();
 void    export(char *cmd, char **envp);
 void unset(char *cmd, char **envp);
-char    *getvar(char *cmd, char **vars);
+char    *getvar(char *cmd);
 void    change_val(char *var_name, char *cmd, char **envp);
 
 //Expansion

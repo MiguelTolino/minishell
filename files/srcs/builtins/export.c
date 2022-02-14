@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rgirondo <rgirondo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mmateo-t <mmateo-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/07 11:19:52 by mmateo-t          #+#    #+#             */
-/*   Updated: 2022/02/12 16:54:36 by rgirondo         ###   ########.fr       */
+/*   Updated: 2022/02/14 16:19:01 by mmateo-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,13 +25,15 @@ char *free_join(char *join, char *str)
     return (s);
 }
 
-char    *getvar(char *cmd, char **vars)
+char    *getvar(char *cmd)
 {
     int i;
     char *str;
+    char **vars;
 
     i = 0;
     str = NULL;
+    vars = global.env;
     while (vars[i] && !ft_strnstr(vars[i], cmd, ft_strlen(cmd)))
         i++;
     if (vars[i] && ft_strnstr(vars[i], cmd, ft_strlen(cmd)))
