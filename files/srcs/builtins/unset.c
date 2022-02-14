@@ -3,20 +3,22 @@
 /*                                                        :::      ::::::::   */
 /*   unset.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rgirondo <rgirondo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mmateo-t <mmateo-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/07 11:20:57 by mmateo-t          #+#    #+#             */
-/*   Updated: 2022/01/19 17:35:59 by rgirondo         ###   ########.fr       */
+/*   Updated: 2022/02/14 20:27:10 by mmateo-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-void unset(char *cmd, char **envp)
+void unset(char *cmd)
 {
     int i;
     char *old_var;
+    char **envp;
 
+    envp = global.env;
     if (cmd)
     {
         i = 0;

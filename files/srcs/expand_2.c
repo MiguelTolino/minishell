@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expand_2.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rgirondo <rgirondo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mmateo-t <mmateo-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/12 15:41:18 by rgirondo          #+#    #+#             */
-/*   Updated: 2022/02/12 16:49:17 by rgirondo         ###   ########.fr       */
+/*   Updated: 2022/02/14 20:25:54 by mmateo-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ char	*expand_str(char *str)
         else
         {
             free(matrix[i]);
-		    matrix[i] = getvar(matrix[i], global.env);
+		    matrix[i] = getvar(matrix[i]);
 		    if (matrix[i])
 			    matrix[i] = ft_strdup(matrix[i]);
 		    else

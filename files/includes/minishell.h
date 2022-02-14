@@ -6,7 +6,7 @@
 /*   By: mmateo-t <mmateo-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/03 13:27:13 by mmateo-t          #+#    #+#             */
-/*   Updated: 2022/02/14 16:30:12 by mmateo-t         ###   ########.fr       */
+/*   Updated: 2022/02/14 20:21:27 by mmateo-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -135,14 +135,14 @@ void	print(void *content);
 int		expand_word2(t_list *cmdlist);
 
 //Builtins
-void	env(char **envp);
-void change_directory(char *path, char **envp);
+void	print_env(void);
+void change_directory(char *path);
 void	echo(char **cmd);
 void	exit_shell();
-void    export(char *cmd, char **envp);
-void unset(char *cmd, char **envp);
+void    export(char *cmd);
+void unset(char *cmd);
 char    *getvar(char *cmd);
-void    change_val(char *var_name, char *cmd, char **envp);
+void    change_val(char *var_name, char *cmd);
 
 //Expansion
 char	*expand_str(char *str);

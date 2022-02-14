@@ -3,23 +3,23 @@
 /*                                                        :::      ::::::::   */
 /*   env.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rgirondo <rgirondo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mmateo-t <mmateo-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/05 19:52:45 by mmateo-t          #+#    #+#             */
-/*   Updated: 2022/01/21 17:39:41 by rgirondo         ###   ########.fr       */
+/*   Updated: 2022/02/14 20:20:58 by mmateo-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-void	env(char **envp)
+void	print_env(void)
 {
 	int i;
 
 	i = 0;
-	while (envp[i])
+	while (global.env[i])
 	{
-		printf("%s\n", envp[i]);
+		printf("%s\n", global.env[i]);
 		i++;
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: mmateo-t <mmateo-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/10 18:08:02 by mmateo-t          #+#    #+#             */
-/*   Updated: 2022/02/14 16:20:46 by mmateo-t         ###   ########.fr       */
+/*   Updated: 2022/02/14 20:32:55 by mmateo-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ void exec_pipe(t_list *cmdlist)
 			if (cmdlist->next != NULL)
 				dup2(p[WRITE_END], STDOUT_FILENO);
 			close(p[READ_END]);
-			if (!exec_builtins(cmd, global.env))
+			if (!exec_builtins(cmd))
 			{
 				check_path(&cmd[0]);
 				execve(cmd[0], cmd, global.env);
@@ -66,8 +66,8 @@ int exec_simple(char **cmds)
 		wait(NULL);
 	else
 		perror("Fork error\n");
-	return (0);
 	wait(NULL);
+	return (0);
 }
 
 int execution(t_shell *shell)
@@ -85,3 +85,4 @@ int execution(t_shell *shell)
 		}
 		return (global.exit_status);
 	}
+}

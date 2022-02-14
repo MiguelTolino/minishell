@@ -6,7 +6,7 @@
 /*   By: mmateo-t <mmateo-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/10 18:50:51 by mmateo-t          #+#    #+#             */
-/*   Updated: 2022/02/13 19:46:19 by mmateo-t         ###   ########.fr       */
+/*   Updated: 2022/02/14 16:51:58 by mmateo-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ int	check_path(char **cmd)
 	char **paths;
 	char *new_cmd;
 	
-	path = getvar("PATH", global.env);
+	path = getvar("PATH");
 	paths = ft_split(path, ':');
 	if (!*cmd || !path || !paths)
 		return (0);

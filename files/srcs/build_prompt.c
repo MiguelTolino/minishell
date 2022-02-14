@@ -6,7 +6,7 @@
 /*   By: mmateo-t <mmateo-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/05 17:46:43 by mmateo-t          #+#    #+#             */
-/*   Updated: 2022/02/13 19:36:55 by mmateo-t         ###   ########.fr       */
+/*   Updated: 2022/02/14 16:51:47 by mmateo-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ char	*build_prompt(void)
 	char	*dir;
 	char	*user;
 
-	user = getvar("USER", global.env);
+	user = getvar("USER");
 	dir = NULL;
 	dir = set_directory(dir);
 	prompt = (char *)calloc(sizeof(char), MAXCOM);
