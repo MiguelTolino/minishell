@@ -6,7 +6,7 @@
 /*   By: mmateo-t <mmateo-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/05 19:14:58 by mmateo-t          #+#    #+#             */
-/*   Updated: 2022/02/14 21:04:31 by mmateo-t         ###   ########.fr       */
+/*   Updated: 2022/02/15 13:40:19 by mmateo-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ int exec_builtins(char **cmd)
 	}
 	if (!ft_strncmp(cmd[0], "exit", ft_strlen(cmd[0])))
 	{
-		exit(EXIT_SUCCESS);
+		exit(cmd);
 		is_builtin = 1;
 	}
 	if (!ft_strncmp(cmd[0], "cd", ft_strlen(cmd[0])))
