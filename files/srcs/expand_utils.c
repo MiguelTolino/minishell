@@ -6,7 +6,7 @@
 /*   By: rgirondo <rgirondo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/12 15:41:28 by rgirondo          #+#    #+#             */
-/*   Updated: 2022/02/12 16:54:26 by rgirondo         ###   ########.fr       */
+/*   Updated: 2022/02/15 20:43:34 by rgirondo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,15 +23,6 @@ void free_matrix(char **mtx)
 		i++;
 	}
 	free(mtx);
-}
-
-void	remove_quote(t_token *token, char *set)
-{
-	char *tmp;
-
-	tmp = ft_strtrim(token->word, set);
-	free(token->word);
-	token->word = tmp;
 }
 
 void	new_token(t_list *token_list)

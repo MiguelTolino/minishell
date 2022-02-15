@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmateo-t <mmateo-t@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rgirondo <rgirondo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/03 09:55:58 by mmateo-t          #+#    #+#             */
-/*   Updated: 2022/02/14 20:31:00 by mmateo-t         ###   ########.fr       */
+/*   Updated: 2022/02/15 20:49:49 by rgirondo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ int	main(int argc, char **argv, char **envp)
 		}
 		token_expansion(&shell);
 		parsing(&shell);
-		//test(shell);
+		test(shell);
 		redirections(&shell);
 		execution(&shell);
 		free_shell(&shell); // If cmdline is empty ocurss a leak

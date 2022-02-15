@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_builtins.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmateo-t <mmateo-t@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rgirondo <rgirondo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/05 19:14:58 by mmateo-t          #+#    #+#             */
-/*   Updated: 2022/02/15 13:40:19 by mmateo-t         ###   ########.fr       */
+/*   Updated: 2022/02/15 18:05:29 by rgirondo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ int exec_builtins(char **cmd)
 	}
 	if (!ft_strncmp(cmd[0], "exit", ft_strlen(cmd[0])))
 	{
-		exit(cmd);
+		//exit(cmd);
 		is_builtin = 1;
 	}
 	if (!ft_strncmp(cmd[0], "cd", ft_strlen(cmd[0])))
@@ -45,12 +45,12 @@ int exec_builtins(char **cmd)
 	}
 	if (!ft_strncmp(cmd[0], "export", ft_strlen(cmd[0])))
 	{
-		//export(cmd);
+		export(cmd[1]);
 		is_builtin = 1;
 	}
 	if (!ft_strncmp(cmd[0], "unset", ft_strlen(cmd[0])))
 	{
-		//unset(cmd);
+		unset(cmd[1]);
 		is_builtin = 1;
 	}
 	return (is_builtin);

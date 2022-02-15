@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmateo-t <mmateo-t@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rgirondo <rgirondo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/03 13:27:13 by mmateo-t          #+#    #+#             */
-/*   Updated: 2022/02/14 20:21:27 by mmateo-t         ###   ########.fr       */
+/*   Updated: 2022/02/15 20:50:50 by rgirondo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -145,10 +145,12 @@ char    *getvar(char *cmd);
 void    change_val(char *var_name, char *cmd);
 
 //Expansion
-char	*expand_str(char *str);
+char *expand(char *cmd);
 void unsplit(char **matrix, t_token *token);
 void	new_token(t_list *token_list);
 void	remove_quote(t_token *token, char *set);
 void free_matrix(char **mtx);
+char *expand_quoted(char *var_value);
+
 
 #endif
