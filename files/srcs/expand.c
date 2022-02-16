@@ -21,7 +21,7 @@ void	word_expand(t_list *token_list)
 
 	i = 0;
 	token = ((t_token *)token_list->content);
-	tmp = expand(token->word);
+	tmp = expand_quoted(token->word);
 	free(token->word);
 	token->word = tmp;
 	matrix = ft_split(token->word, ' ');

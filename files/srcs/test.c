@@ -56,7 +56,7 @@ void test(t_shell shell)
 {
 	t_list *token_list;
 	t_cmd_data *cmd_data;
-	token_list = NULL;
+	(void)token_list;
 	printf("CMDLINE:{%s}\n\n", shell.cmdline);
 	while (shell.cmdlist)
 	{

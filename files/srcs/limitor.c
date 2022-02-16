@@ -18,7 +18,8 @@ int	exists_limitor(int fd, char *limit)
 	char buff[1028];
 	fd = 5;
 	
-	str = NULL;
+	(void)str;
+	(void)fd;
 	while (read(STDIN_FILENO, buff, ft_strlen(limit)) > 0)
 	{
 		if (ft_strncmp(buff, limit, ft_strlen(buff)))
@@ -35,6 +36,7 @@ int	limitor_function(char *limit)
 	char buff[16];
 	int bytes;
 
+	(void)bytes;
 	fd = open("LIMITOR.txt", O_RDWR);
 	if (fd < 0)
 		throw_error("Error in fd");

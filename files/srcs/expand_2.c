@@ -68,7 +68,6 @@ char *expand_2(char *cmd)
 
 	n_single = count_closed_quotes(cmd, '\'');
 	n_double = count_closed_quotes(cmd, '\"');
-	printf("QUOTES : (%i , %i)\n", n_single, n_double);
 	if (n_double == 2)
 	{
 		tmp = cmd;
@@ -124,12 +123,10 @@ char *expand_quoted(char *cmd)
 		i++;
 	}
 	tmp = ft_substr(cmd, 0, i);
+	tmp = expand_2(tmp);
 	tmp2 = ft_strjoin(new_str, tmp);
 	free(new_str);
-	new_str = tmp2;
 	free(tmp);
-	tmp = expand(new_str);
-	free(new_str);
-	new_str = tmp;
+	new_str = tmp2;
 	return (new_str);
 }
