@@ -42,13 +42,16 @@ void change_directory(char *path)
 		free(tmp);
 	}
 	old_path = ft_strjoin("OLDPWD=", getvar("PWD"));
-	change_val("OLDPWD", old_path);
-	free(old_path);
 	if (chdir(path) < 0)
+	{
 		perror("Chdir Error");
+		return;
+	}
 	tmp = getcwd(NULL, 1000);
 	new_path = ft_strjoin("PWD=", tmp);
 	change_val("PWD", new_path);
+	change_val("OLDPWD", old_path);
+	free(old_path);
 	free(tmp);
 	free(new_path);
 }
