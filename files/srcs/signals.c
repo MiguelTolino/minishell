@@ -3,30 +3,23 @@
 /*                                                        :::      ::::::::   */
 /*   signals.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmateo-t <mmateo-t@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mmateo-t <mmateo-t@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/17 12:22:42 by mmateo-t          #+#    #+#             */
-/*   Updated: 2022/02/17 12:24:40 by mmateo-t         ###   ########.fr       */
+/*   Updated: 2022/02/17 17:14:04 by mmateo-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-// FIXME: REPLACE_^C
-
 void	sigint_handler(int sig)
 {
 	if (sig == SIGINT)
 	{
-/* 		rl_on_new_line();
-		rl_replace_line("", 0);
-		write(1, "\n", 1);
-		rl_redisplay(); */
+		ft_putchar_fd('\n', STDOUT_FILENO);
 		rl_on_new_line();
 		rl_replace_line("", 0);
-		write(1, "\b\b", 2); // move cursor behind of ^C
-		write(1, "  ", 2); // remove ^C by printing spaces.
-		write(1, "\b\b", 2); // reset cursor pos
+		rl_redisplay();
 	}
 }
 

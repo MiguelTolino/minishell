@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redirections.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmateo-t <mmateo-t@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mmateo-t <mmateo-t@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/24 12:00:24 by mmateo-t          #+#    #+#             */
-/*   Updated: 2022/02/08 20:47:25 by mmateo-t         ###   ########.fr       */
+/*   Updated: 2022/02/17 17:20:27 by mmateo-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,8 +43,7 @@ void select_redirection(t_token *token)
 	}
 	if (token->type == LIMITOR)
 	{
-		//fd = limitor_function(token->word);
-		// TODO: HERE_DOC
+		limitor_function(token->word);
 	}
 	if (fd)
 		close(fd);

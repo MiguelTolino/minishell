@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: mmateo-t <mmateo-t@student.42.fr>          +#+  +:+       +#+         #
+#    By: mmateo-t <mmateo-t@student.42madrid>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/12/03 10:00:24 by mmateo-t          #+#    #+#              #
-#    Updated: 2022/02/15 17:53:38 by mmateo-t         ###   ########.fr        #
+#    Updated: 2022/02/17 17:03:30 by mmateo-t         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,18 +22,18 @@ OBJS := $(SRCS:%.c=%.o)
 NAME:= minishell
 CC:= gcc
 DEBUG_FLAG:= -g  #-g3 -fsanitize=address
-CFLAGS:= $(DEBUG_FLAG) -Wall -Werror -Wextra 
+CFLAGS:= $(DEBUG_FLAG) -Wall -Werror -Wextra
 LIBFT_PATH:= files/lib/libft
 LIBFT_LIB:= -L$(LIBFT_PATH) $(LIBFT_PATH)/libft.a
 RM := rm -rvf
 UNAME_R:= uname -m
 
 #.......SCHOOL······························#
-LDFLAGS=-L/Users/${USER}/.brew/opt/readline/lib
-CPPFLAGS=-I/Users/${USER}/.brew/opt/readline/include
+##LDFLAGS=-L/Users/${USER}/.brew/opt/readline/lib
+##CPPFLAGS=-I/Users/${USER}/.brew/opt/readline/include
 #-------MacBook Air--------------------------#
-#	LDFLAGS=-L/opt/homebrew/opt/readline/lib
-#	CPPFLAGS=-I/opt/homebrew/opt/readline/include
+	LDFLAGS=-L/opt/homebrew/opt/readline/lib
+	CPPFLAGS=-I/opt/homebrew/opt/readline/include
 SYS_LIB:= -lreadline $(LDFLAGS) $(CPPFLAGS)
 
 UNAME_S := $(shell uname -s)
