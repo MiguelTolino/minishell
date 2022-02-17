@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execution.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmateo-t <mmateo-t@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rgirondo <rgirondo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/10 18:08:02 by mmateo-t          #+#    #+#             */
-/*   Updated: 2022/02/14 20:32:55 by mmateo-t         ###   ########.fr       */
+/*   Updated: 2022/02/17 21:27:20 by rgirondo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,14 +75,15 @@ int execution(t_shell *shell)
 	t_cmd_data *data;
 
 	data = (t_cmd_data *)shell->cmdlist->content;
-	/*  	if (ft_lstsize(shell->cmdlist) > 1)
-		exec_pipe(shell->cmdlist); */
+	if (ft_lstsize(shell->cmdlist) > 1)
+		exec_pipe(shell->cmdlist);
+	else
 	{
 		if (!exec_builtins(data->exec_cmd))
 		{
-			check_path(&(data->exec_cmd[0]));
+			//check_path(&(data->exec_cmd[0]));
 			exec_simple(data->exec_cmd);
 		}
-		return (global.exit_status);
 	}
+	return (global.exit_status);
 }

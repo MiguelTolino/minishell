@@ -6,7 +6,7 @@
 /*   By: rgirondo <rgirondo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/12 15:41:18 by rgirondo          #+#    #+#             */
-/*   Updated: 2022/02/15 21:09:59 by rgirondo         ###   ########.fr       */
+/*   Updated: 2022/02/17 21:13:48 by rgirondo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ char *expand(char *cmd)
 			while (ft_isalnum(cmd[i]) || cmd[i] == '?')
 				i++;
 			tmp = ft_substr(cmd, 0, i);
-			tmp2 = ft_strdup(getvar(tmp));
+			tmp2 = getvar(tmp);
 			free(tmp);
 			cmd += i;
 			i = -1;

@@ -6,7 +6,7 @@
 /*   By: rgirondo <rgirondo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/03 13:27:13 by mmateo-t          #+#    #+#             */
-/*   Updated: 2022/02/15 20:50:50 by rgirondo         ###   ########.fr       */
+/*   Updated: 2022/02/17 19:13:51 by rgirondo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,6 +96,7 @@ typedef struct s_shell
 typedef struct g_global
 {
 	char	**env;
+	int		env_len;
 	int		exit_status;
 	int		fd_stdin;
 	int		fd_stdout;
@@ -133,24 +134,26 @@ void	token_expansion(t_shell *shell);
 int		limitor_function(char *limit);
 void	print(void *content);
 int		expand_word2(t_list *cmdlist);
+char	**init_env(char **envp);
 
 //Builtins
 void	print_env(void);
-void change_directory(char *path);
+void 	change_directory(char *path);
 void	echo(char **cmd);
 void	exit_shell();
-void    export(char *cmd);
-void unset(char *cmd);
+void    export(char **cmd);
+void 	unset(char **cmd);
 char    *getvar(char *cmd);
 void    change_val(char *var_name, char *cmd);
+char 	*get_name(char *cmd);
 
 //Expansion
-char *expand(char *cmd);
-void unsplit(char **matrix, t_token *token);
+char 	*expand(char *cmd);
+void 	unsplit(char **matrix, t_token *token);
 void	new_token(t_list *token_list);
 void	remove_quote(t_token *token, char *set);
-void free_matrix(char **mtx);
-char *expand_quoted(char *var_value);
+void 	free_matrix(char **mtx);
+char 	*expand_quoted(char *var_value);
 
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: rgirondo <rgirondo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/07 11:19:52 by mmateo-t          #+#    #+#             */
-/*   Updated: 2022/02/15 20:42:11 by rgirondo         ###   ########.fr       */
+/*   Updated: 2022/02/17 21:31:10 by rgirondo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,15 +29,22 @@ char *getvar(char *cmd)
 {
 	int i;
 	char *str;
+	char *var_name;
 
 	i = 0;
 	str = 0;
-	while (global.env[i] && !ft_strnstr(global.env[i], cmd, ft_strlen(cmd)))
-		i++;
-	if (global.env[i] && ft_strnstr(global.env[i], cmd, ft_strlen(cmd)))
+	var_name = get_name(global.env[i]);
+	//arreglar que me encuentre $ho cuando es $hola
+	while (global.env[i] && ft_strncmp(var_name, cmd, ft_strlen(cmd)))
 	{
-		str = global.env[i] + (ft_strlen(cmd) + 1);
+		free(var_name);
+		i++;
+		var_name = get_name(global.env[i]);
 	}
+	if (var_name)
+		free(var_name);
+	if (global.env[i])
+		str = global.env[i] + (ft_strlen(cmd) + 1);
 	else if (!ft_strncmp(cmd, "?", ft_strlen(cmd)))
 		return (ft_strdup(ft_itoa(global.exit_status)));
 	else
@@ -51,7 +58,12 @@ char *get_name(char *cmd)
 	char *str;
 
 	i = 0;
-	str = (char *)malloc(1);
+	if (!cmd)
+		return(NULL);
+	while (cmd[i] && cmd[i] != '=')
+		i++;
+	str = (char *)malloc(sizeof(char) * (i + 1));
+	i = 0;
 	while (cmd[i] && cmd[i] != '=')
 	{
 		str[i] = cmd[i];
@@ -64,8 +76,13 @@ char *get_name(char *cmd)
 void add_new(char *new_var)
 {
 	int i;
+	char **tmp;
 
 	i = 0;
+	tmp = global.env;
+	global.env_len += 1;
+	global.env = init_env(tmp);
+	free_matrix(tmp);
 	while (global.env[i])
 		i++;
 	global.env[i] = ft_strdup(new_var);
@@ -83,19 +100,26 @@ void change_val(char *var_name, char *cmd)
 	global.env[i] = ft_strdup(cmd);
 }
 
-void export(char *cmd)
+void export(char **cmd)
 {
 	char *new_var;
 	char *var_name;
+	int i;
 
-	if (cmd)
+	i = 1;
+	while (cmd[i])
 	{
-		var_name = get_name(cmd);
-		new_var = getvar(var_name);
-		if (ft_strchr(cmd, '=') && !new_var)
-			add_new(cmd);
-		else if (ft_strchr(cmd, '=') && new_var)
-			change_val(var_name, cmd);
-		free(var_name);
-	}
+		if (cmd[i])
+		{
+			var_name = get_name(cmd[i]);
+			new_var = getvar(var_name);
+			if (ft_strchr(cmd[i], '=') && !new_var)
+				add_new(cmd[i]);
+			else if (ft_strchr(cmd[i], '=') && new_var)
+				change_val(var_name, cmd[i]);
+			if (var_name)
+				free(var_name);
+		}
+		i++;
+	}	
 }

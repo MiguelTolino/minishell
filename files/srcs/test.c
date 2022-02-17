@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   test.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmateo-t <mmateo-t@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rgirondo <rgirondo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/11 20:02:48 by mmateo-t          #+#    #+#             */
-/*   Updated: 2022/02/14 14:03:17 by mmateo-t         ###   ########.fr       */
+/*   Updated: 2022/02/17 19:04:15 by rgirondo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ void test(t_shell shell)
 	t_list *token_list;
 	t_cmd_data *cmd_data;
 	(void)token_list;
-	printf("CMDLINE:{%s}\n\n", shell.cmdline);
+	printf("\nCMDLINE:{%s}\n\n", shell.cmdline);
 	while (shell.cmdlist)
 	{
 		cmd_data = ((t_cmd_data *)shell.cmdlist->content);
@@ -66,4 +66,5 @@ void test(t_shell shell)
 		test_exec_cmd(cmd_data);
 		shell.cmdlist = shell.cmdlist->next;
 	}
+	printf("ENV_LEN:{%i}\n", global.env_len);
 }
