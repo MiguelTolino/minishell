@@ -6,7 +6,7 @@
 /*   By: mmateo-t <mmateo-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/07 11:19:52 by mmateo-t          #+#    #+#             */
-/*   Updated: 2022/02/15 13:35:45 by mmateo-t         ###   ########.fr       */
+/*   Updated: 2022/02/15 17:55:26 by mmateo-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,18 +25,18 @@ char *free_join(char *join, char *str)
 	return (s);
 }
 
-char    *getvar(char *cmd, char **vars)
+char    *getvar(char *cmd)
 {
 	int i;
 	char *str;
 
 	i = 0;
 	str = 0;
-	while (vars[i] && !ft_strnstr(vars[i], cmd, ft_strlen(cmd)))
+	while (global.env[i] && !ft_strnstr(global.env[i], cmd, ft_strlen(cmd)))
 		i++;
-	if (vars[i] && ft_strnstr(vars[i], cmd, ft_strlen(cmd)))
+	if (global.env[i] && ft_strnstr(global.env[i], cmd, ft_strlen(cmd)))
 	{
-		str = vars[i] + (ft_strlen(cmd) + 1);
+		str = global.env[i] + (ft_strlen(cmd) + 1);
 	}
 	else
 		return (NULL);
@@ -59,42 +59,41 @@ char    *get_name(char *cmd)
 	return (str);
 }
 
-void    add_new(char *new_var, char **envp)
+void    add_new(char *new_var)
 {
 	int i;
 
 	i = 0;
-	while (envp[i])
+	while (global.env[i])
 		i++;
-	envp[i] = ft_strdup(new_var);
-	envp[i + 1] = NULL;
+	global.env[i] = ft_strdup(new_var);
+	global.env[i + 1] = NULL;
 }
 
-void    change_val(char *var_name, char *cmd, char **envp)
+void    change_val(char *var_name, char *cmd)
 {
 	int i;
 	
 	i = 0;
-	while (!ft_strnstr(envp[i], var_name, ft_strlen(var_name)) && envp[i])
+	while (!ft_strnstr(global.env[i], var_name, ft_strlen(var_name)) && global.env[i])
 		i++;
-	free(envp[i]);
-	envp[i] = ft_strdup(cmd);
+	free(global.env[i]);
+	global.env[i] = ft_strdup(cmd);
 }
 
-void    export(char *cmd, char **envp)
+void    export(char *cmd)
 {
 	char *new_var;
 	char *var_name;
-	int i = 0;
 
 	if (cmd)
 	{
 		var_name = get_name(cmd);
-		new_var = getvar(var_name, envp);
+		new_var = getvar(var_name);
 		if (ft_strchr(cmd, '=') && !new_var)
-			add_new(cmd, envp);
+			add_new(cmd);
 		else if (ft_strchr(cmd, '=') && new_var)
-			change_val(var_name, cmd, envp);
+			change_val(var_name, cmd);
 		free(var_name);
 	}
 }

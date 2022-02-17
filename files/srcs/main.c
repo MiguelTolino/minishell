@@ -6,7 +6,7 @@
 /*   By: mmateo-t <mmateo-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/03 09:55:58 by mmateo-t          #+#    #+#             */
-/*   Updated: 2022/02/14 20:31:00 by mmateo-t         ###   ########.fr       */
+/*   Updated: 2022/02/17 12:21:54 by mmateo-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ int	main(int argc, char **argv, char **envp)
 			free_shell(&shell);
 			continue ;
 		}
-		token_expansion(&shell);
+		//token_expansion(&shell);
 		parsing(&shell);
 		//test(shell);
 		redirections(&shell);
