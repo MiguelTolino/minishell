@@ -6,7 +6,7 @@
 /*   By: rgirondo <rgirondo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/10 18:08:02 by mmateo-t          #+#    #+#             */
-/*   Updated: 2022/02/17 21:27:20 by rgirondo         ###   ########.fr       */
+/*   Updated: 2022/02/18 19:22:18 by rgirondo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ int execution(t_shell *shell)
 	{
 		if (!exec_builtins(data->exec_cmd))
 		{
-			//check_path(&(data->exec_cmd[0]));
+			check_path(&(data->exec_cmd[0]));
 			exec_simple(data->exec_cmd);
 		}
 	}

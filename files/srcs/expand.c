@@ -6,7 +6,7 @@
 /*   By: rgirondo <rgirondo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/04 18:59:30 by rgirondo          #+#    #+#             */
-/*   Updated: 2022/02/17 21:13:33 by rgirondo         ###   ########.fr       */
+/*   Updated: 2022/02/18 17:58:35 by rgirondo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	word_expand(t_list *token_list)
 
 	i = 0;
 	token = ((t_token *)token_list->content);
-	tmp = expand_quoted(token->word);
+	tmp = expand(token->word);
 	free(token->word);
 	token->word = tmp;
 	matrix = ft_split(token->word, ' ');
@@ -43,7 +43,7 @@ void	word_expand(t_list *token_list)
 	free(matrix);
 }
 
-void expand_first(void *content)
+void expand_ident_1(void *content)
 {
 	t_cmd_data	*data;
 	t_list		*token_list;
@@ -55,17 +55,17 @@ void expand_first(void *content)
 	while (token_list)
 	{
 		token = ((t_token *)token_list->content);
-		if (token->quote == 2 || token->quote == 1)
+		if (token->quote == 2 || token->quote == 1 || token->type == ARG)
 		{
-			tmp = expand_quoted(token->word);
+			tmp = expand(token->word);
 			free(token->word);
 			token->word = tmp;
 		}
-		if (token->quote == 0 && (token->type == CMD || token->type == ARG))
+		if (token->quote == 0 && token->type == CMD)
 			word_expand(token_list);
 		if (token->type == OPEN_FILE || token->type == EXIT_FILE)
 		{
-			tmp = expand_quoted(token->word);
+			tmp = expand(token->word);
 			free(token->word);
 			token->word = tmp;
 		}
@@ -75,5 +75,5 @@ void expand_first(void *content)
 
 void token_expansion(t_shell *shell)
 {
-	ft_lstiter(shell->cmdlist, expand_first);
+	ft_lstiter(shell->cmdlist, expand_ident_1);
 }

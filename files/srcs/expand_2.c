@@ -6,13 +6,13 @@
 /*   By: rgirondo <rgirondo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/12 15:41:18 by rgirondo          #+#    #+#             */
-/*   Updated: 2022/02/17 21:13:48 by rgirondo         ###   ########.fr       */
+/*   Updated: 2022/02/18 19:22:10 by rgirondo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-char *expand(char *cmd)
+char *expand_dollar(char *cmd)
 {
 	char *new_str;
 	char *tmp;
@@ -45,10 +45,13 @@ char *expand(char *cmd)
 			free(tmp);
 			cmd += i;
 			i = -1;
-			tmp = ft_strjoin(new_str, tmp2);
-			free(new_str);
-			new_str = tmp;
-			free(tmp2);
+			if (tmp2)
+			{
+				tmp = ft_strjoin(new_str, tmp2);
+				free(new_str);
+				new_str = tmp;
+				free(tmp2);
+			}
 		}
 		i++;
 	}
@@ -60,7 +63,7 @@ char *expand(char *cmd)
 	return (new_str);
 }
 
-char *expand_2(char *cmd)
+char *expand_ident_2(char *cmd)
 {
 	char *tmp;
 	int n_single;
@@ -73,7 +76,7 @@ char *expand_2(char *cmd)
 		tmp = cmd;
 		cmd = ft_strtrim(cmd, "\"");
 		free(tmp);
-		tmp = expand(cmd);
+		tmp = expand_dollar(cmd);
 		free(cmd);
 		cmd = tmp;
 	}
@@ -85,14 +88,14 @@ char *expand_2(char *cmd)
 	}
 	if (n_single == 0 && n_double == 0)
 	{
-		tmp = expand(cmd);
+		tmp = expand_dollar(cmd);
 		free(cmd);
 		cmd = tmp;
 	}
 	return (cmd);
 }
 
-char *expand_quoted(char *cmd)
+char *expand(char *cmd)
 {
 	char *new_str;
 	char *tmp;
@@ -112,7 +115,7 @@ char *expand_quoted(char *cmd)
 			if (cmd[0] == cmd[i])
 				i++;
 			tmp = ft_substr(cmd, 0, i);
-			tmp = expand_2(tmp);
+			tmp = expand_ident_2(tmp);
 			cmd += i;
 			i = 0;
 			tmp2 = ft_strjoin(new_str, tmp);
@@ -123,7 +126,7 @@ char *expand_quoted(char *cmd)
 		i++;
 	}
 	tmp = ft_substr(cmd, 0, i);
-	tmp = expand_2(tmp);
+	tmp = expand_ident_2(tmp);
 	tmp2 = ft_strjoin(new_str, tmp);
 	free(new_str);
 	free(tmp);

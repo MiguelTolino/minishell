@@ -6,7 +6,7 @@
 /*   By: rgirondo <rgirondo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/07 11:19:52 by mmateo-t          #+#    #+#             */
-/*   Updated: 2022/02/17 21:31:10 by rgirondo         ###   ########.fr       */
+/*   Updated: 2022/02/18 19:18:48 by rgirondo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,16 +30,24 @@ char *getvar(char *cmd)
 	int i;
 	char *str;
 	char *var_name;
+	int len;
 
 	i = 0;
 	str = 0;
 	var_name = get_name(global.env[i]);
-	//arreglar que me encuentre $ho cuando es $hola
-	while (global.env[i] && ft_strncmp(var_name, cmd, ft_strlen(cmd)))
+	if (var_name && ft_strlen(var_name) > ft_strlen(cmd))
+		len = ft_strlen(var_name);
+	else
+		len = ft_strlen(cmd);
+	while (global.env[i] && ft_strncmp(var_name, cmd, len))
 	{
 		free(var_name);
 		i++;
 		var_name = get_name(global.env[i]);
+		if (var_name && ft_strlen(var_name) > ft_strlen(cmd))
+			len = ft_strlen(var_name);
+		else
+			len = ft_strlen(cmd);
 	}
 	if (var_name)
 		free(var_name);
@@ -48,7 +56,7 @@ char *getvar(char *cmd)
 	else if (!ft_strncmp(cmd, "?", ft_strlen(cmd)))
 		return (ft_strdup(ft_itoa(global.exit_status)));
 	else
-		return (ft_strdup(""));
+		return (NULL);
 	return (ft_strdup(str));
 }
 
