@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmateo-t <mmateo-t@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rgirondo <rgirondo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/03 13:27:13 by mmateo-t          #+#    #+#             */
-/*   Updated: 2022/02/18 18:25:18 by mmateo-t         ###   ########.fr       */
+/*   Updated: 2022/02/18 19:39:15 by rgirondo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,6 +96,7 @@ typedef struct s_shell
 typedef struct g_global
 {
 	char	**env;
+	int		env_len;
 	int		exit_status;
 	int		fd_stdin;
 	int		fd_stdout;
@@ -134,22 +135,24 @@ int		limitor_function(t_token *limit);
 void	sigint_heredoc(int sig);
 void	print(void *content);
 int		expand_word2(t_list *cmdlist);
+char	**init_env(char **envp);
 
 //Builtins
 void	print_env(void);
-void change_directory(char *path);
+void 	change_directory(char *path);
 void	echo(char **cmd);
-void	exit_cmd(char **cmd);
-void    export(char *cmd);
-void unset(char *cmd);
+void	exit_shell();
+void    export(char **cmd);
+void 	unset(char **cmd);
 char    *getvar(char *cmd);
 void    change_val(char *var_name, char *cmd);
+char 	*get_name(char *cmd);
 
 //Expansion
-char	*expand_str(char *str);
-void unsplit(char **matrix, t_token *token);
+void 	unsplit(char **matrix, t_token *token);
 void	new_token(t_list *token_list);
-void	remove_quote(t_token *token, char *set);
-void free_matrix(char **mtx);
+void 	free_matrix(char **mtx);
+char 	*expand(char *var_value);
+
 
 #endif

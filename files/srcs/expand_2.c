@@ -3,88 +3,133 @@
 /*                                                        :::      ::::::::   */
 /*   expand_2.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmateo-t <mmateo-t@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rgirondo <rgirondo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/12 15:41:18 by rgirondo          #+#    #+#             */
-/*   Updated: 2022/02/14 20:25:54 by mmateo-t         ###   ########.fr       */
+/*   Updated: 2022/02/18 19:22:10 by rgirondo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-char	*expand_str(char *str)
+char *expand_dollar(char *cmd)
 {
-	char **matrix;
 	char *new_str;
+	char *tmp;
+	char *tmp2;
 	int i;
-	int len;
 
 	i = 0;
-	len = 0;
-	while (str[i] != '$')
-		i++;
-	matrix = ft_split(str, '$');
-	if (i != 0)
-		i = 1;
-	else
-		i = 0;
-	while (matrix[i])
+	tmp = NULL;
+	tmp2 = NULL;
+	new_str = ft_strdup("");
+	while (cmd[i])
 	{
-	    if (!ft_strncmp(matrix[i], "?", ft_strlen(matrix[i])))
-        {
-            free(matrix[i]);
-            matrix[i] = ft_strdup(ft_itoa(global.exit_status));
-        }
-        else
-        {
-            free(matrix[i]);
-		    matrix[i] = getvar(matrix[i]);
-		    if (matrix[i])
-			    matrix[i] = ft_strdup(matrix[i]);
-		    else
-			    matrix[i] = ft_strdup("\0");
-        }
-        i++;
-	}
-	i = 0;
-	while (matrix[i])
-		len += ft_strlen(matrix[i++]);
-	i = 0;
-	new_str = malloc(sizeof(char) * (len + 1));
-	new_str[0] = '\0';
-	while (matrix[i])
-	{
-		ft_strlcat(new_str, matrix[i], ft_strlen(new_str) + ft_strlen(matrix[i]) + 1);
+		if (cmd[i] == '$' && i != 0)
+		{
+			tmp = ft_substr(cmd, 0, i);
+			cmd += i;
+			i = 0;
+			tmp2 = ft_strjoin(new_str, tmp);
+			free(new_str);
+			new_str = tmp2;
+			free(tmp);
+		}
+		if (cmd[0] == '$')
+		{
+			cmd += 1;
+			while (ft_isalnum(cmd[i]) || cmd[i] == '?')
+				i++;
+			tmp = ft_substr(cmd, 0, i);
+			tmp2 = getvar(tmp);
+			free(tmp);
+			cmd += i;
+			i = -1;
+			if (tmp2)
+			{
+				tmp = ft_strjoin(new_str, tmp2);
+				free(new_str);
+				new_str = tmp;
+				free(tmp2);
+			}
+		}
 		i++;
 	}
-	free(str);
-	free_matrix(matrix);
+	tmp = ft_substr(cmd, 0, i);
+	tmp2 = ft_strjoin(new_str, tmp);
+	free(new_str);
+	new_str = tmp2;
+	free(tmp);
 	return (new_str);
 }
 
-void unsplit(char **matrix, t_token *token)
+char *expand_ident_2(char *cmd)
+{
+	char *tmp;
+	int n_single;
+	int n_double;
+
+	n_single = count_closed_quotes(cmd, '\'');
+	n_double = count_closed_quotes(cmd, '\"');
+	if (n_double == 2)
+	{
+		tmp = cmd;
+		cmd = ft_strtrim(cmd, "\"");
+		free(tmp);
+		tmp = expand_dollar(cmd);
+		free(cmd);
+		cmd = tmp;
+	}
+	if (n_single == 2)
+	{
+		tmp = cmd;
+		cmd = ft_strtrim(cmd, "\'");
+		free(tmp);
+	}
+	if (n_single == 0 && n_double == 0)
+	{
+		tmp = expand_dollar(cmd);
+		free(cmd);
+		cmd = tmp;
+	}
+	return (cmd);
+}
+
+char *expand(char *cmd)
 {
 	char *new_str;
-	int j;
-	int len;
+	char *tmp;
+	char *tmp2;
+	int i;
 
-	j = 0;
-	len = 0;
-	while (matrix[j])
-		len += (ft_strlen(matrix[j++]) + 1);
-	new_str = malloc(sizeof(char) * (len + 1));
-	new_str[0] = '\0';
-	j = 0;
-	while (matrix[j])
-	{	
-		if (matrix[j][0])
-			ft_strlcat(new_str, matrix[j], ft_strlen(new_str) + ft_strlen(matrix[j]) + 1);
-		if (matrix[j + 1])
-			ft_strlcat(new_str, " ", ft_strlen(new_str) + 2);
-		j++;
+	i = 0;
+	tmp = NULL;
+	tmp2 = NULL;
+	new_str = ft_strdup("");
+	if (cmd[i] == '\"' || cmd[i] == '\'')
+		i++;
+	while (cmd[i])
+	{
+		if (cmd[i] == '\"' || cmd[i] == '\'')
+		{
+			if (cmd[0] == cmd[i])
+				i++;
+			tmp = ft_substr(cmd, 0, i);
+			tmp = expand_ident_2(tmp);
+			cmd += i;
+			i = 0;
+			tmp2 = ft_strjoin(new_str, tmp);
+			free(new_str);
+			new_str = tmp2;
+			free(tmp);
+		}
+		i++;
 	}
-	if (token->word)
-		free(token->word);
-	token->word = new_str;
-	free_matrix(matrix);
+	tmp = ft_substr(cmd, 0, i);
+	tmp = expand_ident_2(tmp);
+	tmp2 = ft_strjoin(new_str, tmp);
+	free(new_str);
+	free(tmp);
+	new_str = tmp2;
+	return (new_str);
 }
