@@ -6,7 +6,7 @@
 /*   By: rgirondo <rgirondo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/07 11:19:52 by mmateo-t          #+#    #+#             */
-/*   Updated: 2022/02/18 19:18:48 by rgirondo         ###   ########.fr       */
+/*   Updated: 2022/02/18 19:38:09 by rgirondo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ char *free_join(char *join, char *str)
 	return (s);
 }
 
-char *getvar(char *cmd)
+char    *getvar(char *cmd)
 {
 	int i;
 	char *str;

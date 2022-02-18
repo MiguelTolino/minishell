@@ -6,11 +6,16 @@
 /*   By: mmateo-t <mmateo-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/06 11:45:39 by mmateo-t          #+#    #+#             */
-/*   Updated: 2022/02/13 18:17:27 by mmateo-t         ###   ########.fr       */
+/*   Updated: 2022/02/15 17:58:43 by mmateo-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
+
+void	exit_shell(void)
+{
+	exit(global.exit_status);
+}
 
 void	exit_ctrld(t_shell shell)
 {
@@ -18,10 +23,6 @@ void	exit_ctrld(t_shell shell)
 	exit_shell();
 }
 
-void	exit_shell(void)
-{
-	exit(global.exit_status);
-}
 
 void	throw_error(const char *error)
 {
