@@ -6,7 +6,7 @@
 /*   By: rgirondo <rgirondo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/05 19:14:58 by mmateo-t          #+#    #+#             */
-/*   Updated: 2022/02/17 21:24:36 by rgirondo         ###   ########.fr       */
+/*   Updated: 2022/02/18 19:36:44 by rgirondo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,17 +26,17 @@ int exec_builtins(char **cmd)
 	}
 	else if (!ft_strncmp(cmd[0], "env", ft_strlen(cmd[0])))
 	{
-		print_env();
+		//print_env();
 		is_builtin = 1;
 	}
 	else if (!ft_strncmp(cmd[0], "exit", ft_strlen(cmd[0])))
 	{
-		//exit(cmd);
+		exit_cmd(cmd);
 		is_builtin = 1;
 	}
 	else if (!ft_strncmp(cmd[0], "cd", ft_strlen(cmd[0])))
 	{
-		change_directory(cmd[1]);
+		//change_directory(cmd[1]);
 		is_builtin = 1;
 	}
 	else if (!ft_strncmp(cmd[0], "echo", ft_strlen(cmd[0])))
