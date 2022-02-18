@@ -3,14 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   cd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rgirondo <rgirondo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mmateo-t <mmateo-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/05 20:13:01 by mmateo-t          #+#    #+#             */
-/*   Updated: 2022/02/17 21:27:56 by rgirondo         ###   ########.fr       */
+/*   Updated: 2022/02/18 20:02:53 by mmateo-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
+
+//FIXME: 1. No funciona con mas de 1 argumento -> //TODO: Lanzar error
+// 2. Que funcione solo -
+// 3. ERROR --     cd: string not in pwd: r3
 
 void change_directory(char *path)
 {
@@ -35,7 +39,6 @@ void change_directory(char *path)
 			tmp = tmp2;
 		}
 		path = ft_strjoin(tmp, path);
-		printf("%s\n", path);
 		free(tmp);
 	}
 	old_path = ft_strjoin("OLDPWD=", getvar("PWD"));

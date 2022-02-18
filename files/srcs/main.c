@@ -3,14 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rgirondo <rgirondo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mmateo-t <mmateo-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/03 09:55:58 by mmateo-t          #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2022/02/17 19:38:40 by rgirondo         ###   ########.fr       */
-=======
-/*   Updated: 2022/02/17 12:21:54 by mmateo-t         ###   ########.fr       */
->>>>>>> 6df98fb76b4d94e38136069c16fcfc159035287d
+/*   Updated: 2022/02/18 20:10:00 by mmateo-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +54,7 @@ int	main(int argc, char **argv, char **envp)
 		parsing(&shell);
 		redirections(&shell);
 		execution(&shell);
-		test(shell);
+		//test(shell);
 		free_shell(&shell); // If cmdline is empty ocurss a leak
 	}
 	return (0);

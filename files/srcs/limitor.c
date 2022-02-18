@@ -6,7 +6,7 @@
 /*   By: mmateo-t <mmateo-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/08 19:28:38 by mmateo-t          #+#    #+#             */
-/*   Updated: 2022/02/18 19:44:28 by mmateo-t         ###   ########.fr       */
+/*   Updated: 2022/02/18 20:12:00 by mmateo-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,9 @@
 5. Delete file
 
 */
+
+//FIXME:  EXpandir -> Abajo
+
 
 int	limitor_function(t_token *limit)
 {

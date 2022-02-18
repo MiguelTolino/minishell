@@ -3,14 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   execution.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rgirondo <rgirondo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mmateo-t <mmateo-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/10 18:08:02 by mmateo-t          #+#    #+#             */
-/*   Updated: 2022/02/18 19:36:48 by rgirondo         ###   ########.fr       */
+/*   Updated: 2022/02/18 20:14:40 by mmateo-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
+
+//FIXME: EXEC WITH PIPE
+//FIXME: Me crea varios procesos y no se cierra
+//FIXME: Aprender a usar kill para eliminiar procesos abiertos
 
 void exec_pipe(t_list *cmdlist)
 {

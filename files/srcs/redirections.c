@@ -6,11 +6,14 @@
 /*   By: mmateo-t <mmateo-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/24 12:00:24 by mmateo-t          #+#    #+#             */
-/*   Updated: 2022/02/18 18:14:33 by mmateo-t         ###   ########.fr       */
+/*   Updated: 2022/02/18 20:10:27 by mmateo-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
+
+//FIXME:  '< oufile ls'
+//FIXME: REdicreccion de entrada no funciona -> SEGFAULT
 
 void select_redirection(t_token *token)
 {
