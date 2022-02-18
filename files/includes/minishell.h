@@ -6,7 +6,7 @@
 /*   By: mmateo-t <mmateo-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/03 13:27:13 by mmateo-t          #+#    #+#             */
-/*   Updated: 2022/02/15 17:57:30 by mmateo-t         ###   ########.fr       */
+/*   Updated: 2022/02/18 18:25:18 by mmateo-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -130,7 +130,8 @@ void	init_global(char **envp, char **argv);
 int		count_closed_quotes(char *cmdline, char quote);
 char	*expand_word(char *cmd);
 void	token_expansion(t_shell *shell);
-int		limitor_function(char *limit);
+int		limitor_function(t_token *limit);
+void	sigint_heredoc(int sig);
 void	print(void *content);
 int		expand_word2(t_list *cmdlist);
 

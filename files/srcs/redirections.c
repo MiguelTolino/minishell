@@ -6,7 +6,7 @@
 /*   By: mmateo-t <mmateo-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/24 12:00:24 by mmateo-t          #+#    #+#             */
-/*   Updated: 2022/02/18 14:21:51 by mmateo-t         ###   ########.fr       */
+/*   Updated: 2022/02/18 18:14:33 by mmateo-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ void select_redirection(t_token *token)
 	}
 	if (token->type == LIMITOR)
 	{
-		limitor_function(token->word);
+		limitor_function(token);
 		fd = open("heredoc.tmp", O_RDONLY);
 		if (dup2(fd, STDIN_FILENO) < 0)
 			throw_error("Error in limitor redirection");
