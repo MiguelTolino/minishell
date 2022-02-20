@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   errors.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmateo-t <mmateo-t@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mmateo-t <mmateo-t@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/06 11:45:39 by mmateo-t          #+#    #+#             */
-/*   Updated: 2022/02/15 17:58:43 by mmateo-t         ###   ########.fr       */
+/*   Updated: 2022/02/19 20:22:58 by mmateo-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,25 +40,41 @@ void	check_args(int argc)
 
 //TODO: Add more errors
 
+bool	search_errors(char *cmdline)
+{
+	int i;
+
+	i = 0;
+	while (cmdline[i])
+	{
+		if (cmdline[i] == '|' && ((!ft_isalnum(cmdline[i + 1]) && cmdline[i + 1] != ' ') || (!ft_isalnum(cmdline[i - 1])
+			&& cmdline[i - 1] != ' ')))
+			return (true);
+		i++;
+	}
+	return (false);
+}
+
 int	error_parsing(char *cmdline)
 {
 	char *errors[6];
 	int len;
 	int i;
-	
+
 	i = 0;
 	len = ft_strlen(cmdline);
 	errors[0] = "><";
 	errors[1] = "<>";
 	errors[2] = "<|";
-	errors[3] = ">|";
+	errors[3] = "|||";
 	errors[4] = "||";
 	errors[5] = NULL;
 	while (errors[i])
 	{
-		if (ft_strnstr(cmdline, errors[i], len))
+		if (ft_strnstr(cmdline, errors[i], len) || search_errors(cmdline))
 		{
 			throw_error("Unexpected operators");
+			global.exit_status = 2;
 			return (1);
 		}
 		i++;
