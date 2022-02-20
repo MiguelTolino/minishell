@@ -139,7 +139,7 @@ char	**init_env(char **envp);
 //Builtins
 int		print_env(char **cmd);
 void	exit_cmd(char **cmd);
-void 	change_directory(char **path);
+void 	change_directory(char **cmd);
 void	echo(char **cmd);
 void	exit_shell();
 void    export(char **cmd);
@@ -153,6 +153,8 @@ void 	unsplit(char **matrix, t_token *token);
 void	new_token(t_list *token_list);
 void 	free_matrix(char **mtx);
 char 	*expand(char *var_value);
-
+void 	join_expand_1(char **new_str, char **cmd, int i, int type);
+void 	join_expand_2(char **new_str, char **cmd, int i);
+char 	*expand_ident_2(char *cmd, int n_single, int n_double);
 
 #endif
