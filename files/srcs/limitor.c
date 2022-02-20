@@ -6,7 +6,7 @@
 /*   By: mmateo-t <mmateo-t@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/08 19:28:38 by mmateo-t          #+#    #+#             */
-/*   Updated: 2022/02/19 14:21:41 by mmateo-t         ###   ########.fr       */
+/*   Updated: 2022/02/20 23:50:28 by mmateo-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,46 +21,54 @@
 
 */
 
-//FIXME:  EXpandir -> Abajo
+// FIXME:  EXpandir -> Abajo
 
-
-int	limitor_function(t_token *limit)
+int limitor_function(t_token *limit)
 {
 	int fd;
 	int stop;
 	char *str;
 	char *tmp;
+	pid_t pid;
 
 	stop = 0;
-	fd = open("heredoc.tmp", O_WRONLY | O_CREAT | O_APPEND, 0644);
+	fd = open("heredoc.tmp", O_WRONLY | O_CREAT | O_TRUNC, 0644);
 	if (fd < 0)
 	{
 		throw_error("Could not create temporary file\n");
 		return (1);
 	}
-	while (!stop)
+	pid = fork();
+	if (pid < 0)
+		throw_error("Error: Forking error");
+	else if (!pid)
 	{
-		//signal(SIGINT, &sigint_heredoc); //FIXME: Solucionar ^C
-		str = readline("heredoc > ");
-		if(!str)
-			continue ;
-		if(!limit->quote)
+		while (!stop)
 		{
-			tmp = expand(str);
+			signal(SIGINT, &sigint_heredoc);
+			str = readline("heredoc > ");
+			if (!str)
+				continue;
+			if (!limit->quote)
+			{
+				tmp = expand(str);
+				free(str);
+				str = tmp;
+			}
+			if (!ft_strnstr(str, limit->word, ft_strlen(limit->word)))
+			{
+				ft_putstr_fd(str, fd);
+				ft_putchar_fd('\n', fd);
+			}
+			else
+			{
+				ft_putchar_fd('\n', fd);
+				stop = 1;
+			}
 			free(str);
-			str = tmp;
 		}
-		if (!ft_strnstr(str, limit->word, ft_strlen(limit->word)))
-		{
-			ft_putstr_fd(str, fd);
-			ft_putchar_fd('\n', fd);
-		}
-		else
-		{
-			ft_putchar_fd('\n', fd);
-			stop = 1;
-		}
-		free(str);
 	}
+	else
+		wait(&global.exit_status);
 	return (0);
 }

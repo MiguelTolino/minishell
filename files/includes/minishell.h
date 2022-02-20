@@ -6,7 +6,7 @@
 /*   By: mmateo-t <mmateo-t@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/03 13:27:13 by mmateo-t          #+#    #+#             */
-/*   Updated: 2022/02/19 23:06:39 by mmateo-t         ###   ########.fr       */
+/*   Updated: 2022/02/20 23:32:54 by mmateo-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,6 +100,7 @@ typedef struct g_global
 	int		exit_status;
 	int		fd_stdin;
 	int		fd_stdout;
+	bool	trigger;
 }	g_global;
 
 g_global global;
@@ -135,6 +136,8 @@ int		limitor_function(t_token *limit);
 void	print(void *content);
 int		expand_word2(t_list *cmdlist);
 char	**init_env(char **envp);
+void	sigint_heredoc(int sig);
+void	sigint_handler(int sig);
 
 //Builtins
 int		print_env(char **cmd);

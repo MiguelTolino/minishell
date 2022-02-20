@@ -6,7 +6,7 @@
 /*   By: mmateo-t <mmateo-t@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/10 18:08:02 by mmateo-t          #+#    #+#             */
-/*   Updated: 2022/02/20 20:00:42 by mmateo-t         ###   ########.fr       */
+/*   Updated: 2022/02/20 23:29:16 by mmateo-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,11 +38,8 @@ void exec_pipe(t_list *cmdlist)
 			if (cmdlist->next != NULL)
 				dup2(p[WRITE_END], STDOUT_FILENO);
 			close(p[READ_END]);
-			if (!exec_builtins(cmd))
-			{
-				check_path(&cmd[0]);
-				execve(cmd[0], cmd, global.env);
-			}
+			check_path(&cmd[0]);
+			execve(cmd[0], cmd, global.env);
 			throw_error("Execution Error:");
 		}
 		else
@@ -82,7 +79,7 @@ int execution(t_shell *shell)
 	data = (t_cmd_data *)shell->cmdlist->content;
 /* 	if (ft_lstsize(shell->cmdlist) > 1)
 		exec_pipe(shell->cmdlist);
-	else	*/
+	else */
 	{
 		if (!exec_builtins(data->exec_cmd))
 		{

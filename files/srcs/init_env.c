@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_env.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rgirondo <rgirondo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mmateo-t <mmateo-t@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/24 18:56:26 by rgirondo          #+#    #+#             */
-/*   Updated: 2022/02/17 19:58:18 by rgirondo         ###   ########.fr       */
+/*   Updated: 2022/02/20 23:28:35 by mmateo-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,5 +40,6 @@ void	init_global(char **envp, char **argv)
 	global.exit_status = 0;
 	global.fd_stdin = dup(STDIN_FILENO);
 	global.fd_stdout = dup(STDOUT_FILENO);
+	global.trigger = false;
 	(void)argv;
 }
