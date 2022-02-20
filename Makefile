@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: mmateo-t <mmateo-t@student.42.fr>          +#+  +:+       +#+         #
+#    By: mmateo-t <mmateo-t@student.42madrid>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/12/03 10:00:24 by mmateo-t          #+#    #+#              #
-#    Updated: 2022/02/18 12:55:05 by mmateo-t         ###   ########.fr        #
+#    Updated: 2022/02/19 20:45:48 by mmateo-t         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,14 +26,18 @@ CFLAGS:= $(DEBUG_FLAG) -Wall -Werror -Wextra
 LIBFT_PATH:= files/lib/libft
 LIBFT_LIB:= -L$(LIBFT_PATH) $(LIBFT_PATH)/libft.a
 RM := rm -rvf
-UNAME_R:= uname -m
+UNAME_P:= $(shell uname -p)
 
-#.......SCHOOL······························#
-LDFLAGS=-L/Users/${USER}/.brew/opt/readline/lib
-CPPFLAGS=-I/Users/${USER}/.brew/opt/readline/include
-#-------MacBook Air--------------------------#
-#	LDFLAGS=-L/opt/homebrew/opt/readline/lib
-#	CPPFLAGS=-I/opt/homebrew/opt/readline/include
+ifeq ($(UNAME_P), arm)
+#-------------MacBook Air M1---------------------------
+	LDFLAGS=-L/opt/homebrew/opt/readline/lib
+	CPPFLAGS=-I/opt/homebrew/opt/readline/include
+else
+#-------------iMac school-----------------------
+	LDFLAGS=-L/Users/${USER}/.brew/opt/readline/lib
+	CPPFLAGS=-I/Users/${USER}/.brew/opt/readline/include
+endif
+
 SYS_LIB:= -lreadline $(LDFLAGS) $(CPPFLAGS)
 
 UNAME_S := $(shell uname -s)

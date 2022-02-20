@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmateo-t <mmateo-t@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mmateo-t <mmateo-t@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/05 20:13:01 by mmateo-t          #+#    #+#             */
-/*   Updated: 2022/02/18 20:02:53 by mmateo-t         ###   ########.fr       */
+/*   Updated: 2022/02/19 23:00:59 by mmateo-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ char *change_home(char *path)
 		tmp = getvar("HOME");
 	path += 1;
 	if (path[0] != '/')
-	{	
+	{
 		tmp2 = ft_strjoin(tmp, "/");
 		free(tmp);
 		tmp = tmp2;

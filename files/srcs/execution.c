@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execution.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmateo-t <mmateo-t@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mmateo-t <mmateo-t@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/10 18:08:02 by mmateo-t          #+#    #+#             */
-/*   Updated: 2022/02/18 20:14:40 by mmateo-t         ###   ########.fr       */
+/*   Updated: 2022/02/19 23:05:54 by mmateo-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,9 +79,9 @@ int execution(t_shell *shell)
 	t_cmd_data *data;
 
 	data = (t_cmd_data *)shell->cmdlist->content;
-	if (ft_lstsize(shell->cmdlist) > 1)
+/* 	if (ft_lstsize(shell->cmdlist) > 1)
 		exec_pipe(shell->cmdlist);
-	else
+	else	*/
 	{
 		if (!exec_builtins(data->exec_cmd))
 		{

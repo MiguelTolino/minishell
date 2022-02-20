@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   limitor.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmateo-t <mmateo-t@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mmateo-t <mmateo-t@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/08 19:28:38 by mmateo-t          #+#    #+#             */
-/*   Updated: 2022/02/18 20:12:00 by mmateo-t         ###   ########.fr       */
+/*   Updated: 2022/02/19 14:21:41 by mmateo-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ int	limitor_function(t_token *limit)
 	}
 	while (!stop)
 	{
-		signal(SIGINT, &sigint_heredoc); //FIXME: Solucionar ^C
+		//signal(SIGINT, &sigint_heredoc); //FIXME: Solucionar ^C
 		str = readline("heredoc > ");
 		if(!str)
 			continue ;

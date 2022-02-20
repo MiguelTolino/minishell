@@ -3,28 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   build_prompt.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmateo-t <mmateo-t@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mmateo-t <mmateo-t@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/05 17:46:43 by mmateo-t          #+#    #+#             */
-/*   Updated: 2022/02/14 16:51:47 by mmateo-t         ###   ########.fr       */
+/*   Updated: 2022/02/19 18:23:21 by mmateo-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
-
-char	*set_directory(char *dir)
-{
-	int		size;
-	char	*ptr;
-
-	size = MAXCOM;
-	ptr = NULL;
-	dir = (char *)malloc((size_t)size);
-	ptr = getcwd(dir, (size_t)size);
-	if (!ptr)
-		throw_error(PROMPT_ERROR);
-	return (ptr);
-}
 
 char	*build_prompt(void)
 {
@@ -33,8 +19,9 @@ char	*build_prompt(void)
 	char	*user;
 
 	user = getvar("USER");
-	dir = NULL;
-	dir = set_directory(dir);
+	dir = getvar("PWD");
+	if (!dir)
+		throw_error("Error building prompt");
 	prompt = (char *)calloc(sizeof(char), MAXCOM);
 	ft_strlcat(prompt, COLOR(1, 33), ft_strlen(COLOR(1, 33)) + 1);
 	ft_strlcat(prompt, user, ft_strlen(prompt) + ft_strlen(user) + 1);
@@ -46,5 +33,6 @@ char	*build_prompt(void)
 	ft_strlcat(prompt, NC, ft_strlen(prompt) + ft_strlen(NC) + 1);
 	ft_strlcat(prompt, SIMBOL2, ft_strlen(prompt) + ft_strlen(SIMBOL2) + 1);
 	free(dir);
+	free(user);
 	return (prompt);
 }
