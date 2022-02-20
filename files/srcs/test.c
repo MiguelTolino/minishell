@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   test.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rgirondo <rgirondo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mmateo-t <mmateo-t@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/11 20:02:48 by mmateo-t          #+#    #+#             */
-/*   Updated: 2022/02/17 19:04:15 by rgirondo         ###   ########.fr       */
+/*   Updated: 2022/02/20 20:02:03 by mmateo-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,5 +66,5 @@ void test(t_shell shell)
 		test_exec_cmd(cmd_data);
 		shell.cmdlist = shell.cmdlist->next;
 	}
-	printf("ENV_LEN:{%i}\n", global.env_len);
+	printf("ExitStatus:{%i}\n", global.exit_status);
 }

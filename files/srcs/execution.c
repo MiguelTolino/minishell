@@ -6,7 +6,7 @@
 /*   By: mmateo-t <mmateo-t@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/10 18:08:02 by mmateo-t          #+#    #+#             */
-/*   Updated: 2022/02/19 23:05:54 by mmateo-t         ###   ########.fr       */
+/*   Updated: 2022/02/20 20:00:42 by mmateo-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,16 +58,17 @@ void exec_pipe(t_list *cmdlist)
 
 int exec_simple(char **cmds)
 {
-	int pid;
+	pid_t pid;
 
 	pid = fork();
 	if (!pid)
 	{
 		execve(cmds[0], cmds, global.env);
 		perror("Execution error");
+		exit(global.exit_status);
 	}
 	else if (pid)
-		wait(NULL);
+		wait(&global.exit_status);
 	else
 		perror("Fork error\n");
 	wait(NULL);

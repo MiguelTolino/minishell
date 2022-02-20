@@ -6,7 +6,7 @@
 /*   By: mmateo-t <mmateo-t@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/03 09:55:58 by mmateo-t          #+#    #+#             */
-/*   Updated: 2022/02/19 23:05:32 by mmateo-t         ###   ########.fr       */
+/*   Updated: 2022/02/20 20:03:46 by mmateo-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,10 +53,11 @@ int	main(int argc, char **argv, char **envp)
 		token_expansion(&shell);
 		parsing(&shell);
 		redirections(&shell);
+		test(shell);
 		execution(&shell);
-		//test(shell);
 		free_shell(&shell); // If cmdline is empty ocurss a leak
 		//system("leaks minishell");
 	}
+	dfree(global.env);
 	return (0);
 }

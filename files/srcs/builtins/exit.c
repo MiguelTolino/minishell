@@ -6,7 +6,7 @@
 /*   By: mmateo-t <mmateo-t@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/15 13:38:48 by mmateo-t          #+#    #+#             */
-/*   Updated: 2022/02/19 14:51:54 by mmateo-t         ###   ########.fr       */
+/*   Updated: 2022/02/20 19:43:51 by mmateo-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,9 @@ int	contains_digits(char *cmd)
 	int i;
 
 	i = 0;
-	while (cmd[i])
+	if (!cmd)
+		return (1);
+	while (cmd[i] && cmd)
 	{
 		if (!ft_isdigit(cmd[i]))
 			return (0);
