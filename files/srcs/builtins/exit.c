@@ -17,8 +17,28 @@
  
 void	exit_cmd(char **cmd)
 {	
+	int i;
+	int is_nbr;
+
+	i = 0;
+	is_nbr = 0;
 	if(!cmd[1])
 		exit(EXIT_SUCCESS);
+	else if (!cmd[2])
+	{
+		while (cmd[1][i])
+			is_nbr += ft_isdigit(cmd[1][i++]);
+		if (is_nbr == (int)ft_strlen(cmd[1]))
+		{
+			global.exit_status = ft_atoi(cmd[1]);
+			exit(ft_atoi(cmd[1]));
+		}
+		else
+		{
+			printf("exit: %s: numeric argument required\n", cmd[1]);
+			exit(EXIT_SUCCESS);
+		}
+	}
 	else
-		exit(ft_atoi(cmd[1]));
+		printf("exit: too many arguments\n");
 }

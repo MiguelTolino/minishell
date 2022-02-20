@@ -26,8 +26,7 @@ int exec_builtins(char **cmd)
 	}
 	else if (!ft_strncmp(cmd[0], "env", ft_strlen(cmd[0])))
 	{
-		//FIXME: Solo debe funcionar 1 argumento
-		print_env();
+		print_env(cmd);
 		is_builtin = 1;
 	}
 	else if (!ft_strncmp(cmd[0], "exit", ft_strlen(cmd[0])))
@@ -37,7 +36,7 @@ int exec_builtins(char **cmd)
 	}
 	else if (!ft_strncmp(cmd[0], "cd", ft_strlen(cmd[0])))
 	{
-		change_directory(cmd[1]);
+		change_directory(cmd);
 		is_builtin = 1;
 	}
 	else if (!ft_strncmp(cmd[0], "echo", ft_strlen(cmd[0])))

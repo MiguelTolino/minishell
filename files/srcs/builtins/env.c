@@ -12,11 +12,16 @@
 
 #include "../../includes/minishell.h"
 
-void	print_env(void)
+void	print_env(char **cmd)
 {
 	int i;
 
 	i = 0;
+	if (cmd[1])
+	{
+		printf("env : too many arguments\n");
+		return;
+	}
 	while (global.env[i])
 	{
 		printf("%s\n", global.env[i]);

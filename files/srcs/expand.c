@@ -25,17 +25,15 @@ void	word_expand(t_list *token_list)
 	free(token->word);
 	token->word = tmp;
 	matrix = ft_split(token->word, ' ');
-	if (matrix[0] && matrix[1])
+	if (matrix[i] && matrix[1])
 	{
-		token->word = matrix[0];
-		i++;
+		token->word = matrix[i++];
 		while (matrix[i])
 		{
 			new_token(token_list);
 			token_list = token_list->next;
 			token = ((t_token *)token_list->content);
-			token->word = matrix[i];
-			i++;
+			token->word = matrix[i++];
 		}
 		token_list = token_list->next;
 	}

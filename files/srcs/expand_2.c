@@ -15,62 +15,36 @@
 char *expand_dollar(char *cmd)
 {
 	char *new_str;
-	char *tmp;
-	char *tmp2;
 	int i;
 
 	i = 0;
-	tmp = NULL;
-	tmp2 = NULL;
 	new_str = ft_strdup("");
 	while (cmd[i])
 	{
 		if (cmd[i] == '$' && i != 0)
 		{
-			tmp = ft_substr(cmd, 0, i);
+			join_expand_1(&new_str, &cmd, i, 2);
 			cmd += i;
 			i = 0;
-			tmp2 = ft_strjoin(new_str, tmp);
-			free(new_str);
-			new_str = tmp2;
-			free(tmp);
 		}
 		if (cmd[0] == '$')
 		{
 			cmd += 1;
 			while (ft_isalnum(cmd[i]) || cmd[i] == '?')
 				i++;
-			tmp = ft_substr(cmd, 0, i);
-			tmp2 = getvar(tmp);
-			free(tmp);
-			cmd += i;
-			i = -1;
-			if (tmp2)
-			{
-				tmp = ft_strjoin(new_str, tmp2);
-				free(new_str);
-				new_str = tmp;
-				free(tmp2);
-			}
+			join_expand_2(&new_str, &cmd, i);
+			cmd += i--;
 		}
 		i++;
 	}
-	tmp = ft_substr(cmd, 0, i);
-	tmp2 = ft_strjoin(new_str, tmp);
-	free(new_str);
-	new_str = tmp2;
-	free(tmp);
+	join_expand_1(&new_str, &cmd, i, 2);
 	return (new_str);
 }
 
-char *expand_ident_2(char *cmd)
+char *expand_ident_2(char *cmd, int n_single, int n_double)
 {
 	char *tmp;
-	int n_single;
-	int n_double;
 
-	n_single = count_closed_quotes(cmd, '\'');
-	n_double = count_closed_quotes(cmd, '\"');
 	if (n_double == 2)
 	{
 		tmp = cmd;
@@ -98,13 +72,9 @@ char *expand_ident_2(char *cmd)
 char *expand(char *cmd)
 {
 	char *new_str;
-	char *tmp;
-	char *tmp2;
 	int i;
 
 	i = 0;
-	tmp = NULL;
-	tmp2 = NULL;
 	new_str = ft_strdup("");
 	if (cmd[i] == '\"' || cmd[i] == '\'')
 		i++;
@@ -114,22 +84,12 @@ char *expand(char *cmd)
 		{
 			if (cmd[0] == cmd[i])
 				i++;
-			tmp = ft_substr(cmd, 0, i);
-			tmp = expand_ident_2(tmp);
+			join_expand_1(&new_str, &cmd, i, 1);
 			cmd += i;
 			i = 0;
-			tmp2 = ft_strjoin(new_str, tmp);
-			free(new_str);
-			new_str = tmp2;
-			free(tmp);
 		}
 		i++;
 	}
-	tmp = ft_substr(cmd, 0, i);
-	tmp = expand_ident_2(tmp);
-	tmp2 = ft_strjoin(new_str, tmp);
-	free(new_str);
-	free(tmp);
-	new_str = tmp2;
+	join_expand_1(&new_str, &cmd, i, 1);
 	return (new_str);
 }

@@ -29,6 +29,7 @@ int	limitor_function(t_token *limit)
 	int fd;
 	int stop;
 	char *str;
+	char *tmp;
 
 	stop = 0;
 	fd = open("heredoc.tmp", O_WRONLY | O_CREAT | O_APPEND, 0644);
@@ -43,8 +44,12 @@ int	limitor_function(t_token *limit)
 		str = readline("heredoc > ");
 		if(!str)
 			continue ;
-		//if(!limit->quote)
-			//TODO: EXPAND
+		if(!limit->quote)
+		{
+			tmp = expand(str);
+			free(str);
+			str = tmp;
+		}
 		if (!ft_strnstr(str, limit->word, ft_strlen(limit->word)))
 		{
 			ft_putstr_fd(str, fd);

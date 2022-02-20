@@ -50,7 +50,7 @@ int	main(int argc, char **argv, char **envp)
 			free_shell(&shell);
 			continue ;
 		}
-		//token_expansion(&shell);
+		token_expansion(&shell);
 		parsing(&shell);
 		redirections(&shell);
 		execution(&shell);
