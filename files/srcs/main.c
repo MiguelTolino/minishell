@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmateo-t <mmateo-t@student.42madrid>       +#+  +:+       +#+        */
+/*   By: mmateo-t <mmateo-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/03 09:55:58 by mmateo-t          #+#    #+#             */
-/*   Updated: 2022/02/20 23:16:26 by mmateo-t         ###   ########.fr       */
+/*   Updated: 2022/02/21 11:02:08 by mmateo-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ int	main(int argc, char **argv, char **envp)
 	{
 		shell.prompt = build_prompt();
 		shell.cmdline = readline(shell.prompt);
-		if (shell.cmdline == NULL)
+		if (shell.cmdline == NULL || !shell.prompt)
 			exit_ctrld(shell);
 		if (!ft_strlen(shell.cmdline)) //|| error_parsing(shell.cmdline))
 		{
@@ -54,7 +54,7 @@ int	main(int argc, char **argv, char **envp)
 		parsing(&shell);
 		redirections(&shell);
 		//test(shell);
-		execution(&shell);
+	//	execution(&shell);
 		free_shell(&shell); // If cmdline is empty ocurss a leak
 		//system("leaks minishell");
 	}

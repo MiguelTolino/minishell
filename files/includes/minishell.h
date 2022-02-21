@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmateo-t <mmateo-t@student.42madrid>       +#+  +:+       +#+        */
+/*   By: mmateo-t <mmateo-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/03 13:27:13 by mmateo-t          #+#    #+#             */
-/*   Updated: 2022/02/20 23:32:54 by mmateo-t         ###   ########.fr       */
+/*   Updated: 2022/02/21 10:54:19 by mmateo-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,7 +108,7 @@ g_global global;
 char*	build_prompt();
 int		exec_builtins(char **cmd);
 int		save_env(char **envp);
-void	throw_error(const char *error);
+int		throw_error(const char *error);
 void	check_args(int argc);
 void	parsing(t_shell *shell);
 int		execution(t_shell *shell);

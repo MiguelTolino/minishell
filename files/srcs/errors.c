@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   errors.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmateo-t <mmateo-t@student.42madrid>       +#+  +:+       +#+        */
+/*   By: mmateo-t <mmateo-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/06 11:45:39 by mmateo-t          #+#    #+#             */
-/*   Updated: 2022/02/19 20:22:58 by mmateo-t         ###   ########.fr       */
+/*   Updated: 2022/02/21 10:54:03 by mmateo-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,9 +24,10 @@ void	exit_ctrld(t_shell shell)
 }
 
 
-void	throw_error(const char *error)
+int	throw_error(const char *error)
 {
 	perror(error);
+	return (1);
 }
 
 void	check_args(int argc)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   build_prompt.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmateo-t <mmateo-t@student.42madrid>       +#+  +:+       +#+        */
+/*   By: mmateo-t <mmateo-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/05 17:46:43 by mmateo-t          #+#    #+#             */
-/*   Updated: 2022/02/20 20:00:09 by mmateo-t         ###   ########.fr       */
+/*   Updated: 2022/02/21 10:59:38 by mmateo-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,12 @@ char	*build_prompt(void)
 
 	user = getvar("USER");
 	dir = getvar("PWD");
-	if (!dir)
-		throw_error("Error building prompt");
 	prompt = (char *)calloc(sizeof(char), MAXCOM);
+	if (!dir || !user || !prompt)
+	{
+		throw_error("Error building prompt");
+		return (NULL);
+	}
 	ft_strlcat(prompt, COLOR(1, 33), ft_strlen(COLOR(1, 33)) + 1);
 	ft_strlcat(prompt, user, ft_strlen(prompt) + ft_strlen(user) + 1);
 	ft_strlcat(prompt, NC, ft_strlen(prompt) + ft_strlen(NC) + 1);
@@ -32,7 +35,7 @@ char	*build_prompt(void)
 	ft_strlcat(prompt, dir, ft_strlen(prompt) + ft_strlen(dir) + 1);
 	ft_strlcat(prompt, NC, ft_strlen(prompt) + ft_strlen(NC) + 1);
 	ft_strlcat(prompt, SIMBOL2, ft_strlen(prompt) + ft_strlen(SIMBOL2) + 1);
-	//free(dir);
-	//free(user);
+	free(dir);
+	free(user);
 	return (prompt);
 }
