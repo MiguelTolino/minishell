@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redirections.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmateo-t <mmateo-t@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mmateo-t <mmateo-t@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/24 12:00:24 by mmateo-t          #+#    #+#             */
-/*   Updated: 2022/02/18 20:10:27 by mmateo-t         ###   ########.fr       */
+/*   Updated: 2022/02/21 18:57:01 by mmateo-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 //FIXME:  '< oufile ls'
 //FIXME: REdicreccion de entrada no funciona -> SEGFAULT
 
-void select_redirection(t_token *token)
+int select_redirection(t_token *token)
 {
 	int fd;
 
@@ -24,36 +24,36 @@ void select_redirection(t_token *token)
 	{
 		fd = open(token->word, O_RDONLY);
 		if (fd < 0)
-			throw_error("Error opening a file");
+			return (throw_error("Error opening a file"));
 		if (dup2(fd, STDIN_FILENO) < 0)
-			throw_error("Error in infile redirection");
+			return (throw_error("Error in infile redirection"));
 	}
 	if (token->type == EXIT_FILE)
 	{
 		fd = open(token->word, O_CREAT | O_WRONLY, 0644);
 		if (fd < 0)
-			throw_error("Error opening a file");
+			return (throw_error("Error opening a file"));
 		if (dup2(fd, STDOUT_FILENO) < 0)
-			throw_error("Error in outfile redirection");
+			return (throw_error("Error in outfile redirection"));
 	}
 	if (token->type == EXIT_FILE_RET)
 	{
 		fd = open(token->word, O_CREAT | O_WRONLY | O_APPEND, 0644);
 		if (fd < 0)
-			throw_error("Error opening a file");
+			return (throw_error("Error opening a file"));
 		if (dup2(fd, STDOUT_FILENO) < 0)
-			throw_error("Error in append outfile redirection");
+			return (throw_error("Error in append outfile redirection"));
 	}
 	if (token->type == LIMITOR)
 	{
 		limitor_function(token);
 		fd = open("heredoc.tmp", O_RDONLY);
 		if (dup2(fd, STDIN_FILENO) < 0)
-			throw_error("Error in limitor redirection");
-		unlink("heredoc.tmp");
+			return (throw_error("Error in limitor redirection"));
 	}
 	if (fd)
 		close(fd);
+	return (0);
 }
 
 void iterate_tokens(void *content)
@@ -67,7 +67,8 @@ void iterate_tokens(void *content)
 	while (token_list)
 	{
 		token = ((t_token *)token_list->content);
-		select_redirection(token);
+		if (select_redirection(token))
+			global.exec = true;
 		token_list = token_list->next;
 	}
 }

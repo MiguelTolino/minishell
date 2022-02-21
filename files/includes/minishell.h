@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmateo-t <mmateo-t@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mmateo-t <mmateo-t@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/03 13:27:13 by mmateo-t          #+#    #+#             */
-/*   Updated: 2022/02/21 16:13:13 by mmateo-t         ###   ########.fr       */
+/*   Updated: 2022/02/21 18:30:07 by mmateo-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,13 @@ typedef enum	e_type
 	EXIT_FILE_RET
 }	e_type;
 
+typedef enum	e_signal
+{
+	MAIN,
+	HD,
+	CHILD
+}	e_signal;
+
 typedef struct s_token
 {
 	char	*word;
@@ -99,7 +106,7 @@ typedef struct g_global
 	int		exit_status;
 	int		fd_stdin;
 	int		fd_stdout;
-	bool	trigger;
+	bool	exec;
 	int		signal_status;
 }	g_global;
 

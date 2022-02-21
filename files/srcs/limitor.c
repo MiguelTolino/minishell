@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   limitor.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmateo-t <mmateo-t@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mmateo-t <mmateo-t@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/08 19:28:38 by mmateo-t          #+#    #+#             */
-/*   Updated: 2022/02/21 11:34:13 by mmateo-t         ###   ########.fr       */
+/*   Updated: 2022/02/21 18:28:56 by mmateo-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,6 @@ int limitor_function(t_token *limit)
 	int stop;
 	char *str;
 	char *tmp;
-	pid_t pid;
 
 	stop = 0;
 	fd = open("heredoc.tmp", O_WRONLY | O_CREAT | O_TRUNC, 0644);
@@ -38,40 +37,31 @@ int limitor_function(t_token *limit)
 		throw_error("Could not create temporary file\n");
 		return (1);
 	}
-	pid = fork();
-	if (pid < 0)
-		throw_error("Error: Forking error");
-	else if (!pid)
+	global.signal_status = HERE_DOC;
+	while (!stop)
 	{
-		while (!stop)
+		signal(SIGINT, &sigint_handler);
+		str = readline("heredoc > ");
+		if (!str)
+			continue;
+		if (!limit->quote)
 		{
-			signal(SIGINT, &sigint_heredoc);
-			str = readline("heredoc > ");
-			if (!str)
-				continue;
-			if (!limit->quote)
-			{
-				tmp = expand(str);
-				free(str);
-				str = tmp;
-			}
-			if (!ft_strnstr(str, limit->word, ft_strlen(limit->word)))
-			{
-				ft_putstr_fd(str, fd);
-				ft_putchar_fd('\n', fd);
-			}
-			else
-			{
-				ft_putchar_fd('\n', fd);
-				stop = 1;
-			}
+			tmp = expand(str);
 			free(str);
+			str = tmp;
 		}
+		if (!ft_strnstr(str, limit->word, ft_strlen(limit->word)))
+		{
+			ft_putstr_fd(str, fd);
+			ft_putchar_fd('\n', fd);
+		}
+		else
+		{
+			ft_putchar_fd('\n', fd);
+			stop = 1;
+		}
+		free(str);
 	}
-	else
-	{
-		wait(&global.exit_status);
-		close(fd);
-	}
+	close(fd);
 	return (0);
 }

@@ -36,11 +36,10 @@ int		validate_token(t_list *cmdlist)
 		while (token_list)
 		{
 			token = (t_token *)token_list->content;
- 			if (token_list->next == NULL && (token->type >= 2 && token->type <= 5))
-				return (throw_error("Unexpected parse error near redirections"));
+ 			if (token_list->next == NULL)
+				break ;
 			next_token = (t_token *)token_list->next->content;
-			if ((token->type >= 2 && token->type <= 5) && ((next_token->type >= 2 && next_token->type <= 5 ) || !next_token
-				|| (is_filename(next_token->word) && !next_token->quote)))
+			if ((token->type >= 2 && token->type <= 5) && ((next_token->type >= 2 && next_token->type <= 5 )))
 			{
 				global.exit_status = EXIT_FAILURE;
 				return (throw_error("Unexpected parse error near redirections"));

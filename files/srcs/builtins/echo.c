@@ -6,13 +6,11 @@
 /*   By: mmateo-t <mmateo-t@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/07 11:16:30 by mmateo-t          #+#    #+#             */
-/*   Updated: 2022/02/20 23:14:49 by mmateo-t         ###   ########.fr       */
+/*   Updated: 2022/02/21 19:06:57 by mmateo-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
-
-//FIXME: SEGFAULT
 
 void echo(char **cmd)
 {
@@ -21,6 +19,11 @@ void echo(char **cmd)
 
 	i = 1;
 	option = 0;
+	if (len_array(cmd) == 1)
+	{
+		printf("\n");
+		return ;
+	}
 	if (!ft_strncmp(cmd[i], "-n", ft_strlen(cmd[1])))
 	{
 		option = 1;

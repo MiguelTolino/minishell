@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmateo-t <mmateo-t@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mmateo-t <mmateo-t@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/03 09:55:58 by mmateo-t          #+#    #+#             */
-/*   Updated: 2022/02/21 16:18:24 by mmateo-t         ###   ########.fr       */
+/*   Updated: 2022/02/21 18:15:51 by mmateo-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,8 @@ int	main(int argc, char **argv, char **envp)
 		parsing(&shell);
 	//	test(shell);
 		redirections(&shell);
-		execution(&shell);
+		if (!global.exec)
+			execution(&shell);
 		free_shell(&shell); // If cmdline is empty ocurss a leak
 		//system("leaks minishell");
 	}

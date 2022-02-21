@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free_shell.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmateo-t <mmateo-t@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mmateo-t <mmateo-t@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/11 12:11:17 by mmateo-t          #+#    #+#             */
-/*   Updated: 2022/02/21 13:16:50 by mmateo-t         ###   ########.fr       */
+/*   Updated: 2022/02/21 18:57:07 by mmateo-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,9 +43,10 @@ void	del_data(void *content)
 
 void	free_shell(t_shell *shell)
 {
+	global.exec = 0;
+	unlink("heredoc.tmp");
 	free(shell->cmdline);
 	free(shell->prompt);
 	ft_lstclear(&shell->cmdlist, del_data);
 	restore_fd();
 }
- 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_shell.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmateo-t <mmateo-t@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mmateo-t <mmateo-t@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/21 13:38:13 by mmateo-t          #+#    #+#             */
-/*   Updated: 2022/02/21 15:52:44 by mmateo-t         ###   ########.fr       */
+/*   Updated: 2022/02/21 18:15:51 by mmateo-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ void	init_global(char **envp, char **argv)
 	global.exit_status = 0;
 	global.fd_stdin = dup(STDIN_FILENO);
 	global.fd_stdout = dup(STDOUT_FILENO);
-	global.trigger = false;
+	global.exec = false;
 	global.signal_status = 0;
 	(void)argv;
 }
