@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execution.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmateo-t <mmateo-t@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mmateo-t <mmateo-t@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/10 18:08:02 by mmateo-t          #+#    #+#             */
-/*   Updated: 2022/02/21 15:47:13 by mmateo-t         ###   ########.fr       */
+/*   Updated: 2022/02/21 23:41:42 by mmateo-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,13 +62,12 @@ int exec_simple(char **cmds)
 	{
 		execve(cmds[0], cmds, global.env);
 		perror("Execution error");
-		exit(global.exit_status);
+		exit(EXEC_ERROR);
 	}
 	else if (pid)
-		wait(&global.exit_status);
+		waitpid(pid, &global.exit_status, 0);
 	else
 		perror("Fork error\n");
-	wait(NULL);
 	return (0);
 }
 
