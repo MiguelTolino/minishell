@@ -6,31 +6,20 @@
 /*   By: mmateo-t <mmateo-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/03 09:55:58 by mmateo-t          #+#    #+#             */
-/*   Updated: 2022/02/21 11:02:08 by mmateo-t         ###   ########.fr       */
+/*   Updated: 2022/02/21 15:54:39 by mmateo-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-void	init_shell(void)
-{
-	printf("%s        .__       .__       .__           .__  .__   \n",
-		COLOR(1, 31));
-	printf("  _____ |__| ____ |__| _____|  |__   ____ |  | |  |  \n");
-	printf(" /     \\|  |/    \\|  |/  ___/  |  \\_/ __ \\|  | |  |  \n");
-	printf("|  Y Y  \\  |   |  \\  |\\___ \\|   Y  \\  ___/|  |_|  |__\n");
-	printf("|__|_|  /__|___|  /__/____  >___|  /\\___  >____/____/\n");
-	printf("      \\/        \\/        \\/     \\/     \\/           \n\n%s",
-		NC);
-}
+
 
 int	main(int argc, char **argv, char **envp)
 {
 	t_shell	shell;
 
 	check_args(argc);
-	init_shell();
-	init_global(envp, argv);
+	init_shell(argv, envp);
 	signal_handler();
 	while (1)
 	{
@@ -38,7 +27,7 @@ int	main(int argc, char **argv, char **envp)
 		shell.cmdline = readline(shell.prompt);
 		if (shell.cmdline == NULL || !shell.prompt)
 			exit_ctrld(shell);
-		if (!ft_strlen(shell.cmdline)) //|| error_parsing(shell.cmdline))
+		if (!ft_strlen(shell.cmdline)))
 		{
 			free(shell.prompt);
 			free(shell.cmdline);
@@ -52,9 +41,9 @@ int	main(int argc, char **argv, char **envp)
 		}
 		token_expansion(&shell);
 		parsing(&shell);
-		redirections(&shell);
-		//test(shell);
-	//	execution(&shell);
+	//	test(shell);
+		//redirections(&shell);
+		//execution(&shell);
 		free_shell(&shell); // If cmdline is empty ocurss a leak
 		//system("leaks minishell");
 	}

@@ -6,11 +6,13 @@
 /*   By: mmateo-t <mmateo-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/26 11:51:44 by mmateo-t          #+#    #+#             */
-/*   Updated: 2022/02/14 13:59:45 by mmateo-t         ###   ########.fr       */
+/*   Updated: 2022/02/21 15:55:16 by mmateo-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
+
+//FIXME:  //|| error_parsing(shell.cmdline) -> Comprobar por tokens que existe un error en el parseo o que hay oeradores que no debene de estar
 
 int	cmd_size(t_list *token_list)
 {

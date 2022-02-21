@@ -6,7 +6,7 @@
 /*   By: mmateo-t <mmateo-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/03 13:27:13 by mmateo-t          #+#    #+#             */
-/*   Updated: 2022/02/21 10:54:19 by mmateo-t         ###   ########.fr       */
+/*   Updated: 2022/02/21 15:52:31 by mmateo-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,6 @@
 # define MAXCOM 1024 // max number of letters to be supported
 # define MAXLIST 100 // max number of commands to be supported
 # define MAXHIST 128 // max number of commands to be saved
-
 # define READ_END 0
 # define WRITE_END 1
 
@@ -101,6 +100,7 @@ typedef struct g_global
 	int		fd_stdin;
 	int		fd_stdout;
 	bool	trigger;
+	int		signal_status;
 }	g_global;
 
 g_global global;
@@ -138,6 +138,8 @@ int		expand_word2(t_list *cmdlist);
 char	**init_env(char **envp);
 void	sigint_heredoc(int sig);
 void	sigint_handler(int sig);
+void	print_msg(void);
+int		init_shell(char **argv, char **envp);
 
 //Builtins
 int		print_env(char **cmd);
@@ -145,10 +147,10 @@ void	exit_cmd(char **cmd);
 void 	change_directory(char **cmd);
 void	echo(char **cmd);
 void	exit_shell();
-void    export(char **cmd);
+void	export(char **cmd);
 void 	unset(char **cmd);
-char    *getvar(char *cmd);
-void    change_val(char *var_name, char *cmd);
+char	*getvar(char *cmd);
+void	change_val(char *var_name, char *cmd);
 char 	*get_name(char *cmd);
 
 //Expansion

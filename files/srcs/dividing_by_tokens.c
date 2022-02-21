@@ -141,6 +141,7 @@ void dividing_by_token(t_shell *shell, int *single, int *doble)
 	{
 		data = ((t_cmd_data *)cmdlist->content);
 		data->token = NULL;
+		data->exec_cmd = NULL;
 		save_token(data->cmd, &data->token, single, doble);
 		cmdlist = cmdlist->next;
 	}

@@ -6,7 +6,7 @@
 /*   By: mmateo-t <mmateo-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/11 12:11:17 by mmateo-t          #+#    #+#             */
-/*   Updated: 2022/02/14 16:02:33 by mmateo-t         ###   ########.fr       */
+/*   Updated: 2022/02/21 13:16:50 by mmateo-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,8 @@ void	del_data(void *content)
 
 	data = ((t_cmd_data *)content);
 	free(data->cmd);
-	dfree(data->exec_cmd);
+	if (data->exec_cmd)
+		dfree(data->exec_cmd);
 	token = data->token;
 	ft_lstclear(&token, del_token);
 	free(data);

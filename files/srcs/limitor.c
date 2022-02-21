@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   limitor.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmateo-t <mmateo-t@student.42madrid>       +#+  +:+       +#+        */
+/*   By: mmateo-t <mmateo-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/08 19:28:38 by mmateo-t          #+#    #+#             */
-/*   Updated: 2022/02/20 23:50:28 by mmateo-t         ###   ########.fr       */
+/*   Updated: 2022/02/21 11:34:13 by mmateo-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@
 
 */
 
-// FIXME:  EXpandir -> Abajo
+// FIXME:  Si pulso ^C no ejecutar heredoc
 
 int limitor_function(t_token *limit)
 {
@@ -69,6 +69,9 @@ int limitor_function(t_token *limit)
 		}
 	}
 	else
+	{
 		wait(&global.exit_status);
+		close(fd);
+	}
 	return (0);
 }
