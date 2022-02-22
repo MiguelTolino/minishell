@@ -6,7 +6,7 @@
 /*   By: mmateo-t <mmateo-t@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/03 13:27:13 by mmateo-t          #+#    #+#             */
-/*   Updated: 2022/02/21 18:30:07 by mmateo-t         ###   ########.fr       */
+/*   Updated: 2022/02/22 22:05:15 by mmateo-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -147,6 +147,7 @@ void	sigint_heredoc(int sig);
 void	sigint_handler(int sig);
 void	print_msg(void);
 int		init_shell(char **argv, char **envp);
+int limitor_function_ps(t_token *limit);
 
 //Builtins
 int		print_env(char **cmd);

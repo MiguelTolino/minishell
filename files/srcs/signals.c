@@ -6,7 +6,7 @@
 /*   By: mmateo-t <mmateo-t@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/17 12:22:42 by mmateo-t          #+#    #+#             */
-/*   Updated: 2022/02/22 20:47:21 by mmateo-t         ###   ########.fr       */
+/*   Updated: 2022/02/22 22:12:59 by mmateo-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,8 @@
 
 void	sigint_handler(int sig)
 {
-	if (sig == SIGINT)
+	(void)sig;
+	if (global.signal_status == 0)
 	{
 		global.exit_status = 130;
 		ft_putchar_fd('\n', STDOUT_FILENO);
@@ -22,19 +23,12 @@ void	sigint_handler(int sig)
 		rl_replace_line("", 0);
 		rl_redisplay();
 	}
-}
-
-void	sigint_heredoc(int sig)
-{
-	if (sig == SIGINT)
+	if(global.signal_status == 1)
 	{
 		global.exit_status = 130;
-		global.exec = true;
-/* 		ft_putchar_fd('\n', STDOUT_FILENO);
-		rl_on_new_line();
-		rl_replace_line("", 0); */
 		exit(global.exit_status);
 	}
+
 }
 
 void	signal_handler(void)
