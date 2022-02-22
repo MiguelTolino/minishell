@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_cmd.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmateo-t <mmateo-t@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mmateo-t <mmateo-t@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/10 18:50:51 by mmateo-t          #+#    #+#             */
-/*   Updated: 2022/02/14 16:51:58 by mmateo-t         ###   ########.fr       */
+/*   Updated: 2022/02/22 20:25:48 by mmateo-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,11 +58,12 @@ int	check_path(char **cmd)
 	char *path;
 	char **paths;
 	char *new_cmd;
-	
+
 	path = getvar("PATH");
 	paths = ft_split(path, ':');
 	if (!*cmd || !path || !paths)
 		return (0);
+	free(path);
 	if (!(access(*cmd, X_OK)))
 		return (1);
 	else

@@ -6,14 +6,12 @@
 /*   By: mmateo-t <mmateo-t@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/10 18:08:02 by mmateo-t          #+#    #+#             */
-/*   Updated: 2022/02/22 19:16:38 by mmateo-t         ###   ########.fr       */
+/*   Updated: 2022/02/22 20:13:39 by mmateo-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-//FIXME: EXEC WITH PIPE
-//FIXME: Me crea varios procesos y no se cierra
 //FIXME: Aprender a usar kill para eliminiar procesos abiertos
 
 int exec_pipe(t_list *cmdlist)
@@ -43,8 +41,8 @@ int exec_pipe(t_list *cmdlist)
 				check_path(&cmd[0]);
 				execve(cmd[0], cmd, global.env);
 			}
+			throw_error("Execution Error");
 			exit(global.exit_status);
-			return (throw_error("Execution Error"));
 		}
 		else
 		{
