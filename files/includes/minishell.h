@@ -6,7 +6,7 @@
 /*   By: mmateo-t <mmateo-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/03 13:27:13 by mmateo-t          #+#    #+#             */
-/*   Updated: 2022/02/23 19:06:18 by mmateo-t         ###   ########.fr       */
+/*   Updated: 2022/02/23 22:11:30 by mmateo-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -170,6 +170,7 @@ char	*expand(char *var_value);
 void	join_expand_1(char **new_str, char **cmd, int i, int type);
 void	join_expand_2(char **new_str, char **cmd, int i);
 char	*expand_ident_2(char *cmd, int n_single, int n_double);
+void	add_new(char *new_var);
 
 //Utils
 bool	is_filename(char *str);

@@ -6,7 +6,7 @@
 /*   By: mmateo-t <mmateo-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/07 11:19:52 by mmateo-t          #+#    #+#             */
-/*   Updated: 2022/02/23 19:47:45 by mmateo-t         ###   ########.fr       */
+/*   Updated: 2022/02/23 20:23:26 by mmateo-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ char	*getvar(char *cmd)
 	if (g_global.env[i])
 		str = g_global.env[i] + (ft_strlen(cmd) + 1);
 	else if (!ft_strncmp(cmd, "?", ft_strlen(cmd)))
-		return (ft_strdup(ft_itoa(g_global.exit_status)));
+		return (ft_itoa(g_global.exit_status));
 	else
 		return (NULL);
 	return (ft_strdup(str));

@@ -6,11 +6,33 @@
 /*   By: mmateo-t <mmateo-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/21 13:38:13 by mmateo-t          #+#    #+#             */
-/*   Updated: 2022/02/23 19:04:50 by mmateo-t         ###   ########.fr       */
+/*   Updated: 2022/02/23 22:18:19 by mmateo-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
+
+void	check_shlvl(void)
+{
+	char *var;
+	int	lvl;
+	char *new;
+
+	var = getvar("SHLVL");
+	if (!var)
+		add_new("SHLVL=1");
+	else
+	{
+		lvl = ft_atoi(var);
+		lvl++;
+		free(var);
+		var = ft_itoa(lvl);
+		new = ft_strjoin("SHLVL=", var);
+		change_val("SHLVL", new);
+		free(new);
+	}
+	free(var);
+}
 
 void	print_msg(void)
 {
@@ -61,5 +83,6 @@ int	init_shell(char **argv, char **envp)
 {
 	print_msg();
 	init_g_global(envp, argv);
+	check_shlvl();
 	return (0);
 }
