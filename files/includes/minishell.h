@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmateo-t <mmateo-t@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rgirondo <rgirondo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/03 13:27:13 by mmateo-t          #+#    #+#             */
-/*   Updated: 2022/02/23 22:11:30 by mmateo-t         ###   ########.fr       */
+/*   Updated: 2022/02/23 23:20:45 by rgirondo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -147,6 +147,7 @@ char	**init_env(char **envp);
 void	sigint_heredoc(int sig);
 void	sigint_handler(int sig);
 void	print_msg(void);
+int		parsing_errors(t_list *cmdlist);
 int		init_shell(char **argv, char **envp);
 int		limitor_function_ps(t_token *limit);
 
@@ -165,11 +166,11 @@ char	*get_name(char *cmd);
 //Expansion
 void	unsplit(char **matrix, t_token *token);
 void	new_token(t_list *token_list);
-void	free_matrix(char **mtx);
-char	*expand(char *var_value);
-void	join_expand_1(char **new_str, char **cmd, int i, int type);
-void	join_expand_2(char **new_str, char **cmd, int i);
-char	*expand_ident_2(char *cmd, int n_single, int n_double);
+void 	free_matrix(char **mtx);
+char 	*expand(char *var_value);
+void 	join_expand_1(char **new_str, char **cmd, int i, int type);
+void 	join_expand_2(char **new_str, char **cmd, int i);
+char 	*expand_ident_2(char *cmd, char quotes);
 void	add_new(char *new_var);
 
 //Utils

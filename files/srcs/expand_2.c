@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expand_2.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmateo-t <mmateo-t@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rgirondo <rgirondo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/12 15:41:18 by rgirondo          #+#    #+#             */
-/*   Updated: 2022/02/23 19:17:30 by mmateo-t         ###   ########.fr       */
+/*   Updated: 2022/02/23 23:18:34 by rgirondo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,11 +41,12 @@ char	*expand_dollar(char *cmd)
 	return (new_str);
 }
 
-char	*expand_ident_2(char *cmd, int n_single, int n_double)
+char *expand_ident_2(char *cmd, char quotes)
 {
 	char	*tmp;
 
-	if (n_double == 2)
+	printf("ya : (%s)\n", cmd);
+	if (quotes == '\"')
 	{
 		tmp = cmd;
 		cmd = ft_strtrim(cmd, "\"");
@@ -54,13 +55,13 @@ char	*expand_ident_2(char *cmd, int n_single, int n_double)
 		free(cmd);
 		cmd = tmp;
 	}
-	if (n_single == 2)
+	if (quotes == '\'')
 	{
 		tmp = cmd;
 		cmd = ft_strtrim(cmd, "\'");
 		free(tmp);
 	}
-	if (n_single == 0 && n_double == 0)
+	else
 	{
 		tmp = expand_dollar(cmd);
 		free(cmd);
@@ -71,19 +72,32 @@ char	*expand_ident_2(char *cmd, int n_single, int n_double)
 
 char	*expand(char *cmd)
 {
-	char	*new_str;
-	int		i;
+	char *new_str;
+	int i;
+	char quotes;
 
 	i = 0;
 	new_str = ft_strdup("");
 	if (cmd[i] == '\"' || cmd[i] == '\'')
+	{
+		quotes = cmd[i];
 		i++;
+	}
+	else
+		quotes = 0;
 	while (cmd[i])
 	{
 		if (cmd[i] == '\"' || cmd[i] == '\'')
 		{
-			if (cmd[0] == cmd[i])
-				i++;
+			if (cmd[i++] == quotes)
+				quotes = 0;
+			else if (quotes != 0)
+				continue ;
+			else
+			{
+				i--;
+				quotes = cmd[i];
+			}
 			join_expand_1(&new_str, &cmd, i, 1);
 			cmd += i;
 			i = 0;
