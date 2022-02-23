@@ -6,7 +6,7 @@
 /*   By: mmateo-t <mmateo-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/10 20:11:30 by mmateo-t          #+#    #+#             */
-/*   Updated: 2022/02/21 16:13:04 by mmateo-t         ###   ########.fr       */
+/*   Updated: 2022/02/23 12:11:14 by mmateo-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ bool	is_filename(char *str)
 	i = 0;
 	while (str[i])
 	{
-		if (!ft_isalnum(str[i]) && str[i] != '_')
+		if (!ft_isalnum(str[i]) && str[i] != '_' && (str[0] != '_' && !ft_isalpha(str[0])))
 			return (false);
 		i++;
 	}
