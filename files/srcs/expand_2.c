@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expand_2.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rgirondo <rgirondo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mmateo-t <mmateo-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/12 15:41:18 by rgirondo          #+#    #+#             */
-/*   Updated: 2022/02/23 23:18:34 by rgirondo         ###   ########.fr       */
+/*   Updated: 2022/02/23 23:40:29 by mmateo-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,6 @@ char *expand_ident_2(char *cmd, char quotes)
 {
 	char	*tmp;
 
-	printf("ya : (%s)\n", cmd);
 	if (quotes == '\"')
 	{
 		tmp = cmd;
