@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   limitor.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmateo-t <mmateo-t@student.42madrid>       +#+  +:+       +#+        */
+/*   By: mmateo-t <mmateo-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/08 19:28:38 by mmateo-t          #+#    #+#             */
-/*   Updated: 2022/02/22 22:20:34 by mmateo-t         ###   ########.fr       */
+/*   Updated: 2022/02/23 19:38:22 by mmateo-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,28 +23,28 @@
 
 // FIXME:  Si pulso ^C no ejecutar heredoc
 
-int limitor_function(t_token *limit)
+int	limitor_function(t_token *limit)
 {
-	int fd;
-	int stop;
-	char *str;
-	char *tmp;
+	int		fd;
+	int		stop;
+	char	*str;
+	char	*tmp;
 
 	stop = 0;
-	global.signal_status = 1;
+	g_global.signal_status = 1;
 	fd = open("heredoc.tmp", O_WRONLY | O_CREAT | O_TRUNC, 0644);
 	if (fd < 0)
 	{
 		throw_error("Could not create temporary file\n");
 		return (1);
 	}
-	global.signal_status = HERE_DOC;
+	g_global.signal_status = HERE_DOC;
 	while (!stop)
 	{
-		signal(SIGINT, &signal_handler);
+		//signal(SIGINT, &signal_handler);
 		str = readline("heredoc > ");
 		if (!str)
-			continue;
+			continue ;
 		if (!limit->quote)
 		{
 			tmp = expand(str);
@@ -67,23 +67,23 @@ int limitor_function(t_token *limit)
 	return (0);
 }
 
-int limitor_function_ps(t_token *limit)
+int	limitor_function_ps(t_token *limit)
 {
-	int fd;
-	int stop;
-	char *str;
-	char *tmp;
-	pid_t pid;
+	int		fd;
+	int		stop;
+	char	*str;
+	char	*tmp;
+	pid_t	pid;
 
 	stop = 0;
-	global.signal_status = 1;
+	g_global.signal_status = 1;
 	fd = open("heredoc.tmp", O_WRONLY | O_CREAT | O_TRUNC, 0644);
 	if (fd < 0)
 	{
 		throw_error("Could not create temporary file\n");
 		return (1);
 	}
-	global.signal_status = 1;
+	g_global.signal_status = 1;
 	pid = fork();
 	if (!pid)
 	{
@@ -91,7 +91,7 @@ int limitor_function_ps(t_token *limit)
 		{
 			str = readline("heredoc > ");
 			if (!str)
-				continue;
+				continue ;
 			if (!limit->quote)
 			{
 				tmp = expand(str);
@@ -113,10 +113,10 @@ int limitor_function_ps(t_token *limit)
 	}
 	else if (pid > 0)
 	{
-		waitpid(pid, &global.exit_status, 0);
+		waitpid(pid, &g_global.exit_status, 0);
 		close(fd);
 	}
 	else
-		return(throw_error("Error in fork"));
+		return (throw_error("Error in fork"));
 	return (0);
 }

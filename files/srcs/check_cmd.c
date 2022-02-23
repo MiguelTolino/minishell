@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_cmd.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmateo-t <mmateo-t@student.42madrid>       +#+  +:+       +#+        */
+/*   By: mmateo-t <mmateo-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/10 18:50:51 by mmateo-t          #+#    #+#             */
-/*   Updated: 2022/02/22 20:25:48 by mmateo-t         ###   ########.fr       */
+/*   Updated: 2022/02/23 19:07:34 by mmateo-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 char	*add_slash(char *path)
 {
-	char *new_path;
+	char	*new_path;
 
 	if (!path)
 		return (NULL);
@@ -24,9 +24,9 @@ char	*add_slash(char *path)
 
 char	*search_cmd(char *cmd, char **paths)
 {
-	int i;
-	char *aux;
-	char *full_cmd;
+	int		i;
+	char	*aux;
+	char	*full_cmd;
 
 	i = 0;
 	while (paths[i])
@@ -51,13 +51,11 @@ char	*search_cmd(char *cmd, char **paths)
 	5.return cmd
 */
 
-//FIXME: CHECK_CMD LEAKS, int function returns 0 or 1 and change cmd value
-
 int	check_path(char **cmd)
 {
-	char *path;
-	char **paths;
-	char *new_cmd;
+	char	*path;
+	char	**paths;
+	char	*new_cmd;
 
 	path = getvar("PATH");
 	paths = ft_split(path, ':');

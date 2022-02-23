@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   errors.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmateo-t <mmateo-t@student.42madrid>       +#+  +:+       +#+        */
+/*   By: mmateo-t <mmateo-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/06 11:45:39 by mmateo-t          #+#    #+#             */
-/*   Updated: 2022/02/22 22:36:58 by mmateo-t         ###   ########.fr       */
+/*   Updated: 2022/02/23 19:32:42 by mmateo-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	exit_shell(void)
 {
-	exit(global.exit_status);
+	exit(g_global.exit_status);
 }
 
 void	exit_ctrld(t_shell shell)
@@ -23,7 +23,6 @@ void	exit_ctrld(t_shell shell)
 	printf("exit\n");
 	exit_shell();
 }
-
 
 int	throw_error(const char *error)
 {
@@ -40,17 +39,15 @@ void	check_args(int argc)
 	}
 }
 
-//TODO: Add more errors
-
 bool	search_errors(char *cmdline)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (cmdline[i])
 	{
 		if (cmdline[i] == '|' && ((!ft_isalnum(cmdline[i + 1]) && cmdline[i + 1] != ' ') || (!ft_isalnum(cmdline[i - 1])
-			&& cmdline[i - 1] != ' ')))
+					&& cmdline[i - 1] != ' ')))
 			return (true);
 		i++;
 	}
@@ -59,9 +56,9 @@ bool	search_errors(char *cmdline)
 
 int	error_parsing(char *cmdline)
 {
-	char *errors[6];
-	int len;
-	int i;
+	char	*errors[6];
+	int		len;
+	int		i;
 
 	i = 0;
 	len = ft_strlen(cmdline);
@@ -76,7 +73,7 @@ int	error_parsing(char *cmdline)
 		if (ft_strnstr(cmdline, errors[i], len) || search_errors(cmdline))
 		{
 			throw_error("Unexpected operators");
-			global.exit_status = 2;
+			g_global.exit_status = 2;
 			return (1);
 		}
 		i++;

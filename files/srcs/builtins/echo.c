@@ -3,19 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   echo.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmateo-t <mmateo-t@student.42madrid>       +#+  +:+       +#+        */
+/*   By: mmateo-t <mmateo-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/07 11:16:30 by mmateo-t          #+#    #+#             */
-/*   Updated: 2022/02/21 19:06:57 by mmateo-t         ###   ########.fr       */
+/*   Updated: 2022/02/23 19:45:39 by mmateo-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-void echo(char **cmd)
+void	echo(char **cmd)
 {
-	int i;
-	int option;
+	int	i;
+	int	option;
 
 	i = 1;
 	option = 0;

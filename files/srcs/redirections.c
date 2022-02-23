@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redirections.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmateo-t <mmateo-t@student.42madrid>       +#+  +:+       +#+        */
+/*   By: mmateo-t <mmateo-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/24 12:00:24 by mmateo-t          #+#    #+#             */
-/*   Updated: 2022/02/22 22:12:59 by mmateo-t         ###   ########.fr       */
+/*   Updated: 2022/02/23 19:42:17 by mmateo-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,9 @@
 //FIXME:  '< oufile ls'
 //FIXME: REdicreccion de entrada no funciona -> SEGFAULT
 
-int select_redirection(t_token *token)
+int	select_redirection(t_token *token)
 {
-	int fd;
+	int	fd;
 
 	fd = 0;
 	if (token->type == OPEN_FILE)
@@ -47,7 +47,7 @@ int select_redirection(t_token *token)
 	if (token->type == LIMITOR)
 	{
 		limitor_function_ps(token);
-		global.signal_status = 0;
+		g_global.signal_status = 0;
 		fd = open("heredoc.tmp", O_RDONLY);
 		if (dup2(fd, STDIN_FILENO) < 0)
 			return (throw_error("Error in limitor redirection"));
@@ -57,11 +57,11 @@ int select_redirection(t_token *token)
 	return (0);
 }
 
-void iterate_tokens(void *content)
+void	iterate_tokens(void *content)
 {
-	t_cmd_data *cmd_data;
-	t_list *token_list;
-	t_token *token;
+	t_cmd_data	*cmd_data;
+	t_list		*token_list;
+	t_token		*token;
 
 	cmd_data = (t_cmd_data *)content;
 	token_list = cmd_data->token;
@@ -69,12 +69,12 @@ void iterate_tokens(void *content)
 	{
 		token = ((t_token *)token_list->content);
 		if (select_redirection(token))
-			global.exec = true;
+			g_global.exec = true;
 		token_list = token_list->next;
 	}
 }
 
-void redirections(t_shell *shell)
+void	redirections(t_shell *shell)
 {
 	ft_lstiter(shell->cmdlist, iterate_tokens);
 }

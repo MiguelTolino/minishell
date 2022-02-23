@@ -6,7 +6,7 @@
 /*   By: mmateo-t <mmateo-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/21 16:32:26 by mmateo-t          #+#    #+#             */
-/*   Updated: 2022/02/21 16:35:30 by mmateo-t         ###   ########.fr       */
+/*   Updated: 2022/02/23 19:04:50 by mmateo-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@
 			if ((token->type >= 2 && token->type <= 5) && ((next_token->type >= 2 && next_token->type <= 5 ) || !next_token
 				|| (is_filename(next_token->word) && !next_token->quote)))
 			{
-				global.exit_status = EXIT_FAILURE;
+				g_global.exit_status = EXIT_FAILURE;
 				throw_error("Unexpected parse error near redirections");
 				return (1);
 			}

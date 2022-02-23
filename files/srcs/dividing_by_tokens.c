@@ -1,18 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   dividing_by_token.c                                         :+:      :+:    :+:   */
+/*   dividing_by_tokens.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmateo-t <mmateo-t@student.42madrid>       +#+  +:+       +#+        */
+/*   By: mmateo-t <mmateo-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/14 12:14:24 by mmateo-t          #+#    #+#             */
-/*   Updated: 2022/02/05 00:27:53 by mmateo-t         ###   ########.fr       */
+/*   Updated: 2022/02/23 19:11:44 by mmateo-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
-
-
 
 //Divide by tokens and assign a type
 /*
@@ -22,12 +20,12 @@
 	4º Terminar la lista de token y empezar con el siguiente comando
 */
 
-int		validate_token(t_list *cmdlist)
+int	validate_token(t_list *cmdlist)
 {
-	t_cmd_data *data;
-	t_list *token_list;
-	t_token *token;
-	t_token *next_token;
+	t_cmd_data	*data;
+	t_list		*token_list;
+	t_token		*token;
+	t_token		*next_token;
 
 	while (cmdlist)
 	{
@@ -36,13 +34,14 @@ int		validate_token(t_list *cmdlist)
 		while (token_list)
 		{
 			token = (t_token *)token_list->content;
- 			if (token_list->next == NULL)
+			if (token_list->next == NULL)
 				break ;
 			next_token = (t_token *)token_list->next->content;
-			if ((token->type >= 2 && token->type <= 5) && ((next_token->type >= 2 && next_token->type <= 5 )))
+			if ((token->type >= 2 && token->type <= 5)
+				&& ((next_token->type >= 2 && next_token->type <= 5)))
 			{
-				global.exit_status = EXIT_FAILURE;
-				return (throw_error("Unexpected parse error near redirections"));
+				g_global.exit_status = EXIT_FAILURE;
+				return (throw_error(PARSING_ERROR));
 			}
 			token_list = token_list->next;
 		}
@@ -51,14 +50,13 @@ int		validate_token(t_list *cmdlist)
 	return (0);
 }
 
-unsigned int select_type(t_token *token, int old_type)
+unsigned int	select_type(t_token *token, int old_type)
 {
-	size_t len;
-	unsigned int type;
+	size_t			len;
+	unsigned int	type;
 
 	type = 0;
 	len = ft_strlen(token->word);
-
 	if (!ft_strncmp(token->word, "<", len))
 		return (FILE_IN);
 	if (!ft_strncmp(token->word, "<<", len))
@@ -82,20 +80,20 @@ unsigned int select_type(t_token *token, int old_type)
 	return (type);
 }
 
-void ignore_spaces(char *cmd, int *i)
+void	ignore_spaces(char *cmd, int *i)
 {
 	while (cmd[*i] == ' ')
 		(*i)++;
 }
 
-void save_token(char *cmd, t_list **token_list, int *single, int *doble)
+void	save_token(char *cmd, t_list **token_list, int *single, int *doble)
 {
-	t_list *list;
-	int i;
-	int start;
-	int old_type;
-	t_token *token;
-	int quote;
+	t_list	*list;
+	int		i;
+	int		start;
+	int		old_type;
+	t_token	*token;
+	int		quote;
 
 	i = 0;
 	list = NULL;
@@ -105,7 +103,7 @@ void save_token(char *cmd, t_list **token_list, int *single, int *doble)
 	{
 		ignore_spaces(cmd, &i);
 		if (!cmd[i])
-			break;
+			break ;
 		start = i;
 		while (cmd[i] != ' ' && cmd[i])
 		{
@@ -115,7 +113,7 @@ void save_token(char *cmd, t_list **token_list, int *single, int *doble)
 			else
 				ignore_quotes(cmd, '\"', &i, doble);
 			if (!cmd[i])
-				break;
+				break ;
 			i++;
 		}
 		token = (t_token *)malloc(sizeof(t_token));
@@ -128,10 +126,10 @@ void save_token(char *cmd, t_list **token_list, int *single, int *doble)
 	}
 }
 
-void dividing_by_token(t_shell *shell, int *single, int *doble)
+void	dividing_by_token(t_shell *shell, int *single, int *doble)
 {
-	t_list *cmdlist;
-	t_cmd_data *data;
+	t_list		*cmdlist;
+	t_cmd_data	*data;
 
 	cmdlist = shell->cmdlist;
 	while (cmdlist)

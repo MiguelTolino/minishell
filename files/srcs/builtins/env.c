@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmateo-t <mmateo-t@student.42madrid>       +#+  +:+       +#+        */
+/*   By: mmateo-t <mmateo-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/05 19:52:45 by mmateo-t          #+#    #+#             */
-/*   Updated: 2022/02/19 15:23:28 by mmateo-t         ###   ########.fr       */
+/*   Updated: 2022/02/23 19:46:01 by mmateo-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	print_env(char **cmd)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	if (len_array(cmd) > 1)
@@ -22,9 +22,9 @@ int	print_env(char **cmd)
 		throw_error("Error: Too many arguments");
 		return (1);
 	}
-	while (global.env[i])
+	while (g_global.env[i])
 	{
-		printf("%s\n", global.env[i]);
+		printf("%s\n", g_global.env[i]);
 		i++;
 	}
 	return (0);

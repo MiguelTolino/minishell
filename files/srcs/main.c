@@ -3,16 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmateo-t <mmateo-t@student.42madrid>       +#+  +:+       +#+        */
+/*   By: mmateo-t <mmateo-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/03 09:55:58 by mmateo-t          #+#    #+#             */
-/*   Updated: 2022/02/22 22:17:35 by mmateo-t         ###   ########.fr       */
+/*   Updated: 2022/02/23 19:38:34 by mmateo-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
-
-
 
 int	main(int argc, char **argv, char **envp)
 {
@@ -41,12 +39,12 @@ int	main(int argc, char **argv, char **envp)
 		}
 		token_expansion(&shell);
 		parsing(&shell);
-	//	test(shell);
+		test(shell);
 		redirections(&shell);
-		if (!global.exec)
+		if (!g_global.exec)
 			execution(&shell);
-		free_shell(&shell); // If cmdline is empty ocurss a leak
+		free_shell(&shell);
 	}
-	dfree(global.env);
+	dfree(g_global.env);
 	return (0);
 }

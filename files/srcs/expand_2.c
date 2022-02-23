@@ -3,19 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   expand_2.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rgirondo <rgirondo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mmateo-t <mmateo-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/12 15:41:18 by rgirondo          #+#    #+#             */
-/*   Updated: 2022/02/18 19:22:10 by rgirondo         ###   ########.fr       */
+/*   Updated: 2022/02/23 19:17:30 by mmateo-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-char *expand_dollar(char *cmd)
+char	*expand_dollar(char *cmd)
 {
-	char *new_str;
-	int i;
+	char	*new_str;
+	int		i;
 
 	i = 0;
 	new_str = ft_strdup("");
@@ -41,9 +41,9 @@ char *expand_dollar(char *cmd)
 	return (new_str);
 }
 
-char *expand_ident_2(char *cmd, int n_single, int n_double)
+char	*expand_ident_2(char *cmd, int n_single, int n_double)
 {
-	char *tmp;
+	char	*tmp;
 
 	if (n_double == 2)
 	{
@@ -69,10 +69,10 @@ char *expand_ident_2(char *cmd, int n_single, int n_double)
 	return (cmd);
 }
 
-char *expand(char *cmd)
+char	*expand(char *cmd)
 {
-	char *new_str;
-	int i;
+	char	*new_str;
+	int		i;
 
 	i = 0;
 	new_str = ft_strdup("");

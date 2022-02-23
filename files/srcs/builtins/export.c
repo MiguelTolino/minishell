@@ -3,18 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rgirondo <rgirondo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mmateo-t <mmateo-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/07 11:19:52 by mmateo-t          #+#    #+#             */
-/*   Updated: 2022/02/18 19:38:09 by rgirondo         ###   ########.fr       */
+/*   Updated: 2022/02/23 19:47:45 by mmateo-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-char *free_join(char *join, char *str)
+char	*free_join(char *join, char *str)
 {
-	char *s;
+	char	*s;
 
 	s = 0;
 	if (join)
@@ -25,25 +25,25 @@ char *free_join(char *join, char *str)
 	return (s);
 }
 
-char    *getvar(char *cmd)
+char	*getvar(char *cmd)
 {
-	int i;
-	char *str;
-	char *var_name;
-	int len;
+	int		i;
+	char	*str;
+	char	*var_name;
+	int		len;
 
 	i = 0;
 	str = 0;
-	var_name = get_name(global.env[i]);
+	var_name = get_name(g_global.env[i]);
 	if (var_name && ft_strlen(var_name) > ft_strlen(cmd))
 		len = ft_strlen(var_name);
 	else
 		len = ft_strlen(cmd);
-	while (global.env[i] && ft_strncmp(var_name, cmd, len))
+	while (g_global.env[i] && ft_strncmp(var_name, cmd, len))
 	{
 		free(var_name);
 		i++;
-		var_name = get_name(global.env[i]);
+		var_name = get_name(g_global.env[i]);
 		if (var_name && ft_strlen(var_name) > ft_strlen(cmd))
 			len = ft_strlen(var_name);
 		else
@@ -51,23 +51,23 @@ char    *getvar(char *cmd)
 	}
 	if (var_name)
 		free(var_name);
-	if (global.env[i])
-		str = global.env[i] + (ft_strlen(cmd) + 1);
+	if (g_global.env[i])
+		str = g_global.env[i] + (ft_strlen(cmd) + 1);
 	else if (!ft_strncmp(cmd, "?", ft_strlen(cmd)))
-		return (ft_strdup(ft_itoa(global.exit_status)));
+		return (ft_strdup(ft_itoa(g_global.exit_status)));
 	else
 		return (NULL);
 	return (ft_strdup(str));
 }
 
-char *get_name(char *cmd)
+char	*get_name(char *cmd)
 {
-	int i;
-	char *str;
+	int		i;
+	char	*str;
 
 	i = 0;
 	if (!cmd)
-		return(NULL);
+		return (NULL);
 	while (cmd[i] && cmd[i] != '=')
 		i++;
 	str = (char *)malloc(sizeof(char) * (i + 1));
@@ -81,38 +81,38 @@ char *get_name(char *cmd)
 	return (str);
 }
 
-void add_new(char *new_var)
+void	add_new(char *new_var)
 {
-	int i;
-	char **tmp;
+	int		i;
+	char	**tmp;
 
 	i = 0;
-	tmp = global.env;
-	global.env_len += 1;
-	global.env = init_env(tmp);
+	tmp = g_global.env;
+	g_global.env_len += 1;
+	g_global.env = init_env(tmp);
 	free_matrix(tmp);
-	while (global.env[i])
+	while (g_global.env[i])
 		i++;
-	global.env[i] = ft_strdup(new_var);
-	global.env[i + 1] = NULL;
+	g_global.env[i] = ft_strdup(new_var);
+	g_global.env[i + 1] = NULL;
 }
 
-void change_val(char *var_name, char *cmd)
+void	change_val(char *var_name, char *cmd)
 {
-	int i;
+	int	i;
 
 	i = 0;
-	while (!ft_strnstr(global.env[i], var_name, ft_strlen(var_name)) && global.env[i])
+	while (!ft_strnstr(g_global.env[i], var_name, ft_strlen(var_name)) && g_global.env[i])
 		i++;
-	free(global.env[i]);
-	global.env[i] = ft_strdup(cmd);
+	free(g_global.env[i]);
+	g_global.env[i] = ft_strdup(cmd);
 }
 
-void export(char **cmd)
+void	export(char **cmd)
 {
-	char *new_var;
-	char *var_name;
-	int i;
+	char	*new_var;
+	char	*var_name;
+	int		i;
 
 	i = 1;
 	while (cmd[i])
