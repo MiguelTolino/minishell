@@ -6,7 +6,7 @@
 /*   By: rgirondo <rgirondo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/07 11:19:52 by mmateo-t          #+#    #+#             */
-/*   Updated: 2022/02/18 19:38:09 by rgirondo         ###   ########.fr       */
+/*   Updated: 2022/02/23 22:42:48 by rgirondo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,11 @@ char    *getvar(char *cmd)
 	if (global.env[i])
 		str = global.env[i] + (ft_strlen(cmd) + 1);
 	else if (!ft_strncmp(cmd, "?", ft_strlen(cmd)))
-		return (ft_strdup(ft_itoa(global.exit_status)));
+	{
+		if (global.exit_status > 255)
+			global.exit_status = global.exit_status >> 8;
+		return (ft_itoa(global.exit_status));
+	}
 	else
 		return (NULL);
 	return (ft_strdup(str));
@@ -127,6 +131,8 @@ void export(char **cmd)
 				change_val(var_name, cmd[i]);
 			if (var_name)
 				free(var_name);
+			if (new_var)
+				free(new_var);
 		}
 		i++;
 	}	

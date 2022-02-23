@@ -6,7 +6,7 @@
 /*   By: rgirondo <rgirondo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/12 15:41:28 by rgirondo          #+#    #+#             */
-/*   Updated: 2022/02/18 17:02:56 by rgirondo         ###   ########.fr       */
+/*   Updated: 2022/02/23 21:54:07 by rgirondo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,11 +53,7 @@ void join_expand_1(char **new_str, char **cmd, int i, int type)
 	tmp2 = NULL;
 	tmp = ft_substr(cmd[0], 0, i);
 	if (type == 1)
-	{
-		n_double = count_closed_quotes(tmp, '\"');
-		n_single = count_closed_quotes(tmp, '\'');
-		tmp = expand_ident_2(tmp, n_single, n_double);
-	}
+		tmp = expand_ident_2(tmp, tmp[ft_strlen(tmp) - 1]);
 	tmp2 = ft_strjoin(new_str[0], tmp);
 	free(new_str[0]);
 	free(tmp);

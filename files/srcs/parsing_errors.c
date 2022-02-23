@@ -3,45 +3,111 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_errors.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmateo-t <mmateo-t@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rgirondo <rgirondo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/21 16:32:26 by mmateo-t          #+#    #+#             */
-/*   Updated: 2022/02/21 16:35:30 by mmateo-t         ###   ########.fr       */
+/*   Updated: 2022/02/23 22:56:56 by rgirondo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-/* int		validate_token(t_list *cmdlist)
-{
-	t_cmd_data *data;
-	t_list *token_list;
-	t_token *token;
-	t_token *next_token;
+#include "../includes/minishell.h"
 
-	while (cmdlist)
+int		valid_operator_arg(t_list *token)
+{
+	int i;
+	char quotes;
+	t_token *token_data;
+
+	i = 0;
+	quotes = 0;
+	token_data = token->content;
+	while (token)
 	{
-		data = ((t_cmd_data *)cmdlist->content);
-		token_list = data->token;
-		while (token_list)
+		token_data = token->content;
+		if (token_data->type >= 2 && token_data->type <= 5)
 		{
-			token = (t_token *)token_list->content;
-			next_token = (t_token *)token_list->next->content;
-			if ((token->type >= 2 && token->type <= 5) && ((next_token->type >= 2 && next_token->type <= 5 ) || !next_token
-				|| (is_filename(next_token->word) && !next_token->quote)))
+			token = token->next;
+			token_data = token->content;
+			while (token_data->word[i])
 			{
-				global.exit_status = EXIT_FAILURE;
-				throw_error("Unexpected parse error near redirections");
-				return (1);
+				if (token_data->word[i] == '\"' || token_data->word[i] == '\'')
+				{
+					quotes = token_data->word[i];
+					i++;
+					while (token_data->word[i] != quotes)
+						i++;
+				}
+				if (!ft_isalnum(token_data->word[i]) && !ft_strchr("_$\"\'", token_data->word[i]))
+				{
+					printf("%c\n", token_data->word[i]);
+					throw_error("minishell: syntax error near operator argument");
+					global.exit_status = 258;
+					return (-1);
+				}
+				i++;
 			}
- 			if (token_list->next == NULL)
-				break;
-			token_list = token_list->next;
 		}
-		cmdlist = cmdlist->next;
+		token = token->next;
 	}
 	return (0);
 }
 
-void	parsing_errors(t_list *cmdlist)
+int		validate_operators(t_list *token)
 {
-	ft_lstiter()
-} */
+	int i;
+	t_token *token_data;
+
+	i = 0;
+	token_data = token->content;
+	while (token)
+	{
+		token_data = token->content;
+		if (token_data->word[i] == '>' || token_data->word[i] == '<')
+		{
+			if (token_data->word[i] == token_data->word[i + 1])
+				i++;
+			if (token_data->word[i + 1])
+			{
+			throw_error("minishell: syntax error near operator");
+			global.exit_status = 258;
+			return (-1);
+			}
+		}
+		token = token->next;
+	}
+	return (0);
+}
+
+int		validate_pipes(t_list *cmd_list)
+{
+	int i;
+	t_cmd_data *cmd_data;
+
+	i = 0;
+	cmd_data = cmd_list->content;
+	while (cmd_list)
+	{
+		cmd_data = cmd_list->content;
+		if (validate_operators(cmd_data->token))
+			return (-1);
+		if (valid_operator_arg(cmd_data->token))
+			return (-1);
+		while (cmd_data->cmd[i] == ' ')
+			i++;	
+		if (!cmd_data->cmd[i])
+		{
+			throw_error("minishell: syntax error near pipe");
+			global.exit_status = 258;
+			return (-1);
+		}
+		cmd_list = cmd_list->next;
+	}
+	return (0);
+}
+
+int		parsing_errors(t_list *cmdlist)
+{
+	if (validate_pipes(cmdlist))
+		return (0);
+	return(1);
+}
