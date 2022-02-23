@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_errors.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rgirondo <rgirondo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mmateo-t <mmateo-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/21 16:32:26 by mmateo-t          #+#    #+#             */
-/*   Updated: 2022/02/23 23:18:17 by rgirondo         ###   ########.fr       */
+/*   Updated: 2022/02/23 23:38:03 by mmateo-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,8 @@ int		valid_operator_arg(t_list *token)
 
 	i = 0;
 	quotes = 0;
+	if (!token)
+		return (0);
 	token_data = token->content;
 	while (token)
 	{
@@ -58,6 +60,8 @@ int		validate_operators(t_list *token)
 	t_token *token_data;
 
 	i = 0;
+	if (!token)
+		return (0);
 	token_data = token->content;
 	while (token)
 	{
@@ -77,6 +81,8 @@ int		validate_operators(t_list *token)
 	}
 	return (0);
 }
+
+//FIXME: Peta en pipes
 
 int		validate_pipes(t_list *cmd_list)
 {
