@@ -6,7 +6,7 @@
 /*   By: mmateo-t <mmateo-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/21 13:38:13 by mmateo-t          #+#    #+#             */
-/*   Updated: 2022/02/23 23:07:18 by mmateo-t         ###   ########.fr       */
+/*   Updated: 2022/02/23 23:11:35 by mmateo-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,6 @@ char	**init_env(char **envp)
 		i++;
 	}
 	new_envp[i] = NULL;
-	check_shlvl();
 	return (new_envp);
 }
 
