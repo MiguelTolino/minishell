@@ -6,7 +6,7 @@
 /*   By: mmateo-t <mmateo-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/21 13:38:13 by mmateo-t          #+#    #+#             */
-/*   Updated: 2022/02/23 22:21:44 by mmateo-t         ###   ########.fr       */
+/*   Updated: 2022/02/23 23:07:18 by mmateo-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 
 void	check_shlvl(void)
 {
-	char	*var;
-	int		lvl;
-	char	*new;
+	char *var;
+	int	lvl;
+	char *new;
 
 	var = getvar("SHLVL");
 	if (!var)
@@ -84,5 +84,6 @@ int	init_shell(char **argv, char **envp)
 {
 	print_msg();
 	init_g_global(envp, argv);
+	check_shlvl();
 	return (0);
 }
