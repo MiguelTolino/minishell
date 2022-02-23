@@ -6,7 +6,7 @@
 /*   By: rgirondo <rgirondo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/03 13:27:13 by mmateo-t          #+#    #+#             */
-/*   Updated: 2022/02/23 21:44:07 by rgirondo         ###   ########.fr       */
+/*   Updated: 2022/02/23 23:20:45 by rgirondo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,13 +34,14 @@
 # define MAXHIST 128 // max number of commands to be saved
 # define READ_END 0
 # define WRITE_END 1
+# define OPERATORS "|><"
 
-typedef enum e_quote
+enum e_quote
 {
 	NONE,
 	SINGLE,
 	DOUBLE
-}	e_quote;
+};
 
 /*
 	CMD, //defaut set
@@ -55,7 +56,7 @@ typedef enum e_quote
 	EXIT_FILE_RET //word following '>>'
 */
 
-typedef enum	e_type
+enum e_type
 {
 	CMD,
 	ARG,
@@ -67,23 +68,23 @@ typedef enum	e_type
 	LIMITOR,
 	EXIT_FILE,
 	EXIT_FILE_RET
-}	e_type;
+};
 
-typedef enum	e_signal
+enum	e_signal
 {
 	MAIN,
 	HD,
 	CHILD
-}	e_signal;
+};
 
 typedef struct s_token
 {
-	char	*word;
-	e_type	type;
-	e_quote	quote;
+	char			*word;
+	enum e_type		type;
+	enum e_quote	quote;
 }	t_token;
 
-typedef struct	s_cmd_data
+typedef struct s_cmd_data
 {
 	char		*cmd;
 	t_list		*token;
@@ -94,12 +95,12 @@ typedef struct	s_cmd_data
 
 typedef struct s_shell
 {
-	char *cmdline;
-	char *prompt;
-	t_list *cmdlist;
+	char	*cmdline;
+	char	*prompt;
+	t_list	*cmdlist;
 }	t_shell;
 
-typedef struct g_global
+struct s_global
 {
 	char	**env;
 	int		env_len;
@@ -108,11 +109,11 @@ typedef struct g_global
 	int		fd_stdout;
 	bool	exec;
 	int		signal_status;
-}	g_global;
+};
 
-g_global global;
+struct s_global	g_global;
 
-char*	build_prompt();
+char	*build_prompt(void);
 int		exec_builtins(char **cmd);
 int		save_env(char **envp);
 int		throw_error(const char *error);
@@ -126,7 +127,7 @@ int		dfree(char **array);
 void	free_shell(t_shell *shell);
 int		quoting(t_shell *shell);
 void	test(t_shell shell);
-void	signal_handler();
+void	signal_handler(void);
 void	lexer(t_shell *shell);
 void	dividing_by_token(t_shell *shell, int *single, int *doble);
 int		validate_token(t_list *cmdlist);
@@ -135,7 +136,7 @@ void	redirections(t_shell *shell);
 void	restore_fd(void);
 void	exit_ctrld(t_shell shell);
 void	loop_pipe(t_list *cmdlist);
-void	init_global(char **envp, char **argv);
+void	init_g_global(char **envp, char **argv);
 int		count_closed_quotes(char *cmdline, char quote);
 char	*expand_word(char *cmd);
 void	token_expansion(t_shell *shell);
@@ -148,28 +149,29 @@ void	sigint_handler(int sig);
 void	print_msg(void);
 int		parsing_errors(t_list *cmdlist);
 int		init_shell(char **argv, char **envp);
-int limitor_function_ps(t_token *limit);
+int		limitor_function_ps(t_token *limit);
 
 //Builtins
 int		print_env(char **cmd);
 void	exit_cmd(char **cmd);
-void 	change_directory(char **cmd);
+void	change_directory(char **cmd);
 void	echo(char **cmd);
-void	exit_shell();
+void	exit_shell(void);
 void	export(char **cmd);
-void 	unset(char **cmd);
+void	unset(char **cmd);
 char	*getvar(char *cmd);
 void	change_val(char *var_name, char *cmd);
-char 	*get_name(char *cmd);
+char	*get_name(char *cmd);
 
 //Expansion
-void 	unsplit(char **matrix, t_token *token);
+void	unsplit(char **matrix, t_token *token);
 void	new_token(t_list *token_list);
 void 	free_matrix(char **mtx);
 char 	*expand(char *var_value);
 void 	join_expand_1(char **new_str, char **cmd, int i, int type);
 void 	join_expand_2(char **new_str, char **cmd, int i);
 char 	*expand_ident_2(char *cmd, char quotes);
+void	add_new(char *new_var);
 
 //Utils
 bool	is_filename(char *str);

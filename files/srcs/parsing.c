@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmateo-t <mmateo-t@student.42madrid>       +#+  +:+       +#+        */
+/*   By: mmateo-t <mmateo-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/26 11:51:44 by mmateo-t          #+#    #+#             */
-/*   Updated: 2022/02/21 18:47:58 by mmateo-t         ###   ########.fr       */
+/*   Updated: 2022/02/23 19:39:12 by mmateo-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,8 @@
 
 int	cmd_size(t_list *token_list)
 {
-	int len;
-	t_token *token;
+	int		len;
+	t_token	*token;
 
 	len = 0;
 	while (token_list)
@@ -35,8 +35,8 @@ void	prepare_execution(void	*content)
 	t_cmd_data	*data;
 	t_list		*token_list;
 	t_token		*token;
-	int i;
-	int len;
+	int			i;
+	int			len;
 
 	i = 0;
 	data = ((t_cmd_data *)content);

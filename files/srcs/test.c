@@ -3,27 +3,28 @@
 /*                                                        :::      ::::::::   */
 /*   test.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmateo-t <mmateo-t@student.42madrid>       +#+  +:+       +#+        */
+/*   By: mmateo-t <mmateo-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/11 20:02:48 by mmateo-t          #+#    #+#             */
-/*   Updated: 2022/02/20 20:02:03 by mmateo-t         ###   ########.fr       */
+/*   Updated: 2022/02/23 19:44:11 by mmateo-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-void print(void *content)
+void	print(void *content)
 {
-	t_cmd_data *data;
-	data = (t_cmd_data *)content;
+	t_cmd_data	*data;
 
+	data = (t_cmd_data *)content;
 	printf("ITER:%s\t", data->cmd);
 	printf("\n");
 }
 
-void test_token_list(t_cmd_data *cmd_data)
+void	test_token_list(t_cmd_data *cmd_data)
 {
-	t_list *token_list;
+	t_list	*token_list;
+
 	token_list = ((t_list *)cmd_data->token);
 	printf("\nTOKENS\n");
 	printf("---------------------\n");
@@ -38,9 +39,9 @@ void test_token_list(t_cmd_data *cmd_data)
 	}
 }
 
-void test_exec_cmd(t_cmd_data *cmd_data)
+void	test_exec_cmd(t_cmd_data *cmd_data)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	printf("EXEC_CMD:");
@@ -52,10 +53,11 @@ void test_exec_cmd(t_cmd_data *cmd_data)
 	printf("\n\n");
 }
 
-void test(t_shell shell)
+void	test(t_shell shell)
 {
-	t_list *token_list;
-	t_cmd_data *cmd_data;
+	t_list		*token_list;
+	t_cmd_data	*cmd_data;
+
 	(void)token_list;
 	printf("\nCMDLINE:{%s}\n\n", shell.cmdline);
 	while (shell.cmdlist)
@@ -66,5 +68,5 @@ void test(t_shell shell)
 		test_exec_cmd(cmd_data);
 		shell.cmdlist = shell.cmdlist->next;
 	}
-	printf("ExitStatus:{%i}\n", global.exit_status);
+	printf("ExitStatus:{%i}\n", g_global.exit_status);
 }

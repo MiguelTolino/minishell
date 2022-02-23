@@ -6,7 +6,7 @@
 /*   By: rgirondo <rgirondo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/21 16:32:26 by mmateo-t          #+#    #+#             */
-/*   Updated: 2022/02/23 22:56:56 by rgirondo         ###   ########.fr       */
+/*   Updated: 2022/02/23 23:18:17 by rgirondo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ int		valid_operator_arg(t_list *token)
 				{
 					printf("%c\n", token_data->word[i]);
 					throw_error("minishell: syntax error near operator argument");
-					global.exit_status = 258;
+					g_global.exit_status = 258;
 					return (-1);
 				}
 				i++;
@@ -69,7 +69,7 @@ int		validate_operators(t_list *token)
 			if (token_data->word[i + 1])
 			{
 			throw_error("minishell: syntax error near operator");
-			global.exit_status = 258;
+			g_global.exit_status = 258;
 			return (-1);
 			}
 		}
@@ -97,7 +97,7 @@ int		validate_pipes(t_list *cmd_list)
 		if (!cmd_data->cmd[i])
 		{
 			throw_error("minishell: syntax error near pipe");
-			global.exit_status = 258;
+			g_global.exit_status = 258;
 			return (-1);
 		}
 		cmd_list = cmd_list->next;

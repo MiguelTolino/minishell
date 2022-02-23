@@ -6,16 +6,16 @@
 /*   By: rgirondo <rgirondo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/12 15:41:18 by rgirondo          #+#    #+#             */
-/*   Updated: 2022/02/23 22:38:32 by rgirondo         ###   ########.fr       */
+/*   Updated: 2022/02/23 23:18:34 by rgirondo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-char *expand_dollar(char *cmd)
+char	*expand_dollar(char *cmd)
 {
-	char *new_str;
-	int i;
+	char	*new_str;
+	int		i;
 
 	i = 0;
 	new_str = ft_strdup("");
@@ -43,7 +43,7 @@ char *expand_dollar(char *cmd)
 
 char *expand_ident_2(char *cmd, char quotes)
 {
-	char *tmp;
+	char	*tmp;
 
 	printf("ya : (%s)\n", cmd);
 	if (quotes == '\"')
@@ -70,7 +70,7 @@ char *expand_ident_2(char *cmd, char quotes)
 	return (cmd);
 }
 
-char *expand(char *cmd)
+char	*expand(char *cmd)
 {
 	char *new_str;
 	int i;

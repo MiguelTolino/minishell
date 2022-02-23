@@ -6,15 +6,15 @@
 /*   By: rgirondo <rgirondo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/12 15:41:28 by rgirondo          #+#    #+#             */
-/*   Updated: 2022/02/23 21:54:07 by rgirondo         ###   ########.fr       */
+/*   Updated: 2022/02/23 23:18:41 by rgirondo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-void free_matrix(char **mtx)
+void	free_matrix(char **mtx)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (mtx[i])
@@ -28,7 +28,7 @@ void free_matrix(char **mtx)
 void	new_token(t_list *token_list)
 {
 	t_list	*new;
-	t_token *token;
+	t_token	*token;
 
 	token = (t_token *)malloc(sizeof(t_token));
 	token->word = NULL;
@@ -40,12 +40,12 @@ void	new_token(t_list *token_list)
 	token_list->next = new;
 }
 
-void join_expand_1(char **new_str, char **cmd, int i, int type)
+void	join_expand_1(char **new_str, char **cmd, int i, int type)
 {
-	char *tmp;
-	char *tmp2;
-	int	n_single;
-	int n_double;
+	char	*tmp;
+	char	*tmp2;
+	int		n_single;
+	int		n_double;
 
 	n_double = 0;
 	n_single = 0;
@@ -60,10 +60,10 @@ void join_expand_1(char **new_str, char **cmd, int i, int type)
 	new_str[0] = tmp2;
 }
 
-void join_expand_2(char **new_str, char **cmd, int i)
+void	join_expand_2(char **new_str, char **cmd, int i)
 {
-	char *tmp;
-	char *tmp2;
+	char	*tmp;
+	char	*tmp2;
 
 	tmp = NULL;
 	tmp2 = NULL;
@@ -72,9 +72,9 @@ void join_expand_2(char **new_str, char **cmd, int i)
 	free(tmp);
 	if (tmp2)
 	{
-	tmp = ft_strjoin(new_str[0], tmp2);
-	free(new_str[0]);
-	free(tmp2);
-	new_str[0] = tmp;
+		tmp = ft_strjoin(new_str[0], tmp2);
+		free(new_str[0]);
+		free(tmp2);
+		new_str[0] = tmp;
 	}
 }

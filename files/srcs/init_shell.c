@@ -3,14 +3,36 @@
 /*                                                        :::      ::::::::   */
 /*   init_shell.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmateo-t <mmateo-t@student.42madrid>       +#+  +:+       +#+        */
+/*   By: mmateo-t <mmateo-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/21 13:38:13 by mmateo-t          #+#    #+#             */
-/*   Updated: 2022/02/22 22:12:59 by mmateo-t         ###   ########.fr       */
+/*   Updated: 2022/02/23 23:11:35 by mmateo-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
+
+void	check_shlvl(void)
+{
+	char *var;
+	int	lvl;
+	char *new;
+
+	var = getvar("SHLVL");
+	if (!var)
+		add_new("SHLVL=1");
+	else
+	{
+		lvl = ft_atoi(var);
+		lvl++;
+		free(var);
+		var = ft_itoa(lvl);
+		new = ft_strjoin("SHLVL=", var);
+		change_val("SHLVL", new);
+		free(new);
+	}
+	free(var);
+}
 
 void	print_msg(void)
 {
@@ -29,7 +51,7 @@ char	**init_env(char **envp)
 	char	**new_envp;
 	int		i;
 
-	new_envp = (char **)malloc(sizeof(char *) * global.env_len);
+	new_envp = (char **)malloc(sizeof(char *) * g_global.env_len);
 	i = 0;
 	while (envp[i])
 	{
@@ -40,26 +62,27 @@ char	**init_env(char **envp)
 	return (new_envp);
 }
 
-void	init_global(char **envp, char **argv)
+void	init_g_global(char **envp, char **argv)
 {
 	int	i;
 
 	i = 0;
 	while (envp[i])
 		i++;
-	global.env_len = (i + 2);
-	global.env = init_env(envp);
-	global.exit_status = 0;
-	global.fd_stdin = dup(STDIN_FILENO);
-	global.fd_stdout = dup(STDOUT_FILENO);
-	global.exec = false;
-	global.signal_status = 0;
+	g_global.env_len = (i + 2);
+	g_global.env = init_env(envp);
+	g_global.exit_status = 0;
+	g_global.fd_stdin = dup(STDIN_FILENO);
+	g_global.fd_stdout = dup(STDOUT_FILENO);
+	g_global.exec = false;
+	g_global.signal_status = 0;
 	(void)argv;
 }
 
 int	init_shell(char **argv, char **envp)
 {
 	print_msg();
-	init_global(envp, argv);
+	init_g_global(envp, argv);
+	check_shlvl();
 	return (0);
 }

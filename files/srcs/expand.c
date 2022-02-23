@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expand.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rgirondo <rgirondo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mmateo-t <mmateo-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/04 18:59:30 by rgirondo          #+#    #+#             */
-/*   Updated: 2022/02/18 17:58:35 by rgirondo         ###   ########.fr       */
+/*   Updated: 2022/02/23 19:16:31 by mmateo-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,10 @@
 
 void	word_expand(t_list *token_list)
 {
-	t_token *token;
-	char **matrix;
-	char *tmp;
-	int i;
+	t_token	*token;
+	char	**matrix;
+	char	*tmp;
+	int		i;
 
 	i = 0;
 	token = ((t_token *)token_list->content);
@@ -41,12 +41,12 @@ void	word_expand(t_list *token_list)
 	free(matrix);
 }
 
-void expand_ident_1(void *content)
+void	expand_ident_1(void *content)
 {
 	t_cmd_data	*data;
 	t_list		*token_list;
 	t_token		*token;
-	char *tmp;
+	char		*tmp;
 
 	data = ((t_cmd_data *)content);
 	token_list = data->token;
@@ -71,7 +71,7 @@ void expand_ident_1(void *content)
 	}
 }
 
-void token_expansion(t_shell *shell)
+void	token_expansion(t_shell *shell)
 {
 	ft_lstiter(shell->cmdlist, expand_ident_1);
 }

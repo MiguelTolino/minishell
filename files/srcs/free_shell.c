@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free_shell.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmateo-t <mmateo-t@student.42madrid>       +#+  +:+       +#+        */
+/*   By: mmateo-t <mmateo-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/11 12:11:17 by mmateo-t          #+#    #+#             */
-/*   Updated: 2022/02/21 18:57:07 by mmateo-t         ###   ########.fr       */
+/*   Updated: 2022/02/23 19:36:46 by mmateo-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,13 @@
 
 void	restore_fd(void)
 {
-	dup2(global.fd_stdin, STDIN_FILENO);
-	dup2(global.fd_stdout, STDOUT_FILENO);
+	dup2(g_global.fd_stdin, STDIN_FILENO);
+	dup2(g_global.fd_stdout, STDOUT_FILENO);
 }
 
- void del_token(void *content)
+void	del_token(void *content)
 {
-	t_token *token;
+	t_token	*token;
 
 	token = ((t_token *)content);
 	free(token->word);
@@ -43,7 +43,7 @@ void	del_data(void *content)
 
 void	free_shell(t_shell *shell)
 {
-	global.exec = 0;
+	g_global.exec = 0;
 	unlink("heredoc.tmp");
 	free(shell->cmdline);
 	free(shell->prompt);
