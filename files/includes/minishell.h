@@ -6,7 +6,7 @@
 /*   By: mmateo-t <mmateo-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/03 13:27:13 by mmateo-t          #+#    #+#             */
-/*   Updated: 2022/02/24 18:33:03 by mmateo-t         ###   ########.fr       */
+/*   Updated: 2022/02/24 20:03:56 by mmateo-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -153,6 +153,7 @@ void	print_msg(void);
 int		parsing_errors(t_list *cmdlist);
 int		init_shell(char **argv, char **envp);
 int		limitor_function_ps(t_token *limit);
+void	nothing(int signal);
 
 //Builtins
 int		print_env(char **cmd);
@@ -181,6 +182,5 @@ void	add_new(char *new_var);
 bool	is_filename(char *str);
 int 	throw_set_error(const char *error, int error_code);
 int		ft_strcmp(const char *s1, const char *s2);
-
 
 #endif

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_errors.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rgirondo <rgirondo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mmateo-t <mmateo-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/21 16:32:26 by mmateo-t          #+#    #+#             */
-/*   Updated: 2022/02/24 18:02:21 by rgirondo         ###   ########.fr       */
+/*   Updated: 2022/02/24 20:48:49 by mmateo-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,6 +84,8 @@ int		validate_pipes(t_list *cmd_list)
 	t_cmd_data *cmd_data;
 
 	i = 0;
+	if (!cmd_list)
+		return (0);
 	cmd_data = cmd_list->content;
 	while (cmd_list)
 	{

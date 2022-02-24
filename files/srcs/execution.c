@@ -6,7 +6,7 @@
 /*   By: mmateo-t <mmateo-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/10 18:08:02 by mmateo-t          #+#    #+#             */
-/*   Updated: 2022/02/24 18:08:18 by mmateo-t         ###   ########.fr       */
+/*   Updated: 2022/02/24 20:50:36 by mmateo-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ int	exec_pipe(t_list *cmdlist)
 
 	fd_in = STDIN_FILENO;
 	cmd = NULL;
+	signal(SIGINT, &nothing);
 	while (cmdlist)
 	{
 		cmd = ((t_cmd_data *)cmdlist->content)->exec_cmd;
@@ -33,6 +34,8 @@ int	exec_pipe(t_list *cmdlist)
 			return (throw_error("Fork Error"));
 		else if (!pid)
 		{
+			g_global.whereami = CHILD;
+			signal(SIGQUIT, SIG_DFL);
 			dup2(fd_in, STDIN_FILENO);
 			if (cmdlist->next != NULL)
 				dup2(p[WRITE_END], STDOUT_FILENO);
@@ -41,8 +44,9 @@ int	exec_pipe(t_list *cmdlist)
 			{
 				check_path(&cmd[0]);
 				execve(cmd[0], cmd, g_global.env);
+				throw_error("Execution Error");
+				exit(g_global.exit_status);
 			}
-			throw_error("Execution Error");
 			exit(g_global.exit_status);
 		}
 		else
@@ -60,9 +64,12 @@ int	exec_simple(char **cmds)
 {
 	pid_t	pid;
 
+	signal(SIGINT, &nothing);
 	pid = fork();
 	if (!pid)
 	{
+		g_global.whereami = CHILD;
+		signal(SIGQUIT, SIG_DFL);
 		execve(cmds[0], cmds, g_global.env);
 		perror("Execution error");
 		exit(EXEC_ERROR);
@@ -78,6 +85,8 @@ int	execution(t_shell *shell)
 {
 	t_cmd_data	*data;
 
+	if (!shell->cmdlist)
+		return(g_global.exit_status);
 	data = (t_cmd_data *)shell->cmdlist->content;
 	if (ft_lstsize(shell->cmdlist) > 1)
 		exec_pipe(shell->cmdlist);
