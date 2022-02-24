@@ -3,14 +3,23 @@
 /*                                                        :::      ::::::::   */
 /*   expand.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmateo-t <mmateo-t@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rgirondo <rgirondo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/04 18:59:30 by rgirondo          #+#    #+#             */
-/*   Updated: 2022/02/23 19:16:31 by mmateo-t         ###   ########.fr       */
+/*   Updated: 2022/02/24 19:00:13 by rgirondo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
+
+void	expand_aux(char **token_word)
+{
+	char	*tmp;
+
+	tmp = expand(*token_word);
+	free(*token_word);
+	*token_word = tmp;
+}
 
 void	word_expand(t_list *token_list)
 {
@@ -46,7 +55,6 @@ void	expand_ident_1(void *content)
 	t_cmd_data	*data;
 	t_list		*token_list;
 	t_token		*token;
-	char		*tmp;
 
 	data = ((t_cmd_data *)content);
 	token_list = data->token;
@@ -54,19 +62,11 @@ void	expand_ident_1(void *content)
 	{
 		token = ((t_token *)token_list->content);
 		if (token->quote == 2 || token->quote == 1 || token->type == ARG)
-		{
-			tmp = expand(token->word);
-			free(token->word);
-			token->word = tmp;
-		}
+			expand_aux(&token->word);
 		if (token->quote == 0 && token->type == CMD)
 			word_expand(token_list);
 		if (token->type == OPEN_FILE || token->type == EXIT_FILE)
-		{
-			tmp = expand(token->word);
-			free(token->word);
-			token->word = tmp;
-		}
+			expand_aux(&token->word);
 		token_list = token_list->next;
 	}
 }

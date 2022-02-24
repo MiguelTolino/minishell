@@ -1,31 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   env.c                                              :+:      :+:    :+:   */
+/*   errors_2.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rgirondo <rgirondo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/12/05 19:52:45 by mmateo-t          #+#    #+#             */
-/*   Updated: 2022/02/24 18:53:38 by rgirondo         ###   ########.fr       */
+/*   Created: 2021/12/06 11:45:39 by mmateo-t          #+#    #+#             */
+/*   Updated: 2022/02/24 18:51:44 by rgirondo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/minishell.h"
+#include "../includes/minishell.h"
 
-int	print_env(char **cmd)
+int	throw_error(const char *error)
 {
-	int	i;
-
-	i = 0;
-	if (len_array(cmd) > 1)
-	{
-		throw_error("Error: Too many arguments");
-		return (1);
-	}
-	while (g_global.env[i])
-	{
-		printf("%s\n", g_global.env[i]);
-		i++;
-	}
+	perror(error);
 	return (1);
+}
+
+int	throw_set_error(const char *error, int error_code)
+{
+	perror(error);
+	g_global.exit_status = error_code;
+	return (-1);
+}
+
+void	exit_ctrld(char *cmdline)
+{
+	free(cmdline);
+	rl_clear_history();
+	printf("exit\n");
+	exit_shell();
 }

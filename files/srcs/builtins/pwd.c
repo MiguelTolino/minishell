@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pwd.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmateo-t <mmateo-t@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rgirondo <rgirondo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/24 17:15:45 by mmateo-t          #+#    #+#             */
-/*   Updated: 2022/02/24 17:22:13 by mmateo-t         ###   ########.fr       */
+/*   Updated: 2022/02/24 18:54:39 by rgirondo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,5 +25,5 @@ int	builtins_pwd(char **cmd)
 	pwd = getvar("PWD");
 	printf("%s\n", pwd);
 	free(pwd);
-	return (0);
+	return (1);
 }

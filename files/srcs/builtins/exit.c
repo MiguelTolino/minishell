@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmateo-t <mmateo-t@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rgirondo <rgirondo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/15 13:38:48 by mmateo-t          #+#    #+#             */
-/*   Updated: 2022/02/24 11:07:42 by mmateo-t         ###   ########.fr       */
+/*   Updated: 2022/02/24 19:18:52 by rgirondo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,13 +28,13 @@ int	contains_digits(char *cmd)
 	return (1);
 }
 
-void	exit_cmd(char **cmd)
+int	exit_cmd(char **cmd)
 {
 	if (len_array(cmd) > 2)
 	{
 		throw_error("Error: Too many arguments");
 		g_global.exit_status = 1;
-		return ;
+		return (1);
 	}
 	printf("exit\n");
 	if (!contains_digits(cmd[1]))
@@ -46,4 +46,5 @@ void	exit_cmd(char **cmd)
 		exit(EXIT_SUCCESS);
 	else
 		exit(ft_atoi(cmd[1]));
+	return (1);
 }
