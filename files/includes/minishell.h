@@ -6,7 +6,7 @@
 /*   By: mmateo-t <mmateo-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/03 13:27:13 by mmateo-t          #+#    #+#             */
-/*   Updated: 2022/02/24 20:03:56 by mmateo-t         ###   ########.fr       */
+/*   Updated: 2022/02/24 23:19:56 by mmateo-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -177,6 +177,7 @@ void 	join_expand_1(char **new_str, char **cmd, int i, int type);
 void 	join_expand_2(char **new_str, char **cmd, int i);
 char 	*expand_ident_2(char *cmd, char quotes);
 void	add_new(char *new_var);
+char **create_env_export(void);
 
 //Utils
 bool	is_filename(char *str);

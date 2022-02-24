@@ -6,7 +6,7 @@
 /*   By: mmateo-t <mmateo-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/07 11:19:52 by mmateo-t          #+#    #+#             */
-/*   Updated: 2022/02/24 01:28:22 by mmateo-t         ###   ########.fr       */
+/*   Updated: 2022/02/24 23:20:17 by mmateo-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -146,5 +146,11 @@ void	export(char **cmd)
 				free(new_var);
 		}
 		i++;
-	}	
+	}
+	if (g_global.env_export)
+	{
+		dfree(g_global.env_export);
+		g_global.env_export = create_env_export();
+	}
+	
 }
