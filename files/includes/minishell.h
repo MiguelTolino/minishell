@@ -6,7 +6,7 @@
 /*   By: mmateo-t <mmateo-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/03 13:27:13 by mmateo-t          #+#    #+#             */
-/*   Updated: 2022/02/24 23:19:56 by mmateo-t         ###   ########.fr       */
+/*   Updated: 2022/02/24 23:53:21 by mmateo-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -154,6 +154,7 @@ int		parsing_errors(t_list *cmdlist);
 int		init_shell(char **argv, char **envp);
 int		limitor_function_ps(t_token *limit);
 void	nothing(int signal);
+void	stop_heredoc(int sig);
 
 //Builtins
 int		print_env(char **cmd);

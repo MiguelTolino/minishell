@@ -6,7 +6,7 @@
 /*   By: mmateo-t <mmateo-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/08 19:28:38 by mmateo-t          #+#    #+#             */
-/*   Updated: 2022/02/24 13:28:57 by mmateo-t         ###   ########.fr       */
+/*   Updated: 2022/02/24 23:53:09 by mmateo-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,11 +90,9 @@ int	limitor_function_ps(t_token *limit)
 	pid = fork();
 	if (!pid)
 	{
-		//signal(SIGINT, &sigint_handler);
 		while (!stop)
 		{
-			if (g_global.signal_status == SIGINT)
-				exit(1);
+			signal(SIGINT, &stop_heredoc);
 			str = readline("heredoc > ");
 			if (!str)
 				continue ;

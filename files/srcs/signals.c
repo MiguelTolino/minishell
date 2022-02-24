@@ -6,7 +6,7 @@
 /*   By: mmateo-t <mmateo-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/17 12:22:42 by mmateo-t          #+#    #+#             */
-/*   Updated: 2022/02/24 20:34:02 by mmateo-t         ###   ########.fr       */
+/*   Updated: 2022/02/24 23:52:06 by mmateo-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,13 @@ void	ctrl_c(int sig)
 		rl_replace_line("", 0);
 		if (g_global.whereami == MAIN)
 			rl_redisplay();
+}
+
+void	stop_heredoc(int sig)
+{
+	(void)sig;
+	ft_putstr_fd("\n", STDERR_FILENO);
+	exit(130);
 }
 
 void	sigint_handler(int sig)
@@ -54,9 +61,7 @@ void	sigint_handler(int sig)
 		rl_replace_line("", 0);
 		if (g_global.whereami == MAIN)
 			rl_redisplay();
-
-
-			
+	
 }
 
 void	signal_handler(void)
