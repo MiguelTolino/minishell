@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rgirondo <rgirondo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mmateo-t <mmateo-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/03 13:27:13 by mmateo-t          #+#    #+#             */
-/*   Updated: 2022/02/23 23:20:45 by rgirondo         ###   ########.fr       */
+/*   Updated: 2022/02/24 01:41:36 by mmateo-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,6 +103,7 @@ typedef struct s_shell
 struct s_global
 {
 	char	**env;
+	char	**env_export;
 	int		env_len;
 	int		exit_status;
 	int		fd_stdin;
@@ -117,7 +118,7 @@ char	*build_prompt(void);
 int		exec_builtins(char **cmd);
 int		save_env(char **envp);
 int		throw_error(const char *error);
-void	check_args(int argc);
+void	check_args(int argc;
 void	parsing(t_shell *shell);
 int		execution(t_shell *shell);
 int		search_pipes(char *cmdline);
