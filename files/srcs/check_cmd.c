@@ -6,7 +6,7 @@
 /*   By: mmateo-t <mmateo-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/10 18:50:51 by mmateo-t          #+#    #+#             */
-/*   Updated: 2022/02/24 13:11:55 by mmateo-t         ###   ########.fr       */
+/*   Updated: 2022/02/25 00:12:42 by mmateo-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,14 +42,6 @@ char	*search_cmd(char *cmd, char **paths)
 	}
 	return (NULL);
 }
-
-/*
-	1. Check cmd and paths is different of null
-	2. check cmd is an actually path
-	3. if dont -> add_path and check if exists
-	4. double free
-	5.return cmd
-*/
 
 int	check_path(char **cmd)
 {

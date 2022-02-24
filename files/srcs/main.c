@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rgirondo <rgirondo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mmateo-t <mmateo-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/03 09:55:58 by mmateo-t          #+#    #+#             */
-/*   Updated: 2022/02/24 23:52:16 by rgirondo         ###   ########.fr       */
+/*   Updated: 2022/02/25 00:05:17 by mmateo-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-void	loop(t_shell *shell)
+void loop(t_shell *shell)
 {
 	char *trim;
 	while (1)
@@ -29,30 +29,27 @@ void	loop(t_shell *shell)
 		if (!ft_strlen(shell->cmdline))
 		{
 			free(shell->cmdline);
-			continue ;
+			continue;
 		}
 		add_history(shell->cmdline);
 		if (quoting(shell))
 		{
 			free_shell(shell);
-			continue ;
+			continue;
 		}
-		if (parsing_errors(shell->cmdlist))
-		{
-			token_expansion(shell);
-			parsing(shell);
-			redirections(shell);
-			if (!g_global.exec)
-				execution(shell);
-		}
+		token_expansion(shell);
+		parsing(shell);
+		redirections(shell);
+		if (!g_global.exec)
+			execution(shell);
 		free_shell(shell);
 		system("leaks minishell");
 	}
 }
 
-int	main(int argc, char **argv, char **envp)
+int main(int argc, char **argv, char **envp)
 {
-	t_shell	shell;
+	t_shell shell;
 
 	check_args(argc);
 	init_shell(argv, envp);

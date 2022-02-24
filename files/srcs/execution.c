@@ -6,7 +6,7 @@
 /*   By: mmateo-t <mmateo-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/10 18:08:02 by mmateo-t          #+#    #+#             */
-/*   Updated: 2022/02/24 20:50:36 by mmateo-t         ###   ########.fr       */
+/*   Updated: 2022/02/25 00:14:18 by mmateo-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,7 @@ int	execution(t_shell *shell)
 	t_cmd_data	*data;
 
 	if (!shell->cmdlist)
-		return(g_global.exit_status);
+		return (g_global.exit_status);
 	data = (t_cmd_data *)shell->cmdlist->content;
 	if (ft_lstsize(shell->cmdlist) > 1)
 		exec_pipe(shell->cmdlist);

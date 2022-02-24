@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   errors.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rgirondo <rgirondo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mmateo-t <mmateo-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/06 11:45:39 by mmateo-t          #+#    #+#             */
-/*   Updated: 2022/02/24 23:50:58 by rgirondo         ###   ########.fr       */
+/*   Updated: 2022/02/25 00:13:55 by mmateo-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,8 @@ bool	search_errors(char *cmdline)
 	i = 0;
 	while (cmdline[i])
 	{
-		if (cmdline[i] == '|' && ((!ft_isalnum(cmdline[i + 1]) && cmdline[i + 1] != ' ') || (!ft_isalnum(cmdline[i - 1])
+		if (cmdline[i] == '|' && ((!ft_isalnum(cmdline[i + 1])
+					&& cmdline[i + 1] != ' ') || (!ft_isalnum(cmdline[i - 1])
 					&& cmdline[i - 1] != ' ')))
 			return (true);
 		i++;

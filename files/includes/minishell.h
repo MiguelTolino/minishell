@@ -3,10 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rgirondo <rgirondo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mmateo-t <mmateo-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/03 13:27:13 by mmateo-t          #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2022/02/25 00:21:19 by rgirondo         ###   ########.fr       */
+=======
+/*   Updated: 2022/02/25 00:46:07 by mmateo-t         ###   ########.fr       */
+>>>>>>> 7fd659d967ce9ffed5b5611d636dcd098a7635ce
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -154,6 +158,8 @@ int		parsing_errors(t_list *cmdlist);
 int		init_shell(char **argv, char **envp);
 int		limitor_function_ps(t_token *limit);
 void	nothing(int signal);
+void	stop_heredoc(int sig);
+void	newline(int signal);
 
 //Builtins
 int		print_env(char **cmd);
@@ -177,7 +183,7 @@ void	join_expand_1(char **new_str, char **cmd, int i, int type);
 void	join_expand_2(char **new_str, char **cmd, int i);
 char	*expand_ident_2(char *cmd, char quotes);
 void	add_new(char *new_var);
-char **create_env_export(void);
+char	**create_env_export(void);
 
 //Utils
 bool	is_filename(char *str);
