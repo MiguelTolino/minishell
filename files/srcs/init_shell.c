@@ -6,7 +6,7 @@
 /*   By: mmateo-t <mmateo-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/21 13:38:13 by mmateo-t          #+#    #+#             */
-/*   Updated: 2022/02/24 01:36:08 by mmateo-t         ###   ########.fr       */
+/*   Updated: 2022/02/24 11:52:15 by mmateo-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,6 +108,7 @@ void	init_g_global(char **envp, char **argv)
 	g_global.fd_stdout = dup(STDOUT_FILENO);
 	g_global.exec = false;
 	g_global.signal_status = 0;
+	g_global.whereami = 0;
 	(void)argv;
 }
 

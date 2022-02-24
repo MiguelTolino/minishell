@@ -6,7 +6,7 @@
 /*   By: mmateo-t <mmateo-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/10 18:50:51 by mmateo-t          #+#    #+#             */
-/*   Updated: 2022/02/23 21:30:41 by mmateo-t         ###   ########.fr       */
+/*   Updated: 2022/02/24 13:11:55 by mmateo-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,12 +62,15 @@ int	check_path(char **cmd)
 	if (!*cmd || !path || !paths)
 	{
 		free(path);
-		free(paths);
+		dfree(paths);
 		return (0);
 	}
 	free(path);
 	if (!(access(*cmd, X_OK)))
+	{
+		dfree(paths);
 		return (1);
+	}
 	else
 	{
 		new_cmd = search_cmd(*cmd, paths);

@@ -6,7 +6,7 @@
 /*   By: mmateo-t <mmateo-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/05 19:14:58 by mmateo-t          #+#    #+#             */
-/*   Updated: 2022/02/23 20:15:33 by mmateo-t         ###   ########.fr       */
+/*   Updated: 2022/02/24 17:23:18 by mmateo-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int	exec_builtins(char **cmd)
 	is_builtin = 0;
 	if (!ft_strncmp(cmd[0], "pwd", ft_strlen("pwd")))
 	{
-		printf("%s\n", getvar("PWD"));
+		builtins_pwd(cmd);
 		is_builtin = 1;
 	}
 	else if (!ft_strncmp(cmd[0], "env", ft_strlen("env")))

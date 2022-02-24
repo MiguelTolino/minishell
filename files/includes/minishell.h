@@ -6,7 +6,7 @@
 /*   By: rgirondo <rgirondo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/03 13:27:13 by mmateo-t          #+#    #+#             */
-/*   Updated: 2022/02/24 17:57:27 by rgirondo         ###   ########.fr       */
+/*   Updated: 2022/02/24 18:02:26 by rgirondo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,8 @@
 # define MAXHIST 128 // max number of commands to be saved
 # define READ_END 0
 # define WRITE_END 1
-# define OPERATORS "|><"
+# define WHITESPACE "\t\n\v\f\r "
+# define REDIRECTION "|<>"
 
 enum e_quote
 {
@@ -110,6 +111,7 @@ struct s_global
 	int		fd_stdout;
 	bool	exec;
 	int		signal_status;
+	int		whereami;
 };
 
 struct s_global	g_global;
@@ -135,7 +137,7 @@ int		validate_token(t_list *cmdlist);
 int		ignore_quotes(char *cmd, char type, int *i, int *num);
 void	redirections(t_shell *shell);
 void	restore_fd(void);
-void	exit_ctrld(t_shell shell);
+void	exit_ctrld(char *cmdline);
 void	loop_pipe(t_list *cmdlist);
 void	init_g_global(char **envp, char **argv);
 int		count_closed_quotes(char *cmdline, char quote);
@@ -163,6 +165,7 @@ void	unset(char **cmd);
 char	*getvar(char *cmd);
 void	change_val(char *var_name, char *cmd);
 char	*get_name(char *cmd);
+int		builtins_pwd(char **cmd);
 
 //Expansion
 void	unsplit(char **matrix, t_token *token);

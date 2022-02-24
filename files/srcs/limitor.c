@@ -6,7 +6,7 @@
 /*   By: mmateo-t <mmateo-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/08 19:28:38 by mmateo-t          #+#    #+#             */
-/*   Updated: 2022/02/23 19:38:22 by mmateo-t         ###   ########.fr       */
+/*   Updated: 2022/02/24 13:28:57 by mmateo-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,18 +31,22 @@ int	limitor_function(t_token *limit)
 	char	*tmp;
 
 	stop = 0;
-	g_global.signal_status = 1;
 	fd = open("heredoc.tmp", O_WRONLY | O_CREAT | O_TRUNC, 0644);
 	if (fd < 0)
 	{
 		throw_error("Could not create temporary file\n");
 		return (1);
 	}
-	g_global.signal_status = HERE_DOC;
+	g_global.whereami = HD;
 	while (!stop)
 	{
-		//signal(SIGINT, &signal_handler);
+		signal(SIGINT, &sigint_handler);
 		str = readline("heredoc > ");
+		if (g_global.signal_status == SIGINT && g_global.whereami == HD)
+		{
+			free(str);
+			break ;
+		}
 		if (!str)
 			continue ;
 		if (!limit->quote)
@@ -76,19 +80,21 @@ int	limitor_function_ps(t_token *limit)
 	pid_t	pid;
 
 	stop = 0;
-	g_global.signal_status = 1;
+	g_global.whereami = HD;
 	fd = open("heredoc.tmp", O_WRONLY | O_CREAT | O_TRUNC, 0644);
 	if (fd < 0)
 	{
 		throw_error("Could not create temporary file\n");
 		return (1);
 	}
-	g_global.signal_status = 1;
 	pid = fork();
 	if (!pid)
 	{
+		//signal(SIGINT, &sigint_handler);
 		while (!stop)
 		{
+			if (g_global.signal_status == SIGINT)
+				exit(1);
 			str = readline("heredoc > ");
 			if (!str)
 				continue ;
@@ -110,9 +116,11 @@ int	limitor_function_ps(t_token *limit)
 			}
 			free(str);
 		}
+		exit(g_global.exit_status);
 	}
 	else if (pid > 0)
 	{
+		signal(SIGINT, SIG_IGN);
 		waitpid(pid, &g_global.exit_status, 0);
 		close(fd);
 	}
