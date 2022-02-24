@@ -6,24 +6,11 @@
 /*   By: rgirondo <rgirondo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/12 15:41:28 by rgirondo          #+#    #+#             */
-/*   Updated: 2022/02/23 23:18:41 by rgirondo         ###   ########.fr       */
+/*   Updated: 2022/02/24 20:41:37 by rgirondo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
-
-void	free_matrix(char **mtx)
-{
-	int	i;
-
-	i = 0;
-	while (mtx[i])
-	{
-		free(mtx[i]);
-		i++;
-	}
-	free(mtx);
-}
 
 void	new_token(t_list *token_list)
 {

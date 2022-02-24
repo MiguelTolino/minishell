@@ -6,7 +6,7 @@
 /*   By: rgirondo <rgirondo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/05 20:13:01 by mmateo-t          #+#    #+#             */
-/*   Updated: 2022/02/24 18:02:42 by rgirondo         ###   ########.fr       */
+/*   Updated: 2022/02/24 21:07:54 by rgirondo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,14 +53,21 @@ void	change_old_new_pwd(void)
 		free(pwd);
 }
 
-void	change_directory(char **cmd)
+void	go_old_pwd(char **path)
+{
+	free(*path);
+	*path = getvar("OLDPWD");
+	printf("%s\n", *path);
+}
+
+int	change_directory(char **cmd)
 {
 	char	*path;
 
 	if (cmd[2] && cmd[1])
 	{
 		printf("cd: too many arguments\n");
-		return ;
+		return (1);
 	}
 	if (!cmd[1])
 		path = getvar("HOME");
@@ -69,18 +76,15 @@ void	change_directory(char **cmd)
 	if (path && path[0] == '~')
 		path = change_home(path);
 	if (path && path[0] == '-' && !path[1])
-	{
-		free(path);
-		path = getvar("OLDPWD");
-		printf("%s\n", path);
-	}
+		go_old_pwd(&path);
 	if (chdir(path) < 0)
 	{
 		printf("cd: string not in pwd: %s\n", path);
 		free(path);
-		return ;
+		return (1);
 	}
 	if (path)
 		free(path);
 	change_old_new_pwd();
+	return (1);
 }

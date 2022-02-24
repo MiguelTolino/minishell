@@ -3,20 +3,42 @@
 /*                                                        :::      ::::::::   */
 /*   unset.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmateo-t <mmateo-t@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rgirondo <rgirondo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/07 11:20:57 by mmateo-t          #+#    #+#             */
-/*   Updated: 2022/02/23 19:48:31 by mmateo-t         ###   ########.fr       */
+/*   Updated: 2022/02/24 23:48:15 by rgirondo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-void	unset(char **cmd)
+void	unset_aux(char *cmd, char **envp)
 {
 	int		i;
-	int		j;
 	char	*old_var;
+
+	i = 0;
+	old_var = 0;
+	while (envp[i] && !ft_strnstr(envp[i], cmd, ft_strlen(cmd)))
+		i++;
+	if (envp[i])
+	{
+		old_var = envp[i];
+		while (envp[i])
+		{
+			envp[i] = envp[i + 1];
+			i++;
+		}
+		free(old_var);
+		g_global.env_len -= 1;
+	}
+}
+
+// error al unset las variables que se usan para hacer el Prompt
+
+int	unset(char **cmd)
+{
+	int		j;
 	char	**envp;
 
 	j = 0;
@@ -24,22 +46,13 @@ void	unset(char **cmd)
 	while (cmd[j])
 	{
 		if (cmd[j])
-		{
-			i = 0;
-			while (envp[i] && !ft_strnstr(envp[i], cmd[j], ft_strlen(cmd[j])))
-				i++;
-			if (envp[i])
-			{
-				old_var = envp[i];
-				while (envp[i])
-				{
-					envp[i] = envp[i + 1];
-					i++;
-				}
-				free(old_var);
-				g_global.env_len -= 1;
-			}
-		}
+			unset_aux(cmd[j], envp);
 		j++;
 	}
+	if (g_global.env_export)
+	{
+		dfree(g_global.env_export);
+		g_global.env_export = create_env_export();
+	}
+	return (1);
 }
