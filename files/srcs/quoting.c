@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   quoting.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmateo-t <mmateo-t@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rgirondo <rgirondo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/05 17:05:47 by mmateo-t          #+#    #+#             */
-/*   Updated: 2022/02/23 19:41:37 by mmateo-t         ###   ########.fr       */
+/*   Updated: 2022/02/24 17:53:00 by rgirondo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,7 @@ int	quoting(t_shell *shell)
 	n_single = count_closed_quotes(shell->cmdline, '\'') / 2;
 	n_doble = count_closed_quotes(shell->cmdline, '\"') / 2;
 	dividing_by_token(shell, &n_single, &n_doble);
-	if (validate_token(shell->cmdlist))
+	if (!parsing_errors(shell->cmdlist))
 		return (1);
 	return (0);
 }
