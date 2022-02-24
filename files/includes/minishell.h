@@ -6,7 +6,7 @@
 /*   By: rgirondo <rgirondo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/03 13:27:13 by mmateo-t          #+#    #+#             */
-/*   Updated: 2022/02/24 18:02:26 by rgirondo         ###   ########.fr       */
+/*   Updated: 2022/02/24 21:51:20 by rgirondo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -156,30 +156,30 @@ int		limitor_function_ps(t_token *limit);
 
 //Builtins
 int		print_env(char **cmd);
-void	exit_cmd(char **cmd);
-void	change_directory(char **cmd);
-void	echo(char **cmd);
+int		exit_cmd(char **cmd);
+int		change_directory(char **cmd);
+int		echo(char **cmd);
 void	exit_shell(void);
-void	export(char **cmd);
-void	unset(char **cmd);
+int		export(char **cmd);
+int		unset(char **cmd);
 char	*getvar(char *cmd);
 void	change_val(char *var_name, char *cmd);
 char	*get_name(char *cmd);
 int		builtins_pwd(char **cmd);
+char	**create_env_export(void);
 
 //Expansion
 void	unsplit(char **matrix, t_token *token);
 void	new_token(t_list *token_list);
-void 	free_matrix(char **mtx);
-char 	*expand(char *var_value);
-void 	join_expand_1(char **new_str, char **cmd, int i, int type);
-void 	join_expand_2(char **new_str, char **cmd, int i);
-char 	*expand_ident_2(char *cmd, char quotes);
+char	*expand(char *var_value);
+void	join_expand_1(char **new_str, char **cmd, int i, int type);
+void	join_expand_2(char **new_str, char **cmd, int i);
+char	*expand_ident_2(char *cmd, char quotes);
 void	add_new(char *new_var);
 
 //Utils
 bool	is_filename(char *str);
-int 	throw_set_error(const char *error, int error_code);
-
+int		valid_op_arg_aux(t_token *token_data);
+int		ft_strcmp(const char *s1, const char *s2);
 
 #endif

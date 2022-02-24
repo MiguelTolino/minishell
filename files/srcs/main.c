@@ -6,7 +6,7 @@
 /*   By: rgirondo <rgirondo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/03 09:55:58 by mmateo-t          #+#    #+#             */
-/*   Updated: 2022/02/24 18:02:09 by rgirondo         ###   ########.fr       */
+/*   Updated: 2022/02/24 20:41:46 by rgirondo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ void	loop(t_shell *shell)
 				execution(shell);
 		}
 		free_shell(shell); // If cmdline is empty ocurss a leak
-		system("leaks minishell");
+		//system("leaks minishell");
 	}
 }
 

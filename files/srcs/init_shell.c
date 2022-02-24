@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_shell.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmateo-t <mmateo-t@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rgirondo <rgirondo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/21 13:38:13 by mmateo-t          #+#    #+#             */
-/*   Updated: 2022/02/24 11:52:15 by mmateo-t         ###   ########.fr       */
+/*   Updated: 2022/02/24 23:01:03 by rgirondo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ char **create_env_export(void)
 	j = 0;
 	letter = 'A';
 	array = (char **)malloc(sizeof(char *) * g_global.env_len + 1);
-	array[g_global.env_len] = NULL;
+	array[g_global.env_len + 1] = NULL;
 	while (i < g_global.env_len)
 	{
 		j = 0;

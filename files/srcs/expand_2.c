@@ -3,14 +3,26 @@
 /*                                                        :::      ::::::::   */
 /*   expand_2.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmateo-t <mmateo-t@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rgirondo <rgirondo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/12 15:41:18 by rgirondo          #+#    #+#             */
-/*   Updated: 2022/02/23 23:40:29 by mmateo-t         ###   ########.fr       */
+/*   Updated: 2022/02/24 19:23:01 by rgirondo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
+
+void	expand_aux_2(char *cmd, char *quotes, int *i)
+{
+	int	j;
+
+	j = *i;
+	if (cmd[j] == '\"' || cmd[j] == '\'')
+		*quotes = cmd[j++];
+	else
+		*quotes = 0;
+	*i = j;
+}
 
 char	*expand_dollar(char *cmd)
 {
@@ -41,7 +53,7 @@ char	*expand_dollar(char *cmd)
 	return (new_str);
 }
 
-char *expand_ident_2(char *cmd, char quotes)
+char	*expand_ident_2(char *cmd, char quotes)
 {
 	char	*tmp;
 
@@ -71,19 +83,13 @@ char *expand_ident_2(char *cmd, char quotes)
 
 char	*expand(char *cmd)
 {
-	char *new_str;
-	int i;
-	char quotes;
+	char	*new_str;
+	int		i;
+	char	quotes;
 
 	i = 0;
 	new_str = ft_strdup("");
-	if (cmd[i] == '\"' || cmd[i] == '\'')
-	{
-		quotes = cmd[i];
-		i++;
-	}
-	else
-		quotes = 0;
+	expand_aux_2(cmd, &quotes, &i);
 	while (cmd[i])
 	{
 		if (cmd[i] == '\"' || cmd[i] == '\'')
@@ -93,10 +99,7 @@ char	*expand(char *cmd)
 			else if (quotes != 0)
 				continue ;
 			else
-			{
-				i--;
-				quotes = cmd[i];
-			}
+				quotes = cmd[--i];
 			join_expand_1(&new_str, &cmd, i, 1);
 			cmd += i;
 			i = 0;

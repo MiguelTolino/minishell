@@ -3,14 +3,30 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmateo-t <mmateo-t@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rgirondo <rgirondo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/10 20:11:30 by mmateo-t          #+#    #+#             */
-/*   Updated: 2022/02/23 19:44:39 by mmateo-t         ###   ########.fr       */
+/*   Updated: 2022/02/24 21:50:57 by rgirondo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
+
+int ft_strcmp(const char *s1, const char *s2)
+{
+	size_t	i;
+	
+	if (!s1 && !s2)
+		return (0);
+	i = 0;
+	while (s1[i] != '\0' || s2[i] != '\0')
+	{
+		if (s1[i] != s2[i])
+			return ((unsigned char)s1[i] - (unsigned char)s2[i]);
+		i++;
+	}
+	return (0);
+}
 
 bool	is_filename(char *str)
 {

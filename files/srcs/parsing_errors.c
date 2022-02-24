@@ -6,20 +6,16 @@
 /*   By: rgirondo <rgirondo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/21 16:32:26 by mmateo-t          #+#    #+#             */
-/*   Updated: 2022/02/24 18:02:21 by rgirondo         ###   ########.fr       */
+/*   Updated: 2022/02/24 20:06:21 by rgirondo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-int		valid_operator_arg(t_list *token)
+int	valid_operator_arg(t_list *token)
 {
-	int i;
-	char quotes;
-	t_token *token_data;
+	t_token	*token_data;
 
-	i = 0;
-	quotes = 0;
 	if (!token || !token->content)
 		return (0);
 	token_data = token->content;
@@ -32,30 +28,19 @@ int		valid_operator_arg(t_list *token)
 			if (token)
 				token_data = token->content;
 			else
-				return (throw_set_error("minishell: error near operator argument", 258));
-			while (token_data->word[i])
-			{
-				if (token_data->word[i] == '\"' || token_data->word[i] == '\'')
-				{
-					quotes = token_data->word[i];
-					i++;
-					while (token_data->word[i] != quotes)
-						i++;
-				}
-				if (ft_strchr("<>", token_data->word[i]))
-					return (throw_set_error("minishell: error near operator argument", 258));
-				i++;
-			}
+				return (throw_set_error(PARSING_ERROR_OP_ARG, 258));
+			if (!valid_op_arg_aux(token_data))
+				return (-1);
 		}
 		token = token->next;
 	}
 	return (0);
 }
 
-int		validate_operators(t_list *token)
+int	validate_operators(t_list *token)
 {
-	int i;
-	t_token *token_data;
+	int		i;
+	t_token	*token_data;
 
 	i = 0;
 	if (!token)
@@ -69,19 +54,17 @@ int		validate_operators(t_list *token)
 			if (token_data->word[i] == token_data->word[i + 1])
 				i++;
 			if (token_data->word[i + 1])
-				return (throw_set_error("minishell: error near operator argument", 258));
+				return (throw_set_error(PARSING_ERROR_OP, 258));
 		}
 		token = token->next;
 	}
 	return (0);
 }
 
-//FIXME: Peta en pipes
-
-int		validate_pipes(t_list *cmd_list)
+int	validate_pipes(t_list *cmd_list)
 {
-	int i;
-	t_cmd_data *cmd_data;
+	int			i;
+	t_cmd_data	*cmd_data;
 
 	i = 0;
 	cmd_data = cmd_list->content;
@@ -93,17 +76,17 @@ int		validate_pipes(t_list *cmd_list)
 		if (valid_operator_arg(cmd_data->token))
 			return (-1);
 		while (cmd_data->cmd[i] == ' ')
-			i++;	
+			i++;
 		if (!cmd_data->cmd[i])
-			return (throw_set_error("minishell: error near operator argument", 258));
+			return (throw_set_error(PARSING_ERROR_PIPE, 258));
 		cmd_list = cmd_list->next;
 	}
 	return (0);
 }
 
-int		parsing_errors(t_list *cmdlist)
+int	parsing_errors(t_list *cmdlist)
 {
 	if (validate_pipes(cmdlist))
 		return (0);
-	return(1);
+	return (1);
 }
