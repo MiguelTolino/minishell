@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   errors.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rgirondo <rgirondo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mmateo-t <mmateo-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/06 11:45:39 by mmateo-t          #+#    #+#             */
-/*   Updated: 2022/02/24 18:02:51 by rgirondo         ###   ########.fr       */
+/*   Updated: 2022/02/24 18:14:05 by mmateo-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	exit_shell(void)
 void	exit_ctrld(char *cmdline)
 {
 	free(cmdline);
-	rl_clear_history();
+	//rl_clear_history();
 	printf("exit\n");
 	exit_shell();
 }
