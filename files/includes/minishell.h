@@ -6,7 +6,7 @@
 /*   By: rgirondo <rgirondo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/03 13:27:13 by mmateo-t          #+#    #+#             */
-/*   Updated: 2022/02/24 17:40:32 by rgirondo         ###   ########.fr       */
+/*   Updated: 2022/02/24 17:57:27 by rgirondo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,6 +103,7 @@ typedef struct s_shell
 struct s_global
 {
 	char	**env;
+	char	**env_export;
 	int		env_len;
 	int		exit_status;
 	int		fd_stdin;
