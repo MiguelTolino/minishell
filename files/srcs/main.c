@@ -6,7 +6,7 @@
 /*   By: rgirondo <rgirondo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/03 09:55:58 by mmateo-t          #+#    #+#             */
-/*   Updated: 2022/02/23 23:17:57 by rgirondo         ###   ########.fr       */
+/*   Updated: 2022/02/24 17:51:07 by rgirondo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,17 +37,14 @@ int	main(int argc, char **argv, char **envp)
 			free_shell(&shell);
 			continue ;
 		}
-		if (parsing_errors(shell.cmdlist))
-		{
-			token_expansion(&shell);
-			parsing(&shell);
-			test(shell);
-			redirections(&shell);
-			if (!g_global.exec)
-				execution(&shell);
-		}
+		token_expansion(&shell);
+		parsing(&shell);
+		test(shell);
+		redirections(&shell);
+		if (!g_global.exec)
+			execution(&shell);
 		free_shell(&shell); // If cmdline is empty ocurss a leak
-		//system("leaks minishell");
+		system("leaks minishell");
 	}
 	dfree(g_global.env);
 	return (0);

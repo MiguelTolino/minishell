@@ -6,7 +6,7 @@
 /*   By: rgirondo <rgirondo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/03 13:27:13 by mmateo-t          #+#    #+#             */
-/*   Updated: 2022/02/23 23:20:45 by rgirondo         ###   ########.fr       */
+/*   Updated: 2022/02/24 17:40:32 by rgirondo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -175,5 +175,7 @@ void	add_new(char *new_var);
 
 //Utils
 bool	is_filename(char *str);
+int 	throw_set_error(const char *error, int error_code);
+
 
 #endif

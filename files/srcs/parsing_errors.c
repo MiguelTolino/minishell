@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_errors.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmateo-t <mmateo-t@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rgirondo <rgirondo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/21 16:32:26 by mmateo-t          #+#    #+#             */
-/*   Updated: 2022/02/23 23:38:03 by mmateo-t         ###   ########.fr       */
+/*   Updated: 2022/02/24 17:46:15 by rgirondo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ int		valid_operator_arg(t_list *token)
 
 	i = 0;
 	quotes = 0;
-	if (!token)
+	if (!token || !token->content)
 		return (0);
 	token_data = token->content;
 	while (token)
@@ -29,7 +29,10 @@ int		valid_operator_arg(t_list *token)
 		if (token_data->type >= 2 && token_data->type <= 5)
 		{
 			token = token->next;
-			token_data = token->content;
+			if (token)
+				token_data = token->content;
+			else
+				return (throw_set_error("minishell: error near operator argument", 258));
 			while (token_data->word[i])
 			{
 				if (token_data->word[i] == '\"' || token_data->word[i] == '\'')
@@ -39,13 +42,8 @@ int		valid_operator_arg(t_list *token)
 					while (token_data->word[i] != quotes)
 						i++;
 				}
-				if (!ft_isalnum(token_data->word[i]) && !ft_strchr("_$\"\'", token_data->word[i]))
-				{
-					printf("%c\n", token_data->word[i]);
-					throw_error("minishell: syntax error near operator argument");
-					g_global.exit_status = 258;
-					return (-1);
-				}
+				if (ft_strchr("<>", token_data->word[i]))
+					return (throw_set_error("minishell: error near operator argument", 258));
 				i++;
 			}
 		}
@@ -71,11 +69,7 @@ int		validate_operators(t_list *token)
 			if (token_data->word[i] == token_data->word[i + 1])
 				i++;
 			if (token_data->word[i + 1])
-			{
-			throw_error("minishell: syntax error near operator");
-			g_global.exit_status = 258;
-			return (-1);
-			}
+				return (throw_set_error("minishell: error near operator argument", 258));
 		}
 		token = token->next;
 	}
@@ -101,11 +95,7 @@ int		validate_pipes(t_list *cmd_list)
 		while (cmd_data->cmd[i] == ' ')
 			i++;	
 		if (!cmd_data->cmd[i])
-		{
-			throw_error("minishell: syntax error near pipe");
-			g_global.exit_status = 258;
-			return (-1);
-		}
+			return (throw_set_error("minishell: error near operator argument", 258));
 		cmd_list = cmd_list->next;
 	}
 	return (0);

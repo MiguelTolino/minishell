@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   errors.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmateo-t <mmateo-t@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rgirondo <rgirondo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/06 11:45:39 by mmateo-t          #+#    #+#             */
-/*   Updated: 2022/02/23 21:55:27 by mmateo-t         ###   ########.fr       */
+/*   Updated: 2022/02/24 17:39:51 by rgirondo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,13 @@ int	throw_error(const char *error)
 {
 	perror(error);
 	return (1);
+}
+
+int throw_set_error(const char *error, int error_code)
+{
+	perror(error);
+	g_global.exit_status = error_code;
+	return (-1);
 }
 
 void	check_args(int argc)
