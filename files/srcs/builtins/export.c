@@ -6,18 +6,24 @@
 /*   By: rgirondo <rgirondo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/07 11:19:52 by mmateo-t          #+#    #+#             */
-/*   Updated: 2022/02/24 23:54:14 by rgirondo         ###   ########.fr       */
+/*   Updated: 2022/02/25 00:50:32 by rgirondo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-void	export_aux(char *cmd)
+int	export_aux(char *cmd)
 {
 	char	*new_var;
 	char	*var_name;
 
 	var_name = get_name(cmd);
+	if (!is_filename(var_name))
+	{
+		if (var_name)
+			free(var_name);
+		return (throw_set_error(EXPORT_IDENT, 1));
+	}
 	new_var = getvar(var_name);
 	if (ft_strchr(cmd, '=') && !new_var)
 		add_new(cmd);
@@ -27,6 +33,7 @@ void	export_aux(char *cmd)
 		free(var_name);
 	if (new_var)
 		free(new_var);
+	return (0);
 }
 
 void	print_export_env(void)
@@ -69,7 +76,10 @@ int	export(char **cmd)
 	while (cmd[i])
 	{
 		if (cmd[i])
-			export_aux(cmd[i]);
+		{
+			if (export_aux(cmd[i]))
+				return (1);
+		}
 		i++;
 	}
 	if (g_global.env_export)

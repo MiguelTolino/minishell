@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmateo-t <mmateo-t@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rgirondo <rgirondo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/10 20:11:30 by mmateo-t          #+#    #+#             */
-/*   Updated: 2022/02/25 00:27:10 by mmateo-t         ###   ########.fr       */
+/*   Updated: 2022/02/25 00:56:02 by rgirondo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ bool	is_filename(char *str)
 		return (false);
 	while (str[i])
 	{
-		if (!ft_isalnum(str[i]) && str[i] != '_' && (str[0] != '_'
+		if ((!ft_isalnum(str[i]) && str[i] != '_') || (str[0] != '_'
 				&& !ft_isalpha(str[0])))
 			return (false);
 		i++;

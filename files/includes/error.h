@@ -6,7 +6,7 @@
 /*   By: rgirondo <rgirondo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/10 21:27:24 by mmateo-t          #+#    #+#             */
-/*   Updated: 2022/02/24 21:04:19 by rgirondo         ###   ########.fr       */
+/*   Updated: 2022/02/25 00:19:57 by rgirondo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 # define PARSING_ERROR_OP_ARG "Unexpected parse error near operator arg"
 # define PARSING_ERROR_OP "Unexpected parse error near operator"
 # define PARSING_ERROR_PIPE "Unexpected parse error near pipe"
+# define EXPORT_IDENT "Export not a valid identifier"
 # define EXEC_ERROR 127
 
 int	error_parsing(char *cmdline);
