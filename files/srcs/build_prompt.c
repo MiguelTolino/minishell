@@ -6,7 +6,7 @@
 /*   By: mmateo-t <mmateo-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/05 17:46:43 by mmateo-t          #+#    #+#             */
-/*   Updated: 2022/02/21 15:53:17 by mmateo-t         ###   ########.fr       */
+/*   Updated: 2022/02/24 17:55:05 by mmateo-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ char	*build_prompt(void)
 	if (!dir || !user || !prompt)
 	{
 		throw_error("Error building prompt");
-		return (NULL);
+		exit(1);
 	}
 	ft_strlcat(prompt, COLOR(1, 33), ft_strlen(COLOR(1, 33)) + 1);
 	ft_strlcat(prompt, user, ft_strlen(prompt) + ft_strlen(user) + 1);

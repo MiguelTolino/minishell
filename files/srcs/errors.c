@@ -6,7 +6,7 @@
 /*   By: mmateo-t <mmateo-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/06 11:45:39 by mmateo-t          #+#    #+#             */
-/*   Updated: 2022/02/23 21:55:27 by mmateo-t         ###   ########.fr       */
+/*   Updated: 2022/02/24 16:33:08 by mmateo-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,9 @@ void	exit_shell(void)
 	exit(g_global.exit_status);
 }
 
-void	exit_ctrld(t_shell shell)
+void	exit_ctrld(char *cmdline)
 {
-	free(shell.prompt);
+	free(cmdline);
 	rl_clear_history();
 	printf("exit\n");
 	exit_shell();

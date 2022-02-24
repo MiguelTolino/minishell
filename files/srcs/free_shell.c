@@ -6,7 +6,7 @@
 /*   By: mmateo-t <mmateo-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/11 12:11:17 by mmateo-t          #+#    #+#             */
-/*   Updated: 2022/02/23 19:36:46 by mmateo-t         ###   ########.fr       */
+/*   Updated: 2022/02/24 16:31:34 by mmateo-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,9 +44,10 @@ void	del_data(void *content)
 void	free_shell(t_shell *shell)
 {
 	g_global.exec = 0;
+	g_global.signal_status = 0;
+	g_global.whereami = 0;
 	unlink("heredoc.tmp");
 	free(shell->cmdline);
-	free(shell->prompt);
 	ft_lstclear(&shell->cmdlist, del_data);
 	restore_fd();
 }

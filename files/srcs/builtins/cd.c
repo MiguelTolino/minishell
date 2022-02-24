@@ -6,11 +6,13 @@
 /*   By: mmateo-t <mmateo-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/05 20:13:01 by mmateo-t          #+#    #+#             */
-/*   Updated: 2022/02/23 19:45:25 by mmateo-t         ###   ########.fr       */
+/*   Updated: 2022/02/24 13:45:53 by mmateo-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
+
+//FIXME: Genera leaks
 
 char	*change_home(char *path)
 {

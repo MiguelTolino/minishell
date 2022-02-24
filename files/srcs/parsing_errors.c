@@ -6,7 +6,7 @@
 /*   By: mmateo-t <mmateo-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/21 16:32:26 by mmateo-t          #+#    #+#             */
-/*   Updated: 2022/02/23 23:38:03 by mmateo-t         ###   ########.fr       */
+/*   Updated: 2022/02/24 17:01:54 by mmateo-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ int		valid_operator_arg(t_list *token)
 		if (token_data->type >= 2 && token_data->type <= 5)
 		{
 			token = token->next;
-			token_data = token->content;
+			token_data = token->content; //FIXME: SEGFAULT
 			while (token_data->word[i])
 			{
 				if (token_data->word[i] == '\"' || token_data->word[i] == '\'')
@@ -39,7 +39,7 @@ int		valid_operator_arg(t_list *token)
 					while (token_data->word[i] != quotes)
 						i++;
 				}
-				if (!ft_isalnum(token_data->word[i]) && !ft_strchr("_$\"\'", token_data->word[i]))
+				if (ft_strchr("<>", token_data->word[i]) || !token_data->word)
 				{
 					printf("%c\n", token_data->word[i]);
 					throw_error("minishell: syntax error near operator argument");
