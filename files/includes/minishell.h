@@ -6,7 +6,7 @@
 /*   By: rgirondo <rgirondo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/03 13:27:13 by mmateo-t          #+#    #+#             */
-/*   Updated: 2022/02/24 23:50:17 by rgirondo         ###   ########.fr       */
+/*   Updated: 2022/02/25 00:21:19 by rgirondo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -183,5 +183,6 @@ char **create_env_export(void);
 bool	is_filename(char *str);
 int		valid_op_arg_aux(t_token *token_data);
 int		ft_strcmp(const char *s1, const char *s2);
+bool	is_filename(char *str);
 
 #endif

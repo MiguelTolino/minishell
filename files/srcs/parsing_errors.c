@@ -6,7 +6,7 @@
 /*   By: rgirondo <rgirondo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/21 16:32:26 by mmateo-t          #+#    #+#             */
-/*   Updated: 2022/02/24 23:52:28 by rgirondo         ###   ########.fr       */
+/*   Updated: 2022/02/25 00:14:56 by rgirondo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ int	valid_operator_arg(t_list *token)
 				token_data = token->content;
 			else
 				return (throw_set_error(PARSING_ERROR_OP_ARG, 258));
-			if (!valid_op_arg_aux(token_data))
+			if (valid_op_arg_aux(token_data))
 				return (-1);
 		}
 		token = token->next;
