@@ -3,14 +3,23 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rgirondo <rgirondo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mmateo-t <mmateo-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/07 11:19:52 by mmateo-t          #+#    #+#             */
-/*   Updated: 2022/02/23 23:20:00 by rgirondo         ###   ########.fr       */
+/*   Updated: 2022/02/24 01:28:22 by mmateo-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
+
+void	print_export_env(void)
+{
+	int i;
+
+	i = 0;
+	while (g_global.env_export[i])
+		printf("%s\n", g_global.env_export[i++]);
+}
 
 char	*free_join(char *join, char *str)
 {
@@ -119,6 +128,8 @@ void	export(char **cmd)
 	int		i;
 
 	i = 1;
+	if (len_array(cmd) == 1)
+		print_export_env();
 	while (cmd[i])
 	{
 		if (cmd[i])

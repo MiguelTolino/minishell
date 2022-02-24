@@ -6,11 +6,42 @@
 /*   By: mmateo-t <mmateo-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/21 13:38:13 by mmateo-t          #+#    #+#             */
-/*   Updated: 2022/02/23 23:11:35 by mmateo-t         ###   ########.fr       */
+/*   Updated: 2022/02/24 01:36:08 by mmateo-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
+#define DECLARE "declare -x "
+
+char **create_env_export(void)
+{
+	int i;
+	int j;
+	char letter;
+	char **array;
+
+	i = 0;
+	j = 0;
+	letter = 'A';
+	array = (char **)malloc(sizeof(char *) * g_global.env_len + 1);
+	array[g_global.env_len] = NULL;
+	while (i < g_global.env_len)
+	{
+		j = 0;
+		while (g_global.env[j])
+		{
+			if (g_global.env[j][0] == letter)
+				array[i++] = ft_strjoin(DECLARE, g_global.env[j]); 
+			j++;
+		}
+		if (letter == '_')
+			break;
+		letter++;
+		if (letter == '{')
+			letter = '_';
+	}
+	return (array);
+}
 
 void	check_shlvl(void)
 {
@@ -71,6 +102,7 @@ void	init_g_global(char **envp, char **argv)
 		i++;
 	g_global.env_len = (i + 2);
 	g_global.env = init_env(envp);
+	g_global.env_export = create_env_export();
 	g_global.exit_status = 0;
 	g_global.fd_stdin = dup(STDIN_FILENO);
 	g_global.fd_stdout = dup(STDOUT_FILENO);
