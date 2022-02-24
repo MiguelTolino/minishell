@@ -6,7 +6,7 @@
 /*   By: rgirondo <rgirondo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/21 16:32:26 by mmateo-t          #+#    #+#             */
-/*   Updated: 2022/02/24 20:06:21 by rgirondo         ###   ########.fr       */
+/*   Updated: 2022/02/24 23:52:28 by rgirondo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,8 @@ int	validate_pipes(t_list *cmd_list)
 	t_cmd_data	*cmd_data;
 
 	i = 0;
+	if (!cmd_list)
+		return (0);
 	cmd_data = cmd_list->content;
 	while (cmd_list)
 	{

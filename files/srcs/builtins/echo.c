@@ -6,7 +6,7 @@
 /*   By: rgirondo <rgirondo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/07 11:16:30 by mmateo-t          #+#    #+#             */
-/*   Updated: 2022/02/24 18:58:27 by rgirondo         ###   ########.fr       */
+/*   Updated: 2022/02/24 23:51:07 by rgirondo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int	echo(char **cmd)
 		printf("\n");
 		return (1);
 	}
-	if (!ft_strncmp(cmd[i], "-n", ft_strlen(cmd[1])))
+	if (!ft_strcmp(cmd[i], "-n"))
 	{
 		option = 1;
 		i++;

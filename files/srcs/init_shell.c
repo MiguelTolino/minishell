@@ -6,7 +6,7 @@
 /*   By: rgirondo <rgirondo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/21 13:38:13 by mmateo-t          #+#    #+#             */
-/*   Updated: 2022/02/24 23:01:03 by rgirondo         ###   ########.fr       */
+/*   Updated: 2022/02/24 23:51:50 by rgirondo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,7 @@ char **create_env_export(void)
 	i = 0;
 	j = 0;
 	letter = 'A';
-	array = (char **)malloc(sizeof(char *) * g_global.env_len + 1);
-	array[g_global.env_len + 1] = NULL;
+	array = (char **)ft_calloc(g_global.env_len + 1, sizeof(char *));
 	while (i < g_global.env_len)
 	{
 		j = 0;
@@ -34,11 +33,13 @@ char **create_env_export(void)
 				array[i++] = ft_strjoin(DECLARE, g_global.env[j]); 
 			j++;
 		}
-		if (letter == '_')
-			break;
 		letter++;
+		if (letter == '[')
+			letter = 'a';
 		if (letter == '{')
 			letter = '_';
+		if (letter == 96)
+			break;
 	}
 	return (array);
 }
