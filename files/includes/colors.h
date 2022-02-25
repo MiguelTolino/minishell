@@ -6,10 +6,9 @@
 /*   By: mmateo-t <mmateo-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/05 18:02:29 by mmateo-t          #+#    #+#             */
-/*   Updated: 2022/02/23 18:58:46 by mmateo-t         ###   ########.fr       */
+/*   Updated: 2022/02/25 11:12:28 by mmateo-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 
 /* Colors
 Black       0;30     Dark Gray     1;30
@@ -29,14 +28,12 @@ Light Gray  0;37     White         1;37
 
 #ifndef COLORS_H
 # define COLORS_H
-#  define NC "\001\033[0m\002" //No Color
-#  define BLACK "\001\033[0;30m\002"
-#  define RED "\001\033[0;31m\002"
-#  define GREEN "\001\033[0;32m\002"
-#  define BROWN "\001\033[0;33m\002"
-#  define BLUE "\001\033[0;34m\002"
-#  define PURPLE "\001\033[0;35m\002"
-#  define CYAN "\001\033[0;36m\002"
-#  define COLOR(x,y) "\001\033["#x";"#y"m\002"
-
+# define NC "\001\033[0m\002" //No Color
+# define BLACK "\001\033[0;30m\002"
+# define RED "\001\033[0;31m\002"
+# define GREEN "\001\033[0;32m\002"
+# define BROWN "\001\033[0;33m\002"
+# define BLUE "\001\033[0;34m\002"
+# define PURPLE "\001\033[0;35m\002"
+# define CYAN "\001\033[0;36m\002"
 #endif
