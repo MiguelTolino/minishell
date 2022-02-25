@@ -3,52 +3,20 @@
 /*                                                        :::      ::::::::   */
 /*   init_shell.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rgirondo <rgirondo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mmateo-t <mmateo-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/21 13:38:13 by mmateo-t          #+#    #+#             */
-/*   Updated: 2022/02/24 23:51:50 by rgirondo         ###   ########.fr       */
+/*   Updated: 2022/02/25 02:55:46 by mmateo-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
-#define DECLARE "declare -x "
-
-char **create_env_export(void)
-{
-	int i;
-	int j;
-	char letter;
-	char **array;
-
-	i = 0;
-	j = 0;
-	letter = 'A';
-	array = (char **)ft_calloc(g_global.env_len + 1, sizeof(char *));
-	while (i < g_global.env_len)
-	{
-		j = 0;
-		while (g_global.env[j])
-		{
-			if (g_global.env[j][0] == letter)
-				array[i++] = ft_strjoin(DECLARE, g_global.env[j]); 
-			j++;
-		}
-		letter++;
-		if (letter == '[')
-			letter = 'a';
-		if (letter == '{')
-			letter = '_';
-		if (letter == 96)
-			break;
-	}
-	return (array);
-}
 
 void	check_shlvl(void)
 {
-	char *var;
-	int	lvl;
-	char *new;
+	char	*var;
+	int		lvl;
+	char	*new;
 
 	var = getvar("SHLVL");
 	if (!var)
@@ -76,22 +44,6 @@ void	print_msg(void)
 	printf("|__|_|  /__|___|  /__/____  >___|  /\\___  >____/____/\n");
 	printf("      \\/        \\/        \\/     \\/     \\/           \n\n%s",
 		NC);
-}
-
-char	**init_env(char **envp)
-{
-	char	**new_envp;
-	int		i;
-
-	new_envp = (char **)malloc(sizeof(char *) * g_global.env_len);
-	i = 0;
-	while (envp[i])
-	{
-		new_envp[i] = ft_strdup(envp[i]);
-		i++;
-	}
-	new_envp[i] = NULL;
-	return (new_envp);
 }
 
 void	init_g_global(char **envp, char **argv)

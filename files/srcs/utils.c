@@ -3,19 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rgirondo <rgirondo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mmateo-t <mmateo-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/10 20:11:30 by mmateo-t          #+#    #+#             */
-/*   Updated: 2022/02/25 00:56:02 by rgirondo         ###   ########.fr       */
+/*   Updated: 2022/02/25 01:07:18 by mmateo-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-int ft_strcmp(const char *s1, const char *s2)
+int	ft_strcmp(const char *s1, const char *s2)
 {
 	size_t	i;
-	
+
 	if (!s1 && !s2)
 		return (0);
 	i = 0;

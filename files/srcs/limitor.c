@@ -6,30 +6,56 @@
 /*   By: mmateo-t <mmateo-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/08 19:28:38 by mmateo-t          #+#    #+#             */
-/*   Updated: 2022/02/25 00:50:06 by mmateo-t         ###   ########.fr       */
+/*   Updated: 2022/02/25 03:21:31 by mmateo-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-/*
-1. Create a temporal file
-2. Use readline to read line by line
-3. Save in file
-4. if str == limit
-5. Delete file
+void	check_heredoc(char *str, int fd, t_token *limit, int *stop)
+{
+	if (!ft_strnstr(str, limit->word, ft_strlen(limit->word)))
+	{
+		ft_putstr_fd(str, fd);
+		ft_putchar_fd('\n', fd);
+	}
+	else
+	{
+		ft_putchar_fd('\n', fd);
+		*stop = 1;
+	}
+}
 
-*/
+void	heredoc_child(t_token *limit, int fd)
+{
+	int		stop;
+	char	*tmp;
+	char	*str;
+
+	stop = 0;
+	while (!stop)
+	{
+		signal(SIGINT, &stop_heredoc);
+		str = readline("heredoc > ");
+		if (!str)
+			continue ;
+		if (!limit->quote)
+		{
+			tmp = expand(str);
+			free(str);
+			str = tmp;
+		}
+		check_heredoc(str, fd, limit, &stop);
+		free(str);
+	}
+	exit(g_global.exit_status);
+}
 
 int	limitor_function_ps(t_token *limit)
 {
 	int		fd;
-	int		stop;
-	char	*str;
-	char	*tmp;
 	pid_t	pid;
 
-	stop = 0;
 	g_global.whereami = HD;
 	fd = open("heredoc.tmp", O_WRONLY | O_CREAT | O_TRUNC, 0644);
 	if (fd < 0)
@@ -39,33 +65,7 @@ int	limitor_function_ps(t_token *limit)
 	}
 	pid = fork();
 	if (!pid)
-	{
-		while (!stop)
-		{
-			signal(SIGINT, &stop_heredoc);
-			str = readline("heredoc > ");
-			if (!str)
-				continue ;
-			if (!limit->quote)
-			{
-				tmp = expand(str);
-				free(str);
-				str = tmp;
-			}
-			if (!ft_strnstr(str, limit->word, ft_strlen(limit->word)))
-			{
-				ft_putstr_fd(str, fd);
-				ft_putchar_fd('\n', fd);
-			}
-			else
-			{
-				ft_putchar_fd('\n', fd);
-				stop = 1;
-			}
-			free(str);
-		}
-		exit(g_global.exit_status);
-	}
+		heredoc_child(limit, fd);
 	else if (pid > 0)
 	{
 		signal(SIGINT, SIG_IGN);

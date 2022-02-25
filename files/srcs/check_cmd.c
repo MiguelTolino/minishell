@@ -6,7 +6,7 @@
 /*   By: mmateo-t <mmateo-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/10 18:50:51 by mmateo-t          #+#    #+#             */
-/*   Updated: 2022/02/25 00:12:42 by mmateo-t         ###   ########.fr       */
+/*   Updated: 2022/02/25 02:47:21 by mmateo-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,21 +43,11 @@ char	*search_cmd(char *cmd, char **paths)
 	return (NULL);
 }
 
-int	check_path(char **cmd)
+int	check_access(char **cmd, char **paths)
 {
-	char	*path;
-	char	**paths;
 	char	*new_cmd;
 
-	path = getvar("PATH");
-	paths = ft_split(path, ':');
-	if (!*cmd || !path || !paths)
-	{
-		free(path);
-		dfree(paths);
-		return (0);
-	}
-	free(path);
+	new_cmd = NULL;
 	if (!(access(*cmd, X_OK)))
 	{
 		dfree(paths);
@@ -75,4 +65,21 @@ int	check_path(char **cmd)
 		}
 	}
 	return (0);
+}
+
+int	check_path(char **cmd)
+{
+	char	*path;
+	char	**paths;
+
+	path = getvar("PATH");
+	paths = ft_split(path, ':');
+	if (!*cmd || !path || !paths)
+	{
+		free(path);
+		dfree(paths);
+		return (0);
+	}
+	free(path);
+	return (check_access(cmd, paths));
 }

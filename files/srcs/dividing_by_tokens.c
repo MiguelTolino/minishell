@@ -6,7 +6,7 @@
 /*   By: mmateo-t <mmateo-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/14 12:14:24 by mmateo-t          #+#    #+#             */
-/*   Updated: 2022/02/23 19:11:44 by mmateo-t         ###   ########.fr       */
+/*   Updated: 2022/02/25 03:25:49 by mmateo-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,42 +48,6 @@ int	validate_token(t_list *cmdlist)
 		cmdlist = cmdlist->next;
 	}
 	return (0);
-}
-
-unsigned int	select_type(t_token *token, int old_type)
-{
-	size_t			len;
-	unsigned int	type;
-
-	type = 0;
-	len = ft_strlen(token->word);
-	if (!ft_strncmp(token->word, "<", len))
-		return (FILE_IN);
-	if (!ft_strncmp(token->word, "<<", len))
-		return (HERE_DOC);
-	if (!ft_strncmp(token->word, ">", len))
-		return (FILE_OUT);
-	if (!ft_strncmp(token->word, ">>", len))
-		return (FILE_OUT_SUR);
-	if (old_type == FILE_IN)
-		return (OPEN_FILE);
-	if (old_type == FILE_OUT)
-		return (EXIT_FILE);
-	if (old_type == HERE_DOC)
-		return (LIMITOR);
-	if (old_type == FILE_OUT_SUR)
-		return (EXIT_FILE_RET);
-	if (old_type < 0)
-		return (CMD);
-	if (old_type <= 1)
-		return (ARG);
-	return (type);
-}
-
-void	ignore_spaces(char *cmd, int *i)
-{
-	while (cmd[*i] == ' ')
-		(*i)++;
 }
 
 void	save_token(char *cmd, t_list **token_list, int *single, int *doble)
