@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   unset.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rgirondo <rgirondo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mmateo-t <mmateo-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/07 11:20:57 by mmateo-t          #+#    #+#             */
-/*   Updated: 2022/02/24 23:48:15 by rgirondo         ###   ########.fr       */
+/*   Updated: 2022/02/25 11:21:33 by mmateo-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,6 @@ void	unset_aux(char *cmd, char **envp)
 		g_global.env_len -= 1;
 	}
 }
-
-// error al unset las variables que se usan para hacer el Prompt
 
 int	unset(char **cmd)
 {

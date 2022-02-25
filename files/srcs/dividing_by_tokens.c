@@ -6,85 +6,56 @@
 /*   By: mmateo-t <mmateo-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/14 12:14:24 by mmateo-t          #+#    #+#             */
-/*   Updated: 2022/02/25 03:25:49 by mmateo-t         ###   ########.fr       */
+/*   Updated: 2022/02/25 11:19:55 by mmateo-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
+#define I 0
+#define START 1
+#define OLD_TYPE 2
 
-//Divide by tokens and assign a type
-/*
-	1º Recorrer la lista hasta encontrar un espacio
-	2º Crear una nueva lista de token y guardar el substring en dicha lista
-	3º Asignar que tipo de palabra o comando es
-	4º Terminar la lista de token y empezar con el siguiente comando
-*/
-
-int	validate_token(t_list *cmdlist)
+int	ignore_chars(int *i, int *single, int *doble, char *cmd)
 {
-	t_cmd_data	*data;
-	t_list		*token_list;
-	t_token		*token;
-	t_token		*next_token;
+	int	quote;
 
-	while (cmdlist)
+	while (cmd[*i] != ' ' && cmd[*i])
 	{
-		data = ((t_cmd_data *)cmdlist->content);
-		token_list = data->token;
-		while (token_list)
-		{
-			token = (t_token *)token_list->content;
-			if (token_list->next == NULL)
-				break ;
-			next_token = (t_token *)token_list->next->content;
-			if ((token->type >= 2 && token->type <= 5)
-				&& ((next_token->type >= 2 && next_token->type <= 5)))
-			{
-				g_global.exit_status = EXIT_FAILURE;
-				return (throw_error(PARSING_ERROR));
-			}
-			token_list = token_list->next;
-		}
-		cmdlist = cmdlist->next;
+		quote = ignore_quotes(cmd, '\'', i, single);
+		if (!quote)
+			quote = ignore_quotes(cmd, '\"', i, doble);
+		else
+			ignore_quotes(cmd, '\"', i, doble);
+		if (!cmd[*i])
+			break ;
+		(*i)++;
 	}
-	return (0);
+	return (quote);
 }
 
 void	save_token(char *cmd, t_list **token_list, int *single, int *doble)
 {
 	t_list	*list;
-	int		i;
-	int		start;
-	int		old_type;
+	int		var[3];
 	t_token	*token;
 	int		quote;
 
-	i = 0;
 	list = NULL;
-	start = 0;
-	old_type = -1;
-	while (cmd[i])
+	var[I] = 0;
+	var[START] = 0;
+	var[OLD_TYPE] = -1;
+	while (cmd[var[I]])
 	{
-		ignore_spaces(cmd, &i);
-		if (!cmd[i])
+		ignore_spaces(cmd, &var[I]);
+		if (!cmd[var[I]])
 			break ;
-		start = i;
-		while (cmd[i] != ' ' && cmd[i])
-		{
-			quote = ignore_quotes(cmd, '\'', &i, single);
-			if (!quote)
-				quote = ignore_quotes(cmd, '\"', &i, doble);
-			else
-				ignore_quotes(cmd, '\"', &i, doble);
-			if (!cmd[i])
-				break ;
-			i++;
-		}
+		var[START] = var[I];
+		quote = ignore_chars(&var[I], single, doble, cmd);
 		token = (t_token *)malloc(sizeof(t_token));
-		token->word = ft_substr(cmd, start, i - start);
-		token->type = select_type(token, old_type);
+		token->word = ft_substr(cmd, var[START], var[I] - var[START]);
+		token->type = select_type(token, var[OLD_TYPE]);
 		token->quote = quote;
-		old_type = token->type;
+		var[OLD_TYPE] = token->type;
 		list = ft_lstnew(token);
 		ft_lstadd_back(token_list, list);
 	}
