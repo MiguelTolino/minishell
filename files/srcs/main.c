@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmateo-t <mmateo-t@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rgirondo <rgirondo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/03 09:55:58 by mmateo-t          #+#    #+#             */
-/*   Updated: 2022/02/25 00:05:17 by mmateo-t         ###   ########.fr       */
+/*   Updated: 2022/02/25 02:57:47 by rgirondo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ void loop(t_shell *shell)
 			continue;
 		}
 		token_expansion(shell);
+		//test(*shell);
 		parsing(shell);
 		redirections(shell);
 		if (!g_global.exec)
