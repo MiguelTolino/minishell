@@ -6,7 +6,7 @@
 /*   By: rgirondo <rgirondo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/12 15:41:18 by rgirondo          #+#    #+#             */
-/*   Updated: 2022/02/24 19:23:01 by rgirondo         ###   ########.fr       */
+/*   Updated: 2022/02/25 04:16:46 by rgirondo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ char	*expand_dollar(char *cmd)
 			cmd += i;
 			i = 0;
 		}
-		if (cmd[0] == '$')
+		if (cmd[0] == '$' && cmd[1] != ' ' && cmd[1] != '\0')
 		{
 			cmd += 1;
 			while (ft_isalnum(cmd[i]) || cmd[i] == '?')
