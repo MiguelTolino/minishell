@@ -6,7 +6,7 @@
 /*   By: mmateo-t <mmateo-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/07 11:20:57 by mmateo-t          #+#    #+#             */
-/*   Updated: 2022/02/25 11:21:33 by mmateo-t         ###   ########.fr       */
+/*   Updated: 2022/02/25 11:27:33 by mmateo-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,11 +16,18 @@ void	unset_aux(char *cmd, char **envp)
 {
 	int		i;
 	char	*old_var;
+	char	*var_name;
 
 	i = 0;
-	old_var = 0;
-	while (envp[i] && !ft_strnstr(envp[i], cmd, ft_strlen(cmd)))
-		i++;
+	if (envp[i])
+		var_name = get_name(envp[i]);
+	while (envp[i] && ft_strcmp(var_name, cmd))
+	{
+		free(var_name);
+		var_name = get_name(envp[++i]);
+	}
+	if (var_name)
+		free(var_name);
 	if (envp[i])
 	{
 		old_var = envp[i];
