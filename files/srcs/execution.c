@@ -6,13 +6,18 @@
 /*   By: mmateo-t <mmateo-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/10 18:08:02 by mmateo-t          #+#    #+#             */
-/*   Updated: 2022/02/25 00:14:18 by mmateo-t         ###   ########.fr       */
+/*   Updated: 2022/02/25 01:49:59 by mmateo-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-//FIXME: Aprender a usar kill para eliminiar procesos abiertos
+void	parent_process(pid_t pid, int p[2], int *fd_in)
+{
+	waitpid(pid, &g_global.exit_status, 0);
+	close(p[WRITE_END]);
+	*fd_in = p[READ_END];
+}
 
 int	exec_pipe(t_list *cmdlist)
 {
@@ -33,27 +38,10 @@ int	exec_pipe(t_list *cmdlist)
 		if (pid < 0)
 			return (throw_error("Fork Error"));
 		else if (!pid)
-		{
-			g_global.whereami = CHILD;
-			signal(SIGQUIT, SIG_DFL);
-			dup2(fd_in, STDIN_FILENO);
-			if (cmdlist->next != NULL)
-				dup2(p[WRITE_END], STDOUT_FILENO);
-			close(p[READ_END]);
-			if (!exec_builtins(cmd))
-			{
-				check_path(&cmd[0]);
-				execve(cmd[0], cmd, g_global.env);
-				throw_error("Execution Error");
-				exit(g_global.exit_status);
-			}
-			exit(g_global.exit_status);
-		}
+			child_process(fd_in, cmdlist, cmd, p);
 		else
 		{
-			waitpid(pid, &g_global.exit_status, 0);
-			close(p[WRITE_END]);
-			fd_in = p[READ_END];
+			parent_process(pid, p, &fd_in);
 			cmdlist = cmdlist->next;
 		}
 	}

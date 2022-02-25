@@ -6,15 +6,33 @@
 /*   By: mmateo-t <mmateo-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/03 09:55:58 by mmateo-t          #+#    #+#             */
-/*   Updated: 2022/02/25 00:05:17 by mmateo-t         ###   ########.fr       */
+/*   Updated: 2022/02/25 02:35:59 by mmateo-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-void loop(t_shell *shell)
+char	*trim_cmdline(char *cmdline)
 {
-	char *trim;
+	char	*trim;
+
+	trim = ft_strtrim(cmdline, WHITESPACE);
+	free(cmdline);
+	return (trim);
+}
+
+void	exp_pars_redir_exec(t_shell *shell)
+{
+	token_expansion(shell);
+	parsing(shell);
+	redirections(shell);
+	if (!g_global.exec)
+		execution(shell);
+	free_shell(shell);
+}
+
+void	loop(t_shell *shell)
+{
 	while (1)
 	{
 		signal_handler();
@@ -23,33 +41,26 @@ void loop(t_shell *shell)
 		free(shell->prompt);
 		if (shell->cmdline == NULL)
 			exit_ctrld(shell->cmdline);
-		trim = ft_strtrim(shell->cmdline, WHITESPACE);
-		free(shell->cmdline);
-		shell->cmdline = trim;
+		shell->cmdline = trim_cmdline(shell->cmdline);
 		if (!ft_strlen(shell->cmdline))
 		{
 			free(shell->cmdline);
-			continue;
+			continue ;
 		}
 		add_history(shell->cmdline);
 		if (quoting(shell))
 		{
 			free_shell(shell);
-			continue;
+			continue ;
 		}
-		token_expansion(shell);
-		parsing(shell);
-		redirections(shell);
-		if (!g_global.exec)
-			execution(shell);
-		free_shell(shell);
+		exp_pars_redir_exec(shell);
 		system("leaks minishell");
 	}
 }
 
-int main(int argc, char **argv, char **envp)
+int	main(int argc, char **argv, char **envp)
 {
-	t_shell shell;
+	t_shell	shell;
 
 	check_args(argc);
 	init_shell(argv, envp);

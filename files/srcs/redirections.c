@@ -6,28 +6,17 @@
 /*   By: mmateo-t <mmateo-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/24 12:00:24 by mmateo-t          #+#    #+#             */
-/*   Updated: 2022/02/24 12:47:38 by mmateo-t         ###   ########.fr       */
+/*   Updated: 2022/02/25 03:19:27 by mmateo-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-//FIXME:  '< oufile ls'
-//FIXME: REdicreccion de entrada no funciona -> SEGFAULT
-
-int	select_redirection(t_token *token)
+int	exit_file_redir(t_token *token)
 {
 	int	fd;
 
 	fd = 0;
-	if (token->type == OPEN_FILE)
-	{
-		fd = open(token->word, O_RDONLY);
-		if (fd < 0)
-			return (throw_error("Error opening a file"));
-		if (dup2(fd, STDIN_FILENO) < 0)
-			return (throw_error("Error in infile redirection"));
-	}
 	if (token->type == EXIT_FILE)
 	{
 		fd = open(token->word, O_CREAT | O_WRONLY, 0644);
@@ -44,16 +33,37 @@ int	select_redirection(t_token *token)
 		if (dup2(fd, STDOUT_FILENO) < 0)
 			return (throw_error("Error in append outfile redirection"));
 	}
-	if (token->type == LIMITOR)
+	return (fd);
+}
+
+int	heredoc_function(t_token *token, int *fd)
+{
+	limitor_function_ps(token);
+	g_global.whereami = 0;
+	*fd = open("heredoc.tmp", O_RDONLY);
+	if (*fd < 0)
+		return (throw_error("Error opening a file"));
+	if (dup2(*fd, STDIN_FILENO) < 0)
+		return (throw_error("Error in limitor redirection"));
+	return (0);
+}
+
+int	select_redirection(t_token *token)
+{
+	int	fd;
+
+	fd = 0;
+	if (token->type == OPEN_FILE)
 	{
-		limitor_function_ps(token);
-		g_global.whereami = 0;
-		fd = open("heredoc.tmp", O_RDONLY);
+		fd = open(token->word, O_RDONLY);
 		if (fd < 0)
 			return (throw_error("Error opening a file"));
 		if (dup2(fd, STDIN_FILENO) < 0)
-			return (throw_error("Error in limitor redirection"));
+			return (throw_error("Error in infile redirection"));
 	}
+	fd = exit_file_redir(token);
+	if (token->type == LIMITOR)
+		heredoc_function(token, &fd);
 	if (fd)
 		close(fd);
 	return (0);
