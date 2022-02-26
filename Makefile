@@ -21,8 +21,8 @@ SRCS := $(wildcard $(SRCS_DIR)*.c) $(wildcard $(SRCS_DIR)builtins/*.c)
 OBJS := $(SRCS:%.c=%.o)
 NAME:= minishell
 CC:= gcc
-DEBUG_FLAG:= -g  #-g3 -fsanitize=address
-CFLAGS:= $(DEBUG_FLAG) -Wall -Werror -Wextra
+DEBUG_FLAG:= -g  -g3 -fsanitize=address
+CFLAGS:= -Wall -Werror -Wextra
 LIBFT_PATH:= files/lib/libft
 LIBFT_LIB:= -L$(LIBFT_PATH) $(LIBFT_PATH)/libft.a
 RM := rm -rvf
