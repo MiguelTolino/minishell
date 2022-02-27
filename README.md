@@ -2,7 +2,7 @@
 
 As beautiful as a shell
 
-![demo][demo]
+![demo][demo.png]
 
 ## 🆎 About
 
