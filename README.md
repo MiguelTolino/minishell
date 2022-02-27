@@ -19,7 +19,8 @@ With Minishell, you’ll be able to travel through time and come back to problem
 ### Requirements
 The only requirements are:
 - GNU make (v3.81)
-- Apple clang version 13.0.0
+- Clang version 11.0.0
+- Readline: stable 8.1.2
 
 Those versions are the ones used during development.
 
