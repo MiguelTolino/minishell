@@ -1,22 +1,22 @@
-# Minishell 🐚
+# 🐚 Minishell
 
 As beautiful as a shell
 
 ![demo][demo]
 
-## About
+## 🆎 About
 
 The objective of this project is for you to create a simple shell. Yes, your little bash or zsh. You will learn a lot about processes and file descriptors.
 
-## A brief introduction 💼
+## 👣 A brief introduction
 
 The existence of shells is linked to the very existence of IT. At the time, all coders agreed that communicating with a computer using aligned 1/0 switches was seriously irritating. It was only logical that they came up with the idea to communicate with
 a computer using interactive lines of commands in a language somewhat close to english.
 With Minishell, you’ll be able to travel through time and come back to problems people faced when Windows didn’t exist.
 
-## Installation & Usage
+## 🧰 Installation & Usage
 
-### Requirements
+### 📑 Requirements
 The only requirements are:
 - GNU make (v3.81)
 - Clang version 11.0.0
@@ -24,7 +24,7 @@ The only requirements are:
 
 Those versions are the ones used during development.
 
-### Building the program
+### 🔧 Building the program
 
 1. Download/Clone this repo
 
@@ -35,11 +35,11 @@ Those versions are the ones used during development.
         cd minishell
         make
 
-### Running the program
+### 🏃 Running the program
 
 After building the source, run `./minishell` from the project root.
 
-## Main Project Instructions
+## 📖 Main Project Instructions
 
 - Show a prompt when waiting for a new command.
 - Have a working History.
