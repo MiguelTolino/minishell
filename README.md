@@ -2,7 +2,7 @@
 
 As beautiful as a shell
 
-![Quick Demo][quick-demo]
+![demo][demo]
 
 ## About
 
@@ -40,31 +40,30 @@ After building the source, run `./minishell` from the project root.
 
 ## Main Project Instructions
 
-### Mandatory
-
-- Can only use C
-- Must respect the school imposed coding style ([The Norme][norme-pdf])
-- No memory leaks
-- Implement a series of builtins: `echo`, `cd`, `setenv`, `unsetenv`, `env`, `exit`
-- Manage the errors without using `errno`, by displaying a message adapted
-to the error output
-- Can only use these standard library functions:
-    - malloc, free
-    - access
-    - open, close, read, write
-    - opendir, readdir, closedir
-    - getcwd, chdir
-    - stat, lstat, fstat
-    - fork, execve
-    - wait, waitpid, wait3, wait4
-    - signal, kill
-    - exit
-- Must have a Makefile to build the program
-- The binary file must be named `minishell`
-- Can use [Libft][libft-url]
-- Handle program interruption (Ctrl + D)
-- [Click here][1] for the rest
-- Signal management (specifically Ctrl + C)
-- PATH's right management (error handling)
-- Multiple commands (semi colons)
-
+- Show a prompt when waiting for a new command.
+- Have a working History.
+- Search and launch the right executable (based on the PATH variable or by using relative or absolute path)
+- Environment variables ($ followed by characters) expand to their values.
+### Builtins:
+- **echo** with option -n
+- **cd** with only a relative or absolute path
+- **pwd** with no options
+- **export** with no options
+- **unset** with no options
+- **env** with no options or arguments
+- **exit** with no options
+### Quoting
+- ’ inhibit all interpretation of a sequence of characters.
+- " inhibit all interpretation of a sequence of characters except for $.
+### Redirections:
+- '<' redirect input.
+- '>'redirect output.
+- “<<” read input from the current source until a line containing only the delimiter is seen.
+- “>>” redirect output with append mode.
+### Pipes
+- Pipes | The output of each command in the pipeline is connected via a pipe to the input of the next command.
+- $? expand to the exit status of the most recently executed foreground pipeline.
+### Signals (Works like in bash)
+- **ctrl-C**
+- **ctrl-D**
+- **ctrl-\\**
