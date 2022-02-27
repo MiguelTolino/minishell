@@ -63,5 +63,5 @@ After building the source, run `./minishell` from the project root.
 
 ## 🔗 Links
 - [Bash](https://www.gnu.org/savannah-checkouts/gnu/bash/manual/)
-- [Create your own shell] (https://www.geeksforgeeks.org/making-linux-shell-c/)
-- [Writing your own shell] (https://www.cs.purdue.edu/homes/grr/SystemsProgrammingBook/Book/Chapter5-WritingYourOwnShell.pdf)
+- [Create your own shell](https://www.geeksforgeeks.org/making-linux-shell-c/)
+- [Writing your own shell](https://www.cs.purdue.edu/homes/grr/SystemsProgrammingBook/Book/Chapter5-WritingYourOwnShell.pdf)
