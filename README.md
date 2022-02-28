@@ -56,7 +56,7 @@ After building the source, run `./minishell` from the project root.
 ### Pipes
 - **Pipes |** The output of each command in the pipeline is connected via a pipe to the input of the next command.
 - **$?** expand to the exit status of the most recently executed foreground pipeline.
-### Signals (Works like in bash)
+### Signals (Work like in bash)
 - **ctrl-C**
 - **ctrl-D**
 - **ctrl-\\**
