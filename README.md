@@ -46,16 +46,16 @@ After building the source, run `./minishell` from the project root.
 - **env** with no options or arguments
 - **exit** with no options
 ### Quoting
-- ’ inhibit all interpretation of a sequence of characters.
-- " inhibit all interpretation of a sequence of characters except for $.
+- **’** inhibit all interpretation of a sequence of characters.
+- **"** inhibit all interpretation of a sequence of characters except for $.
 ### Redirections:
-- '<' redirect input.
-- '>'redirect output.
-- “<<” read input from the current source until a line containing only the delimiter is seen.
-- “>>” redirect output with append mode.
+- **'<'** redirect input.
+- **'>'** redirect output.
+- **“<<”** read input from the current source until a line containing only the delimiter is seen.
+- **“>>”** redirect output with append mode.
 ### Pipes
-- Pipes | The output of each command in the pipeline is connected via a pipe to the input of the next command.
-- $? expand to the exit status of the most recently executed foreground pipeline.
+- **Pipes |** The output of each command in the pipeline is connected via a pipe to the input of the next command.
+- **$?** expand to the exit status of the most recently executed foreground pipeline.
 ### Signals (Works like in bash)
 - **ctrl-C**
 - **ctrl-D**
