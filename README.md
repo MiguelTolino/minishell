@@ -37,7 +37,7 @@ After building the source, run `./minishell` from the project root.
 - Have a working History.
 - Search and launch the right executable (based on the PATH variable or by using relative or absolute path)
 - Environment variables ($ followed by characters) expand to their values.
-### Builtins:
+### 🏗️ Builtins:
 - **echo** with option -n
 - **cd** with only a relative or absolute path
 - **pwd** with no options
@@ -45,18 +45,18 @@ After building the source, run `./minishell` from the project root.
 - **unset** with no options
 - **env** with no options or arguments
 - **exit** with no options
-### Quoting
+### ◻️ Quoting
 - **’** inhibit all interpretation of a sequence of characters.
 - **"** inhibit all interpretation of a sequence of characters except for $.
-### Redirections:
+### 🔄 Redirections:
 - **'<'** redirect input.
 - **'>'** redirect output.
 - **“<<”** read input from the current source until a line containing only the delimiter is seen.
 - **“>>”** redirect output with append mode.
-### Pipes
+### ↪️ Pipes
 - **Pipes |** The output of each command in the pipeline is connected via a pipe to the input of the next command.
 - **$?** expand to the exit status of the most recently executed foreground pipeline.
-### Signals (Work like in bash)
+### 📶 Signals (Work like in bash)
 - **ctrl-C**
 - **ctrl-D**
 - **ctrl-\\**
